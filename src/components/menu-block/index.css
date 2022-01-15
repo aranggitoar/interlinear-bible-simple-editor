@@ -1,0 +1,53 @@
+.menu-items {
+  background: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: .5em;
+}
+
+.menu-items:hover {
+  background: none;
+}
+
+.menu-items label,
+.menu-items span,
+.menu-items button {
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  font-size: 14px;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  transition: all 500ms;
+}
+
+.menu-items button:hover {
+  background: none;
+  background-image: radial-gradient(rgb(250, 249, 248), rgb(255, 255, 255));
+  transform: translateY(-2px);
+}
+
+#menu-load-file input,
+#menu-save-file input {
+  display: none;
+}
+
+#menu-load-file label,
+#menu-save-file label {
+  cursor: pointer;
+}
+
+#menu-load-file label:after,
+#menu-save-file label:after {
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+#menu-save-file {
+  padding: 0;
+}

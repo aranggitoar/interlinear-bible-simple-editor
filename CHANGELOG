@@ -1,0 +1,10 @@
+0.0.1 Added basic templates
+
+0.1.0 Added capability to save and load file
+
+0.2.0 Added capability to choose Bible book, chapter, and verse
+
+0.3.0 Added capability to display Bible by verse
+
+0.4.0 Added capability to enter translation and save to temporary application
+data on verse change

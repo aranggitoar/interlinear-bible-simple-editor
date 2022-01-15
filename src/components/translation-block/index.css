@@ -1,0 +1,32 @@
+#column-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#column-container > div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.row-container {
+  padding: .25em 0;
+  max-width: 135px;
+}
+
+.row-target-language div {
+  border: none;
+}
+
+.row-target-language input {
+  border: 1px dashed rgb(188,186,184) !important;
+  border-radius: 2.5px !important;
+  color: #dd0000 !important;
+}
+
+.row-target-language input:hover {
+  border: 1px dashed rgb(142,140,138) !important;
+}

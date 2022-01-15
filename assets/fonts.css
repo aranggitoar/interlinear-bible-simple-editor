@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'SBL BibLit';
+  src: local('SBL Biblit'),
+       local('SBL BibLit'),
+       local('SBLBiblit'),
+       url('sbl_blit-webfont.woff2') format('woff2'),
+       url('SBL_BLit.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}

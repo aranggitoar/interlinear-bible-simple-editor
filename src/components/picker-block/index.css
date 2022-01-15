@@ -1,0 +1,45 @@
+.picker-items {
+  cursor: pointer;
+  margin: .5em 1.5em;
+  padding: .15em .3em;
+}
+
+#forward,
+#backward {
+  background: none;
+  border: none;
+  font-size: 25px;
+  transition: all 500ms;
+}
+
+#forward {
+  margin-left: 2em;
+}
+
+#backward {
+  margin-right: 2em;
+}
+
+#forward:after,
+#backward:after {
+  background: none;
+  content: "";
+  height: 150%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 150%;
+}
+
+#forward:hover,
+#backward:hover {
+  background: none;
+}
+
+#forward:hover {
+  transform: translateX(7.5px);
+}
+
+#backward:hover {
+  transform: translateX(-7.5px);
+}
