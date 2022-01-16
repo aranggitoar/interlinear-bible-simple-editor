@@ -5,56 +5,7 @@
     <title>Editor Format Interlinear Sederhana</title>
   </head>
   <body>
-      <div id="hidden-containers">
-        <option id="hidden-container-whole" data-book-names=""></option>
-        <option id="hidden-container-chosen-bible-book" data-book-name=""></option>
-        <option id="hidden-container-chosen-bible-chapter" data-chapter-index=""></option>
-        <option id="hidden-container-chosen-bible-verse" data-verse-index=""></option>
-      </div>
     <main id="main">
     </main>
-
-        <!-- <script> -->
-        <!--   document.addEventListener('DOMContentLoaded', (event) => { -->
-        <!--     var loadedBibleBooksContainer = document.getElementById('hidden-container-whole'); -->
-        <!--     var chosenBibleBooksContainer = document.getElementById('hidden-container-chosen-bible-book'); -->
-        <!--     var chosenBibleChapterContainer = document.getElementById('hidden-container-chosen-bible-chapter'); -->
-        <!--     var chosenBibleVerseContainer = document.getElementById('hidden-container-chosen-bible-verse'); -->
-
-        <!--     var fileUploadInputElement = document.getElementById('load-file') -->
-
-        <!--     fileUploadInputElement.addEventListener('change', (event) => { -->
-        <!--       event.preventDefault(); -->
-        <!--       setTimeout (() => { -->
-        <!--         const rawJSON = Object.assign(JSON.parse(loadedBibleBooksContainer.value)); -->
-        <!--         const bookNames = Object.keys(rawJSON); -->
-        <!--         loadedBibleBooksContainer.dataset.bookNames = bookNames; -->
-
-        <!--         setTimeout(() => { -->
-        <!--           const bookName = bookNames[0]; -->
-        <!--           chosenBibleBooksContainer.dataset.bookName = bookName; -->
-        <!--           const bookContent = rawJSON[bookName]; -->
-        <!--           chosenBibleBooksContainer.value = bookContent; -->
-
-        <!--           setTimeout(() => { -->
-        <!--             const chapterContent = bookContent[0]; -->
-        <!--             chosenBibleChapterContainer.dataset.chapterIndex = 0; -->
-        <!--             chosenBibleChapterContainer.value = chapterContent; -->
-
-        <!--             setTimeout(() => { -->
-        <!--               chosenBibleVerseContainer.dataset.verseIndex = 0; -->
-        <!--               const verseContent = chapterContent[0]; -->
-        <!--               chosenBibleVerseContainer.value = verseContent; -->
-        <!--             }, 500); -->
-
-        <!--           }, 500); -->
-
-        <!--         }, 500); -->
-
-        <!--       }, 500); -->
-        <!--     }); -->
-        <!--   }); -->
-        <!-- </script> -->
-
   </body>
 </html>
