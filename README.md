@@ -1,30 +1,25 @@
-# **Editor Format Interlinear Sederhana**
-Ini adalah editor format sederhana interlinear yang diciptakan untuk mempermudah penggunaan format sederhana yang telah dijelaskan dalam halaman utama.
+# **Interlinear Bible Simple Editor**
+This is an interlinear Bible simple editor that's created for easier translation of the interlinear Bible format described [here](https://github.com/benihyangbaik/asti).
 
 
-## **Teknologi**
-Karena aplikasi ini diperlukan secara darurat dan harus portabel, maka digunakan teknologi web (pustaka React untuk fungsionalitas dan antarmuka dalam JavaScript dan pustaka Fluent UI untuk antarmuka dalam JavaScript dan CSS) dengan ElectronJS sebagai pembungkus untuk GUI. Sehingga setiap mesin yang dapat melakukan kompilasi JavaScript dan C++ dapat menjalankan aplikasi ini, bahkan setiap mesin yang dapat mengakses internet!
+## **Technology**
+Because of the urgent need of this application, it is made to be simple. It also needs to be portable. So the web technologies (React library for the functionality and interface in JavaScript and Fluent UI library for the interface in JavaScript and CSS) and Electron as the wrapper for desktop GUIs are used.
 
 
-## **Fungsionalitas**
-Karena aplikasi ini diperlukan secara darurat, maka fungsionalitas akan ditambahkan secara bertahap.
+## **Functionality**
+Because of the urgent need of this application, so the functionality will be added gradually.
 
-_Tahap I_ (**OK**)
-1. Memasukkan padanan dari setiap kata dalam bahasa asli.
-2. Menyimpan dan membuka file JSON dalam direktori tertentu.
-3. Penyimpanan otomatis setiap pindah ayat, pasal, atau buku.
+_Phase I_ (**OK**)
+1. Input the equivalent of every word of the original language.
+2. Save and load the JSON file from certain directory.
+3. Automatically save every verse, chapter, and Bible book move.
 
-_Tahap II_
-1. Menampilkan satu ayat atau pasal untuk diterjemahkan.
-2. Mengubah ukuran font.
-3. Pengaturan lama penyimpanan otomatis.
-
-_Tahap III_
-1. Mengenali file yang diedit sebagai satu kitab atau sekumpulan kitab.
-2. Keterangan tentang akar dan keluarga dari sebuah data Strongs.
+_Phase II_
+1. Display one chapter to translate.
+2. Change the font size.
+3. Detail for the root and family of a Strongs data.
 
 
-## **Pengembangan atau Perbaikan**
-Daftar hal-hal yang bisa dikembangkan/diperbaiki.
-1. Mengubah semua kode untuk manipulasi data dengan fungsionalitas konteks dari pustaka React.
-2. Menambahkan dokumentasi dalam bentuk komentar untuk setiap fungsi dan kelas.
+## **Improvements**
+List of things to be improved.
+1. Add documentation as a comment for every function and components.
