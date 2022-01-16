@@ -1,12 +1,12 @@
 {
-  "name": "editor-format-interlinear-sederhana",
-  "productName": "Editor Format Interlinear Sederhana",
+  "name": "interlinear-bible-simple-editor",
+  "productName": "Interlinear Bible Simple Editor",
   "version": "0.4.0",
-  "description": "Editor Format Interlinear Sederhana, mempermudah penerjemahan Alkitab interlinear!",
+  "description": "Interlinear Bible Simple Editor, makes Interlinear Bible translation easier!",
   "main": ".webpack/main",
   "build": {
-    "appID": "com.byb.efis",
-    "productName": "Editor Format Interlinear Sederhana",
+    "appID": "com.byb.ibse",
+    "productName": "Interlinear Bible Simple Editor",
     "icon": "assets/icons/dove.ico"
   },
   "scripts": {
@@ -14,6 +14,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
+    "webpack": "webpack --config webpack.web.config.js",
     "lint": "eslint --ext .ts ."
   },
   "keywords": [],
@@ -34,7 +35,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "EFIS"
+            "name": "IBSE"
           }
         },
         {
