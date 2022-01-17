@@ -27,7 +27,7 @@ _Phase II_
 
 
 ## **Usage**
-Simply go to [this link](https://ibse.benihyangbaik.com), load [this
+Simply go to [our site](https://ibse.benihyangbaik.com), load [this
 file](https://github.com/benihyangbaik/interlinear-bible-simple-editor/blob/main/data/morphhb.json)
 and start editing! Every edit is saved on verse change and persists as a React
 context.
