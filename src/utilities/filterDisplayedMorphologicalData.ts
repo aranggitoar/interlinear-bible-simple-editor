@@ -54,6 +54,8 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
 
   let parsedMorphologicalData: string;
 
+  console.log(morphologicalData);
+
   if (mainMorphologicalDataPoints.length === 1) {
     parsedMorphologicalData = parser(mainMorphologicalDataPoints[0]);
   }
@@ -67,8 +69,14 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
   }
 
   if (morphologicalData.split('/').length === 3) {
-    parsedMorphologicalData = parser(mainMorphologicalDataPoints[1]);
+    if (mainMorphologicalDataPoints[1] === 'T') {
+      parsedMorphologicalData = parser(mainMorphologicalDataPoints[2]);
+    } else {
+      parsedMorphologicalData = parser(mainMorphologicalDataPoints[1]);
+    }
   }
+
+  console.log(parsedMorphologicalData);
 
   return parsedMorphologicalData;
 }
