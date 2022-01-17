@@ -2,9 +2,10 @@ import * as React from 'react';
 import { DefaultButton } from '@fluentui/react';
 
 import { populateWithEmptyTargetLanguage } from '@/utilities/populateWithEmptyTargetLanguage';
+import { arrangeBibleBookName } from '@/utilities/arrangeBibleBookName';
 
-const loadFileText = "Load File";
-const saveFileText = "Save File";
+const loadFileText = "Load";
+const saveFileText = "Save";
 
 const uploadFileText = "Upload";
 const downloadFileText = "Download";
@@ -37,7 +38,7 @@ const uploadRequestHandler: React.FC<PropsUpdate> = ({updateUploadedBible, child
     fileReader.onload = (e2) => {
       // @ts-ignore // the property exists
       const fileObject = Object.assign(JSON.parse(e2.currentTarget.result));
-      const bibleBookNames = Object.keys(fileObject);
+      let bibleBookNames = Object.keys(fileObject);
       let updatedFileObject = fileObject;
 
       // Check which book exists.
@@ -48,9 +49,18 @@ const uploadRequestHandler: React.FC<PropsUpdate> = ({updateUploadedBible, child
         bibleBookName = 'Matthew';
       }
 
+      // If the file is a default Open Scripture's Hebrew Bible format, add the
+      // container for target language.
       if (fileObject[bibleBookName][0][0][0].length === 3) {
         updatedFileObject = populateWithEmptyTargetLanguage(fileObject);
       }
+
+      // If there is more than one Bible book, arrange the order;
+      if (bibleBookNames.length > 1) {
+        bibleBookNames = arrangeBibleBookName(bibleBookNames);
+      }
+
+      console.log(updatedFileObject);
 
       // @ts-ignore // the element exists
       const newUploadedFile: ILoadedBible = {
