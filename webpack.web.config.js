@@ -11,7 +11,7 @@ rules.push({
 module.exports = {
   entry: './src/web',
   output: {
-    path: path.resolve(__dirname, 'gh-page/'),
+    path: path.resolve(__dirname, 'ibse.benihyangbaik.com/'),
   },
   module: {
     rules,
