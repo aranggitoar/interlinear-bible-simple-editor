@@ -13,7 +13,7 @@ const Block = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  padding: 0 rem;
+  padding: 0;
   width: 100%;
 `;
 

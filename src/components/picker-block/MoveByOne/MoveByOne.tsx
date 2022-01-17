@@ -63,7 +63,7 @@ export const MoveBackwardByOne: React.FC<Props> = ({loadedBibleObject, updateUpl
   return (
     <DefaultButton id="backward" className="move-by-one"
       onClick={(e) => updateVerseIndex(e, loadedBibleObject, updateUploadedBible)}>
-      &#8592;
+      &#8249;
     </DefaultButton>
   );
 }
@@ -72,7 +72,7 @@ export const MoveForwardByOne: React.FC<Props> = ({loadedBibleObject, updateUplo
   return (
     <DefaultButton id="forward" className="move-by-one"
       onClick={(e) => updateVerseIndex(e, loadedBibleObject, updateUploadedBible)}>
-      &#8594;
+      &#8250;
     </DefaultButton>
   );
 }

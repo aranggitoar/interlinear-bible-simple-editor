@@ -13,14 +13,13 @@ const Container = styled.div`
   align-items: center;
   margin: auto;
   height: 100%;
-  padding: 0 2em;
 `;
 
 const Separator = styled.hr`
-  border: .25px solid #777;
+  border: 1px solid #777;
   box-shadow: 20px 20px 250px 1px;
-  margin: .25em 0 2em;
-  width: 35%;
+  margin: 1em 0 2em;
+  width: 30%;
 `;
 
 export function App(): React.ReactElement<Record<string, unknown>> {

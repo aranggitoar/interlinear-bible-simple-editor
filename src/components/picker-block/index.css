@@ -1,5 +1,6 @@
 .picker-items {
   cursor: pointer;
+  font-size: 16px;
   margin: .5em 1.5em;
   padding: .15em .3em;
 }
@@ -8,8 +9,14 @@
 #backward {
   background: none;
   border: none;
-  font-size: 25px;
-  transition: all 500ms;
+  color: #777;
+  font-size: 50px;
+  transition: transform 500ms, color 150ms;
+}
+
+#forward:hover,
+#backward:hover {
+  color: #555;
 }
 
 #forward {
@@ -37,9 +44,9 @@
 }
 
 #forward:hover {
-  transform: translateX(7.5px);
+  transform: translateX(10px);
 }
 
 #backward:hover {
-  transform: translateX(-7.5px);
+  transform: translateX(-10px);
 }

@@ -16,7 +16,8 @@ const Container = styled.div`
   flex-direction: row;
   height: 75%;
   justify-content: center;
-  padding: .75em 1rem;
+  padding: .75em 1em;
+  margin-top: 1em;
 `;
 
 export function PickerBlock(): React.ReactElement<Record<string, unknown>> {
