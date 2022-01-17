@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import ReactDOMServer from 'react-dom/server';
 import { TextField } from '@fluentui/react';
 
@@ -16,6 +17,12 @@ type Props = {
   loadedBibleObject: ILoadedBible,
   updateUploadedBible: (newlyLoadedBibleObject: ILoadedBible) => void
 }
+
+const Container = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+`
 
 function rowContentsGenerator(sourceData: Array<Array<string>>, index: number) {
   // Prepare markup.
@@ -45,8 +52,7 @@ function rowContentsGenerator(sourceData: Array<Array<string>>, index: number) {
 
 function columnContainerGenerator(sourceData: Array<Array<string>>, count: number) {
   let markup = '';
-  // In reverse because it is only for translation Old Testament for now.
-  for (let i = count - 1; i >= 0; i--) {
+  for (let i = 0; i < count; i++) {
     let columnId = "column-" + i as string;
     markup += `<div id=${columnId}>${rowContentsGenerator(sourceData, i)}</div>`
   }
@@ -114,9 +120,9 @@ function dataAssembler(bibleObjectCopy: ILoadedBible, updateUploadedBible: (newl
 
 const TranslationBlockColumnContainer: React.FC<Props> = ({loadedBibleObject, updateUploadedBible}) => {
   return (
-    <>
+    <Container>
       <div id="column-container" dangerouslySetInnerHTML={{__html:dataAssembler(loadedBibleObject, updateUploadedBible)}} />
-    </>
+    </Container>
   );
 }
 
