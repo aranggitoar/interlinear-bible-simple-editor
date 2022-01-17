@@ -27,10 +27,38 @@ _Phase II_
 
 
 ## **Usage**
-Simply load [this
+Simply go to [this link](https://ibse.benihyangbaik.com), load [this
 file](https://github.com/benihyangbaik/interlinear-bible-simple-editor/blob/main/data/morphhb.json)
 and start editing! Every edit is saved on verse change and persists as a React
 context.
+
+You can also download the repo and run,
+```
+yarn install
+yarn start
+```
+OR
+```
+npm install
+npm start
+```
+to run it on your desktop temporarily.
+
+Also run, 
+```
+yarn install
+yarn make
+```
+OR
+```
+npm install
+npm make
+```
+and go to the `./out/make/{your-os}` directory then install using the provided
+installer there.
+
+We will release the installer in a couple of weeks, so desktop usage wouldn't
+need you to compile from source!
 
 
 ## **Improvements**
