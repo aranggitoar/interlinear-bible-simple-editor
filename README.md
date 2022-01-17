@@ -33,29 +33,20 @@ and start editing! Every edit is saved on verse change and persists as a React
 context.
 
 You can also download the repo and run,
-```
+```bash
 yarn install
 yarn start
 ```
 OR
-```
+```bash
 npm install
 npm start
 ```
 to run it on your desktop temporarily.
 
-Also run, 
-```
-yarn install
-yarn make
-```
-OR
-```
-npm install
-npm make
-```
-and go to the `./out/make/{your-os}` directory then install using the provided
-installer there.
+Also run `yarn make` or `npm make` to compile the installer and go to the
+`./out/make/{your-os}` directory and install using the provided installer
+there.
 
 We will release the installer in a couple of weeks, so desktop usage wouldn't
 need you to compile from source!
