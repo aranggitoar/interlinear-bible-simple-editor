@@ -13,6 +13,8 @@ import { filterDisplayedStrongsData } from '@/utilities/filterDisplayedStrongsDa
 import { filterDisplayedOriginalLanguage } from '@/utilities/filterDisplayedOriginalLanguage';
 import { filterDisplayedMorphologicalData } from '@/utilities/filterDisplayedMorphologicalData';
 
+import { arrayOfCorrectlyOrderedNTBibleBookName, arrayOfCorrectlyOrderedOTBibleBookName } from '@/utilities/correctlyOrderedBibleBookName';
+
 type Props = {
   loadedBibleObject: ILoadedBible,
   updateUploadedBible: (newlyLoadedBibleObject: ILoadedBible) => void
@@ -119,9 +121,18 @@ function dataAssembler(bibleObjectCopy: ILoadedBible, updateUploadedBible: (newl
 }
 
 const TranslationBlockColumnContainer: React.FC<Props> = ({loadedBibleObject, updateUploadedBible}) => {
+  const currentBook = loadedBibleObject.chosenBibleBookDetails[0];
+  let direction: string;
+  
+  if (arrayOfCorrectlyOrderedOTBibleBookName.indexOf(currentBook) > -1) {
+    direction = "ltr";
+  } else if (arrayOfCorrectlyOrderedNTBibleBookName.indexOf(currentBook) > -1) {
+    direction = "rtl";
+  }
+
   return (
     <Container>
-      <div id="column-container" dangerouslySetInnerHTML={{__html:dataAssembler(loadedBibleObject, updateUploadedBible)}} />
+      <div id="column-container" className={direction} dangerouslySetInnerHTML={{__html:dataAssembler(loadedBibleObject, updateUploadedBible)}} />
     </Container>
   );
 }

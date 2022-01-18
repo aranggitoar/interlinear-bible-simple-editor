@@ -1,5 +1,4 @@
 #column-container {
-  direction: rtl;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -13,6 +12,14 @@
   display: flex;
   flex-direction: column;
   padding: .5em;
+}
+
+.rtl {
+  direction: "rtl";
+}
+
+.ltr {
+  direction: "ltr";
 }
 
 .row-container {
