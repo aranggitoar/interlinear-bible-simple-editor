@@ -15,11 +15,11 @@
 }
 
 .rtl {
-  direction: "rtl";
+  direction: rtl;
 }
 
 .ltr {
-  direction: "ltr";
+  direction: ltr;
 }
 
 .row-container {

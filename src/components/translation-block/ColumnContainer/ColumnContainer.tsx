@@ -125,9 +125,11 @@ const TranslationBlockColumnContainer: React.FC<Props> = ({loadedBibleObject, up
   let direction: string;
   
   if (arrayOfCorrectlyOrderedOTBibleBookName.indexOf(currentBook) > -1) {
-    direction = "ltr";
-  } else if (arrayOfCorrectlyOrderedNTBibleBookName.indexOf(currentBook) > -1) {
     direction = "rtl";
+  } 
+
+  if (arrayOfCorrectlyOrderedNTBibleBookName.indexOf(currentBook) > -1) {
+    direction = "ltr";
   }
 
   return (
