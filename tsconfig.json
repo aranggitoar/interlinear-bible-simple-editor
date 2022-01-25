@@ -12,11 +12,13 @@
     "resolveJsonModule": true,
     "paths": {
       "*": ["node_modules/*"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "$/*": ["data/*"]
     },
     "jsx": "react"
   },
   "include": [
     "src/**/*"
-  ]
+  ],
+  "exclude": ["node_modules", "out"]
 }
