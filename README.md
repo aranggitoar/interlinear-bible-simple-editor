@@ -6,9 +6,10 @@ translation of the Interlinear Bible format described
 ## **Technology**
 Because of the urgent need of this application, it is made to be simple. It
 also needs to be portable. So the web technologies (React library for the
-functionality and interface in JavaScript and Fluent UI library for the
-interface in JavaScript and CSS) and Electron as the wrapper for desktop GUIs
-are used.
+functionality and interface, Fluent UI library for the interface, and
+TypeScript for easier debugging) and Electron as the wrapper for desktop GUIs
+are used. The fonts used are [SBL
+Biblit](https://www.sbl-site.org/educational/BiblicalFonts_SBLBibLit.aspx).
 
 
 ## **Functionality**
