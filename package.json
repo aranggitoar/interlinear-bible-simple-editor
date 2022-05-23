@@ -7,14 +7,14 @@
   "build": {
     "appID": "com.byb.ibse",
     "productName": "Interlinear Bible Simple Editor",
-    "icon": "assets/icons/dove.ico"
+    "icon": "./build/assets/icons/dove.ico"
   },
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "webpack": "webpack --config webpack.web.config.js",
+    "webpack": "webpack --config ./build/webpack.web.config.js",
     "lint": "eslint --ext .ts ."
   },
   "keywords": [],
@@ -27,7 +27,7 @@
     "forge": {
       "forge": {
         "packagerConfig": {
-          "icon": "assets/icons/dove.ico"
+          "icon": "./build/assets/icons/dove.ico"
         }
       },
       "packagerConfig": {},
@@ -58,14 +58,14 @@
           "@electron-forge/plugin-webpack",
           {
             "devContentSecurityPolicy": "default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-eval' 'unsafe-inline' data:",
-            "mainConfig": "./webpack.main.config.js",
+            "mainConfig": "./build/webpack.main.config.js",
             "renderer": {
               "nodeIntegration": true,
-              "config": "./webpack.renderer.config.js",
+              "config": "./build/webpack.dev.config.js",
               "entryPoints": [
                 {
                   "html": "./src/index.html",
-                  "js": "./src/renderer.tsx",
+                  "js": "./src/dev.tsx",
                   "name": "main_window"
                 }
               ]
