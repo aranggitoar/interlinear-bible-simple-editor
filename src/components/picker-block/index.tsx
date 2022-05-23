@@ -20,7 +20,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 import React from 'react';
-import styled from 'styled-components';
 
 import BibleBookPickerBlock from './BibleBook/BibleBook';
 import ChapterPickerBlock from './Chapter/Chapter';
@@ -28,18 +27,8 @@ import VersePickerBlock from './Verse/Verse';
 import { MoveBackwardByOne, MoveForwardByOne } from './MoveByOne/MoveByOne';
 
 import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
+import { Container } from './styles';
 
-import './index.css';
-
-const Container = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  height: 75%;
-  justify-content: center;
-  padding: .75em 1em;
-  margin-top: 1em;
-`;
 
 export function PickerBlock(): React.ReactElement<Record<string, unknown>> {
   const { loadedBibleObject, updateUploadedBible } = React.useContext(LoadedBibleContext) as LoadedBibleContextType

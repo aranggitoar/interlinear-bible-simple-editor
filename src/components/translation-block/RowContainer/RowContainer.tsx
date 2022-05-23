@@ -31,6 +31,7 @@ import { getStrongsDictionaryEntry } from '@/utilities/getStrongsDictionaryEntry
 // Generate the row containers.
 // Return an array of JSX Elements.
 function rowContainerGenerator(sourceData: ILoadedVerse, index: number) {
+
   // Prepare markup.
   let jsxMarkup = [] as Array<JSX.Element>;
 
@@ -47,7 +48,6 @@ function rowContainerGenerator(sourceData: ILoadedVerse, index: number) {
   // Insert the about to be created dialog box upstairs in the next markup
   jsxMarkup.push(
     <div key={`${index}1`} className="row-strongs row-container"
-    /*onClick={}*/
     data-strongs-entry={getStrongsDictionaryEntry(sourceData.arrayOfStrongs[index])}>
       {filterDisplayedStrongsData(sourceData.arrayOfStrongs[index])}
     </div>
@@ -61,7 +61,7 @@ function rowContainerGenerator(sourceData: ILoadedVerse, index: number) {
 
   jsxMarkup.push(
     <div key={`${index}3`} className="row-target-language row-container">
-      <TextField id={targetLanguageID} value={sourceData.arrayOfTargetWords[index]} />
+      <TextField id={targetLanguageID} defaultValue={sourceData.arrayOfTargetWords[index]} />
     </div>
   );
 

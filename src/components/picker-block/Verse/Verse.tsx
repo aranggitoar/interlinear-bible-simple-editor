@@ -24,10 +24,6 @@ import * as React from 'react';
 import { getTranslationResult } from '@/utilities/getTranslationResult';
 import { storeTranslationResult } from '@/utilities/storeTranslationResult';
 
-type Props = {
-  loadedBibleObject: ILoadedBible,
-  updateUploadedBible: (newlyLoadedBibleObject: ILoadedBible) => void
-}
 
 const defaultBibleVersePickerText = "Choose verse";
 

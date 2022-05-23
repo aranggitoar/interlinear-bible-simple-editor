@@ -20,19 +20,14 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 import * as React from 'react';
-import styled from 'styled-components';
 
 import TranslationBlockRowContainer from '@/components/translation-block/RowContainer/RowContainer';
 
 import { assembleBibleDataByVerse } from '@/utilities/assembleBibleDataByVerse';
 import { arrayOfCorrectlyOrderedNTBibleBookName, arrayOfCorrectlyOrderedOTBibleBookName } from '@/utilities/correctlyOrderedBibleBookName';
 
+import { Container } from './styles';
 
-const Container = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-`
 
 // Generate the column containers.
 // Return an array of JSX Elements.

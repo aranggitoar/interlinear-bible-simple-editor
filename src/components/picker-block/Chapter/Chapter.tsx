@@ -24,12 +24,8 @@ import * as React from 'react';
 import { getTranslationResult } from '@/utilities/getTranslationResult';
 import { storeTranslationResult } from '@/utilities/storeTranslationResult';
 
-type Props = {
-  loadedBibleObject: ILoadedBible,
-  updateUploadedBible: (newlyLoadedBibleObject: ILoadedBible) => void
-}
-
 const defaultBibleChapterPickerText = "Choose chapter";
+
 
 function createChapterPicker(chapterCount: number, selectedChapterIndex: number) {
   var markup = `<option disabled value="undefined">${defaultBibleChapterPickerText}</option>`;

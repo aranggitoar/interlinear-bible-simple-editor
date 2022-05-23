@@ -24,12 +24,8 @@ import * as React from 'react';
 import { getTranslationResult } from '@/utilities/getTranslationResult';
 import { storeTranslationResult } from '@/utilities/storeTranslationResult';
 
-type Props = {
-  loadedBibleObject: ILoadedBible,
-  updateUploadedBible: (newlyLoadedBibleObject: ILoadedBible) => void
-}
-
 const defaultBibleBookPickerText = "Choose bible book";
+
 
 function createBibleBookPicker(bibleBookNameList: Array<string>, selectedBibleBookName: string) {
   var markup = `<option disabled value="undefined">${defaultBibleBookPickerText}</option>`;

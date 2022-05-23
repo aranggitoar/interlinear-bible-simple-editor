@@ -25,10 +25,6 @@ import { DefaultButton } from '@fluentui/react';
 import { getTranslationResult } from '@/utilities/getTranslationResult';
 import { storeTranslationResult } from '@/utilities/storeTranslationResult';
 
-type Props = {
-  loadedBibleObject: ILoadedBible,
-  updateUploadedBible: (newlyLoadedBibleObject: ILoadedBible) => void
-}
 
 const updateTranslation = (bibleObject: Object, chosenBibleBookDetails: Array<string>):void => {
   let newTranslationData = getTranslationResult(document.getElementsByClassName('row-target-language').length);

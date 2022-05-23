@@ -27,25 +27,14 @@ import { MenuBlock } from '@/components/menu-block';
 import { PickerBlock } from '@/components/picker-block';
 
 import LoadedBibleProvider from '@/contexts/LoadedBibleContext';
+import GlobalStyle from '@/styles/global';
+import { Container, Separator } from './styles';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-  height: 100%;
-`;
-
-const Separator = styled.hr`
-  border: 1px solid #777;
-  box-shadow: 20px 20px 250px 1px;
-  margin: 1em 0 2em;
-  width: 30%;
-`;
 
 export function App(): React.ReactElement<Record<string, unknown>> {
   return (
     <Container id="app">
+      <GlobalStyle />
       <LoadedBibleProvider>
         <MenuBlock />
         <PickerBlock />

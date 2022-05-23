@@ -25,24 +25,15 @@ import { DefaultButton } from '@fluentui/react';
 import { populateWithEmptyTargetLanguage } from '@/utilities/populateWithEmptyTargetLanguage';
 import { arrangeBibleBookName } from '@/utilities/arrangeBibleBookName';
 
+import { PropsAll, PropsLoad, PropsUpdate } from './type';
+import { Label } from './style';
+
+
 const loadFileText = "Load";
 const saveFileText = "Save";
 
 const uploadFileText = "Upload";
 const downloadFileText = "Download";
-
-type PropsAll = {
-  loadedBibleObject: ILoadedBible,
-  updateUploadedBible: (newlyLoadedBibleObject: ILoadedBible) => void
-}
-
-type PropsLoad = {
-  loadedBibleObject: ILoadedBible,
-}
-
-type PropsUpdate = {
-  updateUploadedBible: (newlyLoadedBibleObject: ILoadedBible) => void
-}
 
 const uploadRequestHandler: React.FC<PropsUpdate> = ({updateUploadedBible, children}) => {
   var fileName = '';
@@ -99,10 +90,10 @@ const uploadRequestHandler: React.FC<PropsUpdate> = ({updateUploadedBible, child
     <>
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <DefaultButton id="menu-load-file" className="menu-items">
-          <label htmlFor="load-file">
+          <Label>
             {loadFileText}
-            <input id="load-file" type="file" onChange={handleChange} />
-          </label>
+            <input type="file" onChange={handleChange} />
+          </Label>
           <span id="loaded-file-name">{fileName}</span>
         </DefaultButton>
     </>

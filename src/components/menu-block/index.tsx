@@ -20,30 +20,20 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 import React from 'react';
-import styled from 'styled-components';
 
 import MenuBlockFileHandler from './MenuBlockFileHandler/MenuBlockFileHandler';
 import { MenuBlockSettings } from './Settings/Settings';
 
 import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
+import { Container } from './styles';
 
-import './index.css';
-
-const Block = styled.div`
-  align-items: flex-start;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 0;
-  width: 100%;
-`;
 
 export function MenuBlock(): React.ReactElement<Record<string, unknown>> {
   const { loadedBibleObject, updateUploadedBible } = React.useContext(LoadedBibleContext) as LoadedBibleContextType
   return (
-    <Block>
+    <Container>
       <MenuBlockFileHandler loadedBibleObject={loadedBibleObject} updateUploadedBible={updateUploadedBible}/>
-    </Block>
+    </Container>
   );
 }
 
