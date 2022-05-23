@@ -56,6 +56,12 @@ We will release the installer in a couple of weeks, so desktop usage wouldn't
 need you to compile from source!
 
 
+## **Development**
+Run the same commands as for running the application on your desktop
+temporarily. Start modifying the source, save them, and you'll see the
+application updated automatically.
+
+
 ## **Improvements**
 List of things to be improved.
 1. Add documentation as a comment for every function and components.
