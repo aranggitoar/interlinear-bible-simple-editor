@@ -20,20 +20,16 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 import * as React from 'react';
-import { DefaultButton } from '@fluentui/react';
 
 import { populateWithEmptyTargetLanguage } from '@/utilities/populateWithEmptyTargetLanguage';
 import { arrangeBibleBookName } from '@/utilities/arrangeBibleBookName';
 
 import { PropsAll, PropsLoad, PropsUpdate } from './type';
-import { Label } from './style';
+import { FileHandlerButton, InvisibleInput, Container } from './style';
 
 
-const loadFileText = "Load";
 const saveFileText = "Save";
-
-const uploadFileText = "Upload";
-const downloadFileText = "Download";
+const loadFileText = "Load";
 
 const uploadRequestHandler: React.FC<PropsUpdate> = ({updateUploadedBible, children}) => {
   var fileName = '';
@@ -87,16 +83,10 @@ const uploadRequestHandler: React.FC<PropsUpdate> = ({updateUploadedBible, child
   };
 
   return (
-    <>
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        <DefaultButton id="menu-load-file" className="menu-items">
-          <Label>
-            {loadFileText}
-            <input type="file" onChange={handleChange} />
-          </Label>
-          <span id="loaded-file-name">{fileName}</span>
-        </DefaultButton>
-    </>
+    <FileHandlerButton>
+        {loadFileText}
+        <InvisibleInput type="file" onChange={handleChange} />
+    </FileHandlerButton>
   );
 }
 
@@ -114,31 +104,25 @@ const downloadRequestHandler: React.FC<PropsLoad> = ({loadedBibleObject, childre
   }
   
   return (
-    <>
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        <DefaultButton id="menu-save-file" onClick={downloadBibleAsJSON}>
-          {saveFileText}
-        </DefaultButton>
-    </>
+    <FileHandlerButton onClick={downloadBibleAsJSON}>
+        {saveFileText}
+    </FileHandlerButton>
   );
 }
 
 const MenuBlockFileHandler: React.FC<PropsAll> = ({loadedBibleObject, updateUploadedBible}) => {
-  const Upload = uploadRequestHandler;
-  const Download = downloadRequestHandler;
+  const LoadFileHandler = uploadRequestHandler;
+  const SaveFileHandler = downloadRequestHandler;
   return (
     <>
-      <div className="menu-items">
-        <Upload updateUploadedBible={updateUploadedBible}>
-          <button type="submit">{uploadFileText}</button>
-        </Upload>
-      </div>
-      <div className="menu-items">
-        <Download loadedBibleObject={loadedBibleObject}>
-          <button type="submit">{downloadFileText}</button>
-        </Download>
-      </div>
+      <Container>
+        <LoadFileHandler updateUploadedBible={updateUploadedBible} />
+      </Container>
+      <Container>
+        <SaveFileHandler loadedBibleObject={loadedBibleObject} />
+      </Container>
     </>
   );
 }
+
 export default MenuBlockFileHandler;
