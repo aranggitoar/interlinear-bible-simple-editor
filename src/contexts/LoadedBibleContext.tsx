@@ -19,36 +19,37 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import * as React from 'react';
+import React from 'react';
+import { useState, createContext, FC, ReactNode } from 'react';
 
-export const LoadedBibleContext = React.createContext<LoadedBibleContextType | null>(null);
+export const LoadedBibleContext = createContext<LoadedBibleContextType | null>(null);
 
-const LoadedBibleProvider: React.FC<React.ReactNode> = ({ children }) => {
-  const [loadedBibleObject, setLoadedBibleObject] = React.useState<ILoadedBible>(
-    {
-      bibleObject: {},
-      chosenBibleSourceName: 'morphhb.js',
-      chosenBibleBookNames: [],
-      chosenBibleBookDetails: ['', '0', '0'],
-    },
-  );
+const LoadedBibleProvider: FC<ReactNode> = ({ children }) => {
+  const [loadedBibleObject, setLoadedBibleObject] = useState<Object>({});
+  const [loadedBibleFileName, setLoadedBibleFileName] = useState<string>('');
+  const [loadedBibleBookNames, setLoadedBibleBookNames] = useState<Array<string>>([]);
+  const [displayedBibleInfo, setDisplayedBibleInfo] = useState<Array<string>>([]);
 
-  const downloadBible = (bibleObject: Object) => {
-    return JSON.stringify(bibleObject);
-  }
+  const updateUploadedBibleObject = (uploadedBibleObject: Object) => {
+    setLoadedBibleObject(uploadedBibleObject);
+  };
 
-  const updateUploadedBible = (newlyLoadedBibleObject: ILoadedBible) => {
-    const newBibleObject: ILoadedBible = {
-      bibleObject: newlyLoadedBibleObject.bibleObject,
-      chosenBibleSourceName: newlyLoadedBibleObject.chosenBibleSourceName,
-      chosenBibleBookNames: newlyLoadedBibleObject.chosenBibleBookNames,
-      chosenBibleBookDetails: newlyLoadedBibleObject.chosenBibleBookDetails,
-    }
-    setLoadedBibleObject(newBibleObject);
+  const updateUploadedBibleFileName = (uploadedBibleFileName: string) => {
+    setLoadedBibleFileName(uploadedBibleFileName);
+  };
+
+  const updateUploadedBibleBookNames = (uploadedBibleBookNames: Array<string>) => {
+    setLoadedBibleBookNames(uploadedBibleBookNames);
+  };
+
+  const updateDisplayedBibleInfo = (newDisplayedBibleInfo: Array<string>) => {
+    setDisplayedBibleInfo(newDisplayedBibleInfo);
   };
 
   return (
-    <LoadedBibleContext.Provider value={{ loadedBibleObject, downloadBible, updateUploadedBible }}>
+    <LoadedBibleContext.Provider value={{
+      loadedBibleObject, loadedBibleFileName, loadedBibleBookNames, displayedBibleInfo, updateUploadedBibleObject, updateUploadedBibleFileName, updateUploadedBibleBookNames, updateDisplayedBibleInfo
+    }}>
       {children}
     </LoadedBibleContext.Provider>
   );

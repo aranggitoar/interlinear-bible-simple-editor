@@ -19,33 +19,36 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-interface ILoadedBible {
-  bibleObject: Object;
-  chosenBibleSourceName: string;
-  chosenBibleBookNames: Array<string>;
-  chosenBibleBookDetails: Array<string>;
-}
-
 interface ILoadedVerse {
   arrayOfTargetWords: Array<string>;
   arrayOfOriginalWords: Array<string>;
   arrayOfStrongs: Array<string>;
   arrayOfMorphologies: Array<string>;
-  chosenBibleBookDetails: Array<string>;
 }
 
 type LoadedBibleContextType = {
-  loadedBibleObject: ILoadedBible;
-  downloadBible: (bibleObject: Object) => void;
-  updateUploadedBible: (newlyLoadedBibleObject: ILoadedBible) => void;
+  loadedBibleObject: Object;
+  loadedBibleFileName: string;
+  loadedBibleBookNames: Array<string>;
+  displayedBibleInfo: Array<string>;
+  updateUploadedBibleObject: (uploadedBibleObject: Object) => void;
+  updateUploadedBibleFileName: (uploadedBibleFileName: string) => void;
+  updateUploadedBibleBookNames: (uploadedBibleBookNames: Array<string>) => void;
+  updateDisplayedBibleInfo: (newDisplayedBibleInfo: Array<string>) => void;
 } 
 
-type Props = {
-  loadedBibleObject: ILoadedBible;
-  updateUploadedBible?: (newlyLoadedBibleObject: ILoadedBible) => void;
-}
+type MenuProps = Omit<LoadedBibleContextType, "loadedBibleBookNames" | "displayedBibleInfo">
 
-type VerseDataProps = {
-  loadedBibleVerse: ILoadedVerse;
-  verseIndex: number;
-}
+type FileLoadHandlerMenuProps = Omit<MenuProps, "loadedBibleObject" | "loadedBibleFileName">
+
+type FileSaveHandlerMenuProps = Pick<MenuProps, "loadedBibleObject" | "loadedBibleFileName">
+
+type BibleBookSelectorProps = Pick<LoadedBibleContextType, "loadedBibleBookNames" | "displayedBibleInfo" | "updateDisplayedBibleInfo">
+
+type NonBibleBookSelectorProps = Pick<LoadedBibleContextType, "loadedBibleObject" | "displayedBibleInfo" | "updateDisplayedBibleInfo">
+
+type TranslationColumnProps = Pick<LoadedBibleContextType, "loadedBibleObject" | "displayedBibleInfo" | "updateUploadedBibleObject">
+
+type TranslationRowProps = {
+  wordIndex: number;
+} & TranslationColumnProps
