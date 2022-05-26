@@ -33,7 +33,13 @@ import { assembleBibleDataByVerse } from '@/utilities/assembleBibleDataByVerse';
 import { Container, RowContainer, TranslationInputField } from './style';
 
 
-const updateWordTranslation = (e: FormEvent<HTMLTextAreaElement | HTMLInputElement>, loadedBibleObject: Object, displayedBibleInfo: Array<string>, updateUploadedBibleObject: (uploadedBibleObject: Object) => void, updateTranslationData: (newTranslationData: Array<string>) => void, wordIndex: number): void => {
+const updateWordTranslation = (
+  e: FormEvent<HTMLTextAreaElement | HTMLInputElement>,
+  loadedBibleObject: Object, displayedBibleInfo: Array<string>,
+  updateUploadedBibleObject: (uploadedBibleObject: Object) => void,
+  updateTranslationData: (newTranslationData: Array<string>) => void,
+  wordIndex: number
+): void => {
   e.preventDefault();
   let newTranslation = getTranslationResult();
   // @ts-ignore // property exists
@@ -44,7 +50,11 @@ const updateWordTranslation = (e: FormEvent<HTMLTextAreaElement | HTMLInputEleme
 
 // Generate the row containers.
 // Return an array of JSX Elements.
-function rowContainerGenerator(loadedBibleObject: Object, displayedBibleInfo: Array<string>, updateUploadedBibleObject: (uploadedBibleObject: Object) => void, wordIndex: number) {
+const rowContainerGenerator = (
+  loadedBibleObject: Object, displayedBibleInfo: Array<string>,
+  updateUploadedBibleObject: (uploadedBibleObject: Object) => void,
+  wordIndex: number
+): Array<JSX.Element> => {
   let verseData = assembleBibleDataByVerse(loadedBibleObject, displayedBibleInfo) as ILoadedVerse,
       index = wordIndex;
 
@@ -92,8 +102,9 @@ function rowContainerGenerator(loadedBibleObject: Object, displayedBibleInfo: Ar
 }
 
 // Display translation block's row container.
-export const TranslationBlockRowContainer: FC<TranslationRowProps> = ({loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordIndex}) => {
-
+export const TranslationBlockRowContainer: FC<TranslationRowProps> = ({
+  loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordIndex
+}) => {
   return (
     <Container>
       {rowContainerGenerator(loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordIndex)}
