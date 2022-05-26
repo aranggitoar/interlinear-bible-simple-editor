@@ -20,21 +20,32 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 import React from 'react';
+import { ReactElement, useContext } from 'react';
 
-import MenuBlockFileHandler from './MenuBlockFileHandler/MenuBlockFileHandler';
+import FileHandlerMenuBlock from './FileHandler/FileHandler';
 import { MenuBlockSettings } from './Settings/Settings';
 
 import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Container } from './styles';
 
 
-export function MenuBlock(): React.ReactElement<Record<string, unknown>> {
-  const { loadedBibleObject, updateUploadedBible } = React.useContext(LoadedBibleContext) as LoadedBibleContextType
+export function MenuBlock(): ReactElement<Record<string, unknown>> {
+  const {
+    loadedBibleObject, loadedBibleFileName,
+    updateUploadedBibleObject, updateUploadedBibleFileName,
+    updateUploadedBibleBookNames, updateDisplayedBibleInfo
+  } = useContext(LoadedBibleContext) as LoadedBibleContextType;
+
   return (
     <Container>
-      <MenuBlockFileHandler loadedBibleObject={loadedBibleObject} updateUploadedBible={updateUploadedBible}/>
+      <FileHandlerMenuBlock
+        loadedBibleObject={loadedBibleObject}
+        loadedBibleFileName={loadedBibleFileName}
+        updateUploadedBibleObject={updateUploadedBibleObject}
+        updateUploadedBibleFileName={updateUploadedBibleFileName}
+        updateUploadedBibleBookNames={updateUploadedBibleBookNames}
+        updateDisplayedBibleInfo={updateDisplayedBibleInfo}
+      />
     </Container>
   );
 }
-
-export default MenuBlock;

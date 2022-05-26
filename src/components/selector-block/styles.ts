@@ -83,3 +83,6 @@ export const Container = styled.div`
     transform: translateX(-10px);
   }
 `;
+
+export const Option = styled.option`
+`;

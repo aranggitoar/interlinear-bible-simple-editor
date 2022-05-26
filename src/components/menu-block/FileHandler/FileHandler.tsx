@@ -19,22 +19,25 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import * as React from 'react';
+import React from 'react';
+import { FC, FormEvent } from 'react';
 
 import { populateWithEmptyTargetLanguage } from '@/utilities/populateWithEmptyTargetLanguage';
 import { arrangeBibleBookName } from '@/utilities/arrangeBibleBookName';
 
-import { PropsAll, PropsLoad, PropsUpdate } from './type';
 import { FileHandlerButton, InvisibleInput, Container } from './style';
 
 
 const saveFileText = "Save";
 const loadFileText = "Load";
 
-const uploadRequestHandler: React.FC<PropsUpdate> = ({updateUploadedBible, children}) => {
+const uploadRequestHandler: FC<FileLoadHandlerMenuProps> = ({
+  updateUploadedBibleObject, updateUploadedBibleFileName,
+  updateUploadedBibleBookNames, updateDisplayedBibleInfo, children
+}) => {
   var fileName = '';
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
+  const handleChange = (e: FormEvent<HTMLInputElement>): void => {
     e.preventDefault();
 
     const fileReader = new FileReader();
@@ -70,56 +73,61 @@ const uploadRequestHandler: React.FC<PropsUpdate> = ({updateUploadedBible, child
 
       console.log(updatedFileObject);
 
-      // @ts-ignore // the element exists
-      const newUploadedFile: ILoadedBible = {
-        ['bibleObject']: updatedFileObject,
-        ['chosenBibleSourceName']: fileName,
-        ['chosenBibleBookNames']: bibleBookNames,
-        ['chosenBibleBookDetails']: [bibleBookName, '0', '0']
-      }
-      updateUploadedBible(newUploadedFile);
-
+      updateUploadedBibleObject(updatedFileObject);
+      updateUploadedBibleFileName(fileName);
+      updateUploadedBibleBookNames(bibleBookNames);
+      updateDisplayedBibleInfo([bibleBookName, '0', '0']);
     }
   };
 
   return (
     <FileHandlerButton>
-        {loadFileText}
-        <InvisibleInput type="file" onChange={handleChange} />
+      {loadFileText}
+      <InvisibleInput type="file" onChange={handleChange} />
     </FileHandlerButton>
   );
 }
 
-const downloadRequestHandler: React.FC<PropsLoad> = ({loadedBibleObject, children}) => {
-  const stringifiedBibleObject = JSON.stringify(loadedBibleObject.bibleObject);
-
-  // @ts-expect-error // name "Button" exists
-  const downloadBibleAsJSON = (e: MouseEventHandler<Button>): void => {
+const downloadRequestHandler: FC<FileSaveHandlerMenuProps> = ({
+  loadedBibleObject, loadedBibleFileName
+}) => {
+  const downloadBibleAsJSON = (): void => {
     var hiddenElement = document.createElement('a');
-
-    hiddenElement.href = 'data:attachment/text,' + encodeURI(stringifiedBibleObject);
+    hiddenElement.href = 'data:attachment/text,' + encodeURI(JSON.stringify(loadedBibleObject));
     hiddenElement.target = '_blank';
-    hiddenElement.download = loadedBibleObject.chosenBibleSourceName as string;
+    hiddenElement.download = loadedBibleFileName as string;
     hiddenElement.click();
   }
   
   return (
     <FileHandlerButton onClick={downloadBibleAsJSON}>
-        {saveFileText}
+      {saveFileText}
     </FileHandlerButton>
   );
 }
 
-const MenuBlockFileHandler: React.FC<PropsAll> = ({loadedBibleObject, updateUploadedBible}) => {
-  const LoadFileHandler = uploadRequestHandler;
-  const SaveFileHandler = downloadRequestHandler;
+const MenuBlockFileHandler: FC<MenuProps> = ({
+  loadedBibleObject, loadedBibleFileName, updateUploadedBibleObject,
+  updateUploadedBibleFileName, updateUploadedBibleBookNames,
+  updateDisplayedBibleInfo
+}) => {
+  const FileLoadHandlerButton = uploadRequestHandler;
+  const FileSaveHandlerButton = downloadRequestHandler;
   return (
     <>
       <Container>
-        <LoadFileHandler updateUploadedBible={updateUploadedBible} />
+        <FileLoadHandlerButton
+          updateUploadedBibleObject={updateUploadedBibleObject}
+          updateUploadedBibleFileName={updateUploadedBibleFileName}
+          updateUploadedBibleBookNames={updateUploadedBibleBookNames}
+          updateDisplayedBibleInfo={updateDisplayedBibleInfo}
+        />
       </Container>
       <Container>
-        <SaveFileHandler loadedBibleObject={loadedBibleObject} />
+        <FileSaveHandlerButton
+          loadedBibleObject={loadedBibleObject}
+          loadedBibleFileName={loadedBibleFileName}
+        />
       </Container>
     </>
   );

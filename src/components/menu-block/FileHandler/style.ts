@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
-export const FileHandlerButton = styled.button`
+export const FileHandlerButton = styled.label`
   align-items: center;
   border: 0;
   background: none;
+  display: flex;
   font-size: 16px;
   font-weight: 400 !important;
   height: 2em;
+  justify-content: center;
   text-transform: uppercase;
   transition: all 500ms;
   pointer: cursor;
@@ -14,7 +16,9 @@ export const FileHandlerButton = styled.button`
 `;
 
 export const InvisibleInput = styled.input`
-  display: none;
+  height: .1px;
+  width: .1px;
+  opacity: 0;
 `;
 
 export const Container = styled.div`
