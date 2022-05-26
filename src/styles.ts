@@ -6,11 +6,3 @@ export const Separator = styled.hr`
   margin: 1em 0 2em;
   width: 30%;
 `;
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-  height: 100%;
-`;

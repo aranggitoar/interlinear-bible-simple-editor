@@ -22,18 +22,17 @@ export default createGlobalStyle`
     height: 100%;
   }
 
-  body {
+  main {
+    align-items: center;
     background-color: white;
     color: black;
+    display: flex;
+    flex-direction: column;
     margin: auto;
   }
 
   #root {
     display: flex;
     width: 100%;
-  }
-
-  #hidden-containers {
-    display: none;
   }
 `;

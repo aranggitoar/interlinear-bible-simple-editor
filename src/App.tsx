@@ -19,28 +19,27 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import * as React from 'react';
-import styled from 'styled-components';
+import React from 'react';
 
 import TranslationBlock from '@/components/translation-block';
 import { MenuBlock } from '@/components/menu-block';
-import { PickerBlock } from '@/components/picker-block';
+import { SelectorBlock } from '@/components/selector-block';
 
 import LoadedBibleProvider from '@/contexts/LoadedBibleContext';
 import GlobalStyle from '@/styles/global';
-import { Container, Separator } from './styles';
+import { Separator } from './styles';
 
 
 export function App(): React.ReactElement<Record<string, unknown>> {
   return (
-    <Container id="app">
+    <React.StrictMode>
       <GlobalStyle />
       <LoadedBibleProvider>
         <MenuBlock />
-        <PickerBlock />
+        <SelectorBlock />
         <Separator />
         <TranslationBlock />
       </LoadedBibleProvider>
-    </Container>
+    </React.StrictMode>
   );
 }
