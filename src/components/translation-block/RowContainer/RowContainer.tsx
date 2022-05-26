@@ -37,15 +37,15 @@ const updateWordTranslation = (
   e: FormEvent<HTMLTextAreaElement | HTMLInputElement>,
   loadedBibleObject: Object, displayedBibleInfo: Array<string>,
   updateUploadedBibleObject: (uploadedBibleObject: Object) => void,
-  updateTranslationData: (newTranslationData: Array<string>) => void,
+  setTranslationData: (newTranslationData: Array<string>) => void,
   wordIndex: number
 ): void => {
   e.preventDefault();
   let newTranslation = getTranslationResult();
   // @ts-ignore // property exists
   newTranslation[wordIndex] = e.target.value;
-  updateTranslationData(newTranslation);
-  updateUploadedBibleObject(storeTranslationResult(loadedBibleObject, displayedBibleInfo, newTranslation));
+  setTranslationData(newTranslation);
+  updateUploadedBibleObject({ ...storeTranslationResult(loadedBibleObject, displayedBibleInfo, newTranslation) });
 }
 
 // Generate the row containers.
@@ -59,10 +59,6 @@ const rowContainerGenerator = (
       index = wordIndex;
 
   const [translationData, setTranslationData] = useState<Array<string>>([]);
-
-  const updateTranslationData = (newTranslationData: Array<string>) => {
-    setTranslationData(newTranslationData);
-  }
 
   // Prepare markup.
   let jsxMarkup = [] as Array<JSX.Element>;
@@ -87,7 +83,7 @@ const rowContainerGenerator = (
   jsxMarkup.push(
     <RowContainer key={`${index}3`} className="row-target-language">
       <TranslationInputField id={targetLanguageID} value={verseData.arrayOfTargetWords[index]} 
-        onChange={(e) => updateWordTranslation(e, loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, updateTranslationData, index)}
+        onChange={(e) => updateWordTranslation(e, loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, setTranslationData, index)}
       />
     </RowContainer>
   );
