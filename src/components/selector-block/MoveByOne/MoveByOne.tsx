@@ -33,12 +33,7 @@ const updateVerseIndex = (e: MouseEvent<Button>, loadedBibleObject: Object, disp
   const chapterIndex = displayedBibleInfo[1];
 
   let oldVerseIndex = displayedBibleInfo[2] as unknown;
-  // There is a bug.
-  // The oldValue is less 2 numbers than it should be when going forward,
-  // but the exact value displayed when going backward.
-  // Reducing the maxValue by 2 is a temporary fix,
-  // as it will be always less 2 numbers than it should be when going forward.
-  let maxVerseIndex = loadedBibleObject[bibleBookName][chapterIndex].length - 2;
+  let maxVerseIndex = loadedBibleObject[bibleBookName][chapterIndex].length - 1;
   let newVerseIndex = oldVerseIndex as number;
 
   if (e.currentTarget.id === "forward" && oldVerseIndex < maxVerseIndex) {
