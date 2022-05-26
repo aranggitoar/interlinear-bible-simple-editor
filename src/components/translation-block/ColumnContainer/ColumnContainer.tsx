@@ -19,22 +19,22 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import * as React from 'react';
+import React from 'react';
+import { useState, FC } from 'react';
 
-import TranslationBlockRowContainer from '@/components/translation-block/RowContainer/RowContainer';
+import { TranslationBlockRowContainer } from '@/components/translation-block/RowContainer/RowContainer';
 
-import { assembleBibleDataByVerse } from '@/utilities/assembleBibleDataByVerse';
 import { arrayOfCorrectlyOrderedNTBibleBookName, arrayOfCorrectlyOrderedOTBibleBookName } from '@/utilities/correctlyOrderedBibleBookName';
 
-import { Container } from './styles';
+import { Container, ColumnContainer } from './styles';
 
 
 // Generate the column containers.
 // Return an array of JSX Elements.
-function columnContainerGenerator(sourceData: ILoadedVerse, count: number) {
+function columnContainerGenerator(loadedBibleObject: Object, displayedBibleInfo: Array<string>, updateUploadedBibleObject: (uploadedBibleObject: Object) => void, wordCount: number) {
   let jsxMarkup = [] as Array<JSX.Element>;
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < wordCount; i++) {
     let columnId = "column-" + i as string;
     // Key attribute is a necessary internal component for React to not output warnings.
     // It is implicitly defined but it's defined explicitly here to be safe.
@@ -43,7 +43,12 @@ function columnContainerGenerator(sourceData: ILoadedVerse, count: number) {
     // https://reactjs.org/docs/reconciliation.html#recursing-on-children
     jsxMarkup.push(
       <div key={i} id={columnId}>
-        {<TranslationBlockRowContainer loadedBibleVerse={sourceData}verseIndex={i} />}
+        {<TranslationBlockRowContainer
+          loadedBibleObject={loadedBibleObject}
+          displayedBibleInfo={displayedBibleInfo}
+          updateUploadedBibleObject={updateUploadedBibleObject}
+          wordIndex={i}
+        />}
       </div>
     );
   }
@@ -64,18 +69,18 @@ function verseDirection(currentBook: string) {
 }
 
 // Display translation block's column container.
-const TranslationBlockColumnContainer: React.FC<Props> = ({loadedBibleObject}) => {
-  let verseData = assembleBibleDataByVerse(loadedBibleObject) as ILoadedVerse,
-      verseLength = verseData.arrayOfTargetWords.length as number,
-      currentBook = loadedBibleObject.chosenBibleBookDetails[0] as string;
+export const TranslationBlockColumnContainer: FC<TranslationColumnProps> = ({loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject}) => {
+  let currentBook = displayedBibleInfo[0] as string,
+    wordCount: number;
+  if (loadedBibleObject[displayedBibleInfo[0]] !== undefined) {
+    wordCount = loadedBibleObject[displayedBibleInfo[0]][displayedBibleInfo[1]][displayedBibleInfo[2]].length as number;
+  }
 
   return (
     <Container>
-      <div id="column-container" className={verseDirection(currentBook)}>
-        {columnContainerGenerator(verseData, verseLength)}
-      </div>
+      <ColumnContainer className={verseDirection(currentBook)}>
+        {columnContainerGenerator(loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordCount)}
+      </ColumnContainer>
     </Container>
   );
 }
-
-export default TranslationBlockColumnContainer;
