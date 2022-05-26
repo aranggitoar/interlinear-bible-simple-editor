@@ -25,10 +25,7 @@ import { useState, FC, FormEvent } from 'react';
 import { filterDisplayedStrongsData } from '@/utilities/filterDisplayedStrongsData';
 import { filterDisplayedOriginalLanguage } from '@/utilities/filterDisplayedOriginalLanguage';
 import { filterDisplayedMorphologicalData } from '@/utilities/filterDisplayedMorphologicalData';
-import { getStrongsDictionaryEntry } from '@/utilities/getStrongsDictionaryEntry';
-import { getTranslationResult } from '@/utilities/getTranslationResult';
-import { storeTranslationResult } from '@/utilities/storeTranslationResult';
-import { assembleBibleDataByVerse } from '@/utilities/assembleBibleDataByVerse';
+import { assembleBibleDataByWord } from '@/utilities/assembleBibleDataByWord';
 
 import { Container, RowContainer, TranslationInputField } from './style';
 
@@ -37,15 +34,32 @@ const updateWordTranslation = (
   e: FormEvent<HTMLTextAreaElement | HTMLInputElement>,
   loadedBibleObject: Object, displayedBibleInfo: Array<string>,
   updateUploadedBibleObject: (uploadedBibleObject: Object) => void,
-  setTranslationData: (newTranslationData: Array<string>) => void,
-  wordIndex: number
+  setTranslatedWord: (newTranslatedWord: string) => void,
+  translatedWordIndex: number
 ): void => {
   e.preventDefault();
-  let newTranslation = getTranslationResult();
-  // @ts-ignore // property exists
-  newTranslation[wordIndex] = e.target.value;
-  setTranslationData(newTranslation);
-  updateUploadedBibleObject({ ...storeTranslationResult(loadedBibleObject, displayedBibleInfo, newTranslation) });
+
+  // Copy the currently displayed Bible information
+  const [ displayedBibleBookName, displayedBibleChapterIndex,
+        displayedBibleVerseIndex ] = displayedBibleInfo,
+    // @ts-ignore // property exists
+    newTranslatedWord = e.target.value;
+
+  // Update the translated word state
+  setTranslatedWord(newTranslatedWord);
+
+  // Update the global Bible object
+  updateUploadedBibleObject({
+    ...loadedBibleObject,
+    displayedBibleBookName: [
+      ...loadedBibleObject
+        [displayedBibleBookName]
+        [displayedBibleChapterIndex]
+        [displayedBibleVerseIndex]
+        [translatedWordIndex]
+        .splice(0, 1, newTranslatedWord)
+    ]
+  });
 }
 
 // Generate the row containers.
@@ -55,46 +69,39 @@ const rowContainerGenerator = (
   updateUploadedBibleObject: (uploadedBibleObject: Object) => void,
   wordIndex: number
 ): Array<JSX.Element> => {
-  let verseData = assembleBibleDataByVerse(loadedBibleObject, displayedBibleInfo) as ILoadedVerse,
-      index = wordIndex;
 
-  const [translationData, setTranslationData] = useState<Array<string>>([]);
+  // Get every component of the current word.
+  const { targetWord, originalWord, strongs, morphology } =
+    assembleBibleDataByWord(loadedBibleObject, [...displayedBibleInfo,
+    wordIndex as unknown as string]) as ILoadedWord,
 
-  // Prepare markup.
-  let jsxMarkup = [] as Array<JSX.Element>;
+  // Prepare a local state for the currently displayed target word.
+    [translatedWord, setTranslatedWord] = useState<string>(""),
 
   // Prepare translation index identification.
-  let targetLanguageID = 'target-language-' + index as unknown as string;
+    targetLanguageID = 'target-language-' + wordIndex as unknown as string,
 
-  // Insert the about to be created dialog box upstairs in the next markup
-  jsxMarkup.push(
-    <RowContainer key={`${index}1`} className="row-strongs"
-    data-strongs-entry={getStrongsDictionaryEntry(verseData.arrayOfStrongs[index])}>
-      {filterDisplayedStrongsData(verseData.arrayOfStrongs[index])}
-    </RowContainer>
-  );
+  // Prepare the variables to be consumed.
+    containerVariables = [
+      ["1" + wordIndex, "row-strongs", filterDisplayedStrongsData(strongs)],
+      ["2" + wordIndex, "row-original-language", filterDisplayedOriginalLanguage(originalWord)],
+      ["3" + wordIndex, "row-target-language", <TranslationInputField
+        id={targetLanguageID} value={targetWord} onChange={(e) =>
+        updateWordTranslation(e, loadedBibleObject,
+        displayedBibleInfo, updateUploadedBibleObject,
+        setTranslatedWord, wordIndex)}/>],
+      ["4" + wordIndex, "row-morphology", filterDisplayedMorphologicalData(morphology)]
+    ]
 
-  jsxMarkup.push(
-    <RowContainer key={`${index}2`} className="row-original-language">
-      {filterDisplayedOriginalLanguage(verseData.arrayOfOriginalWords[index])}
-    </RowContainer>
-  );
-
-  jsxMarkup.push(
-    <RowContainer key={`${index}3`} className="row-target-language">
-      <TranslationInputField id={targetLanguageID} value={verseData.arrayOfTargetWords[index]} 
-        onChange={(e) => updateWordTranslation(e, loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, setTranslationData, index)}
-      />
-    </RowContainer>
-  );
-
-  jsxMarkup.push(
-    <RowContainer key={`${index}4`} className="row-morphology">
-      {filterDisplayedMorphologicalData(verseData.arrayOfMorphologies[index])}
-    </RowContainer>
-  );
-
-  return jsxMarkup as Array<JSX.Element>;
+  // Iterate the variables to be consumed into a container.
+  return containerVariables.map((containerVariable) => {
+    return (
+      <RowContainer key={containerVariable[0] as unknown as string}
+        className={containerVariable[1] as unknown as string}>
+        {containerVariable[2]}
+      </RowContainer>
+    )
+  });
 }
 
 // Display translation block's row container.
@@ -103,7 +110,8 @@ export const TranslationBlockRowContainer: FC<TranslationRowProps> = ({
 }) => {
   return (
     <Container>
-      {rowContainerGenerator(loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordIndex)}
+      {rowContainerGenerator(loadedBibleObject, displayedBibleInfo,
+        updateUploadedBibleObject, wordIndex)}
     </Container>
   );
 }
