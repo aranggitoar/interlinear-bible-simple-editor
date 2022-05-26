@@ -21,22 +21,47 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  height: 75%;
-  justify-content: center;
-  padding: .75em 1em;
-  margin-top: 1em;
+export const ButtonContainer = styled.div`
+  position: relative;
+`
 
-  .picker-items {
-    cursor: pointer;
-    font-size: 16px;
-    margin: .5em 1.5em;
-    padding: .15em .3em;
+export const MoveByOneButton = styled.button`
+  background: none;
+  border: none;
+  color: #777;
+  font-size: 50px;
+  transition: transform 500ms, color 150ms;
+
+  &:hover {
+    background: none;
+    color: #555;
   }
-`;
 
-export const Option = styled.option`
-`;
+  &:after,
+  &:after {
+    background: none;
+    content: "";
+    height: 150%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 150%;
+  }
+
+  &#forward {
+    margin-left: 2em;
+  }
+
+  &#backward {
+    margin-right: 2em;
+  }
+
+  &#forward:hover {
+    transform: translateX(10px);
+  }
+
+  &#backward:hover {
+    transform: translateX(-10px);
+  }
+`
+

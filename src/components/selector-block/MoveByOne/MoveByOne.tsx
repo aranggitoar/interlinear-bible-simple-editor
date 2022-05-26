@@ -21,8 +21,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import React from 'react';
 import { MouseEvent } from 'react';
-import { DefaultButton } from '@fluentui/react';
 
+import { ButtonContainer, MoveByOneButton } from './styles';
 
 
 // @ts-ignore // the type exists
@@ -58,18 +58,22 @@ const updateVerseIndex = (e: MouseEvent<Button>, loadedBibleObject: Object, disp
 
 export const MoveBackwardByOne: React.FC<NonBibleBookSelectorProps> = ({loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo}) => {
   return (
-    <DefaultButton id="backward" className="move-by-one"
+    <ButtonContainer>
+      <MoveByOneButton id="backward" className="move-by-one"
       onClick={(e) => updateVerseIndex(e, loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo)}>
       &#8249;
-    </DefaultButton>
+      </MoveByOneButton>
+    </ButtonContainer>
   );
 }
 
 export const MoveForwardByOne: React.FC<NonBibleBookSelectorProps> = ({loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo}) => {
   return (
-    <DefaultButton id="forward" className="move-by-one"
-      onClick={(e) => updateVerseIndex(e, loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo)}>
-      &#8250;
-    </DefaultButton>
+    <ButtonContainer>
+      <MoveByOneButton id="forward" className="move-by-one"
+        onClick={(e) => updateVerseIndex(e, loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo)}>
+        &#8250;
+      </MoveByOneButton>
+    </ButtonContainer>
   );
 }
