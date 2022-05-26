@@ -1,9 +1,8 @@
 # Changes and License Notice
 The `morphhb.json` is a modified `morphhb.js` from the
-[Javascripture](https://github.com/javascripture/javascripture) software,
-originally by [Open Scripture's Hebrew
-Bible](https://github.com/benihyangbaik/interlinear-bible-simple-editor/blob/main/data/morphhb.json).
-It is [licensed with CC BY
+[Javascripture](https://github.com/javascripture/javascripture) software, which
+is basically [Open Scripture's Hebrew
+Bible](https://github.com/openscriptures/morphhb). It is [licensed with CC BY
 4.0](https://github.com/openscriptures/morphhb/blob/master/LICENSE.md). CC BY
 is [compatible with all version of GNU
 GPL](https://www.gnu.org/licenses/license-list.en.html#ccby).
