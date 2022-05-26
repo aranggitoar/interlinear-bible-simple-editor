@@ -20,12 +20,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 import React from 'react';
-import { useState, FC } from 'react';
+import { FC } from 'react';
 
 import { TranslationBlockRowContainer } from '@/components/translation-block/RowContainer/RowContainer';
 
 import { arrayOfCorrectlyOrderedNTBibleBookName, arrayOfCorrectlyOrderedOTBibleBookName } from '@/utilities/correctlyOrderedBibleBookName';
-
 import { Container, ColumnContainer } from './styles';
 
 
@@ -59,13 +58,8 @@ function columnContainerGenerator(loadedBibleObject: Object, displayedBibleInfo:
 // Interpret the verse direction.
 // Return a string of the direction.
 function verseDirection(currentBook: string) {
-  if (arrayOfCorrectlyOrderedOTBibleBookName.indexOf(currentBook) > -1) {
-    return "rtl";
-  } 
-
-  if (arrayOfCorrectlyOrderedNTBibleBookName.indexOf(currentBook) > -1) {
-    return "ltr";
-  }
+  if (arrayOfCorrectlyOrderedOTBibleBookName.indexOf(currentBook) > -1) return "rtl";
+  else if (arrayOfCorrectlyOrderedNTBibleBookName.indexOf(currentBook) > -1) return "ltr";
 }
 
 // Display translation block's column container.
