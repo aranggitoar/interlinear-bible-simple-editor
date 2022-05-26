@@ -4,9 +4,12 @@ const plugins = require('./webpack.plugins');
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve(__dirname, '..', 'src/web.tsx'),
+  entry: {
+    import: path.resolve(__dirname, '..', 'src/web.tsx'),
+    dependOn: ['react', 'styled-components'],
+  },
   output: {
-    path: path.resolve(__dirname, 'ibse.benihyangbaik.com/'),
+    path: path.resolve(__dirname, '..', 'ibse.benihyangbaik.com/'),
   },
   module: {
     rules,
