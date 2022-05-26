@@ -28,60 +28,12 @@ export const Container = styled.div`
   justify-content: center;
   padding: 1rem;
 
-  #column-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0;
-    max-width: 75%;
-  }
-
-  #column-container > div {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: .5em;
-  }
-
   .rtl {
     direction: rtl !important;
   }
 
   .ltr {
     direction: ltr !important;
-  }
-
-  .row-container {
-    padding: .15em 0;
-    max-width: 135px;
-  }
-
-  .row-strongs {
-    color: #4444dd;
-  }
-
-  .row-original-language {
-    font-size: 1.5em;
-  }
-
-  .row-target-language div {
-    border: none;
-    direction: ltr;
-  }
-
-  .row-morphology {
-    color: #555555;
-  }
-
-  .row-target-language input {
-    border: 1px dashed rgb(188,186,184) !important;
-    border-radius: 2.5px !important;
-    color: #dd4444 !important;
-  }
-
-  .row-target-language input:hover {
-    border: 1px dashed rgb(142,140,138) !important;
   }
 `;
 
