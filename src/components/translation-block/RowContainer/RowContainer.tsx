@@ -19,18 +19,40 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import * as React from 'react';
-import { TextField } from '@fluentui/react';
+import React from 'react';
+import { useState, FC, FormEvent } from 'react';
 
 import { filterDisplayedStrongsData } from '@/utilities/filterDisplayedStrongsData';
 import { filterDisplayedOriginalLanguage } from '@/utilities/filterDisplayedOriginalLanguage';
 import { filterDisplayedMorphologicalData } from '@/utilities/filterDisplayedMorphologicalData';
 import { getStrongsDictionaryEntry } from '@/utilities/getStrongsDictionaryEntry';
+import { getTranslationResult } from '@/utilities/getTranslationResult';
+import { storeTranslationResult } from '@/utilities/storeTranslationResult';
+import { assembleBibleDataByVerse } from '@/utilities/assembleBibleDataByVerse';
 
+import { Container, RowContainer, TranslationInputField } from './style';
+
+
+const updateWordTranslation = (e: FormEvent<HTMLTextAreaElement | HTMLInputElement>, loadedBibleObject: Object, displayedBibleInfo: Array<string>, updateUploadedBibleObject: (uploadedBibleObject: Object) => void, updateTranslationData: (newTranslationData: Array<string>) => void, wordIndex: number): void => {
+  e.preventDefault();
+  let newTranslation = getTranslationResult();
+  // @ts-ignore // property exists
+  newTranslation[wordIndex] = e.target.value;
+  updateTranslationData(newTranslation);
+  updateUploadedBibleObject(storeTranslationResult(loadedBibleObject, displayedBibleInfo, newTranslation));
+}
 
 // Generate the row containers.
 // Return an array of JSX Elements.
-function rowContainerGenerator(sourceData: ILoadedVerse, index: number) {
+function rowContainerGenerator(loadedBibleObject: Object, displayedBibleInfo: Array<string>, updateUploadedBibleObject: (uploadedBibleObject: Object) => void, wordIndex: number) {
+  let verseData = assembleBibleDataByVerse(loadedBibleObject, displayedBibleInfo) as ILoadedVerse,
+      index = wordIndex;
+
+  const [translationData, setTranslationData] = useState<Array<string>>([]);
+
+  const updateTranslationData = (newTranslationData: Array<string>) => {
+    setTranslationData(newTranslationData);
+  }
 
   // Prepare markup.
   let jsxMarkup = [] as Array<JSX.Element>;
@@ -38,49 +60,43 @@ function rowContainerGenerator(sourceData: ILoadedVerse, index: number) {
   // Prepare translation index identification.
   let targetLanguageID = 'target-language-' + index as unknown as string;
 
-  // Add word index in the verse array.
-  if (sourceData.chosenBibleBookDetails.length < 4) {
-    sourceData.chosenBibleBookDetails.push(index as unknown as string);
-  } else {
-    sourceData.chosenBibleBookDetails[3] = index as unknown as string;
-  }
-
   // Insert the about to be created dialog box upstairs in the next markup
   jsxMarkup.push(
-    <div key={`${index}1`} className="row-strongs row-container"
-    data-strongs-entry={getStrongsDictionaryEntry(sourceData.arrayOfStrongs[index])}>
-      {filterDisplayedStrongsData(sourceData.arrayOfStrongs[index])}
-    </div>
+    <RowContainer key={`${index}1`} className="row-strongs"
+    data-strongs-entry={getStrongsDictionaryEntry(verseData.arrayOfStrongs[index])}>
+      {filterDisplayedStrongsData(verseData.arrayOfStrongs[index])}
+    </RowContainer>
   );
 
   jsxMarkup.push(
-    <div key={`${index}2`} className="row-original-language row-container">
-      {filterDisplayedOriginalLanguage(sourceData.arrayOfOriginalWords[index])}
-    </div>
+    <RowContainer key={`${index}2`} className="row-original-language">
+      {filterDisplayedOriginalLanguage(verseData.arrayOfOriginalWords[index])}
+    </RowContainer>
   );
 
   jsxMarkup.push(
-    <div key={`${index}3`} className="row-target-language row-container">
-      <TextField id={targetLanguageID} defaultValue={sourceData.arrayOfTargetWords[index]} />
-    </div>
+    <RowContainer key={`${index}3`} className="row-target-language">
+      <TranslationInputField id={targetLanguageID} value={verseData.arrayOfTargetWords[index]} 
+        onChange={(e) => updateWordTranslation(e, loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, updateTranslationData, index)}
+      />
+    </RowContainer>
   );
 
   jsxMarkup.push(
-    <div key={`${index}4`} className="row-morphology row-container">
-      {filterDisplayedMorphologicalData(sourceData.arrayOfMorphologies[index])}
-    </div>
+    <RowContainer key={`${index}4`} className="row-morphology">
+      {filterDisplayedMorphologicalData(verseData.arrayOfMorphologies[index])}
+    </RowContainer>
   );
 
   return jsxMarkup as Array<JSX.Element>;
 }
 
 // Display translation block's row container.
-const TranslationBlockRowContainer: React.FC<VerseDataProps> = ({loadedBibleVerse, verseIndex}) => {
+export const TranslationBlockRowContainer: FC<TranslationRowProps> = ({loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordIndex}) => {
+
   return (
-    <>
-      {rowContainerGenerator(loadedBibleVerse, verseIndex)}
-    </>
+    <Container>
+      {rowContainerGenerator(loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordIndex)}
+    </Container>
   );
 }
-
-export default TranslationBlockRowContainer;
