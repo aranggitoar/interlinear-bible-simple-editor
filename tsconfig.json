@@ -15,7 +15,7 @@
       "@/*": ["src/*"],
       "$/*": ["data/*"]
     },
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "include": [
     "src/**/*"
