@@ -26,6 +26,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: .5em;
+  margin: 0 .5em;
 `;
 
 export const RowContainer = styled.div`
@@ -54,6 +55,7 @@ export const TranslationInputField = styled.textarea`
   border-radius: 2.5px !important;
   color: #dd4444 !important;
   height: 2em;
+  padding: .1em .4em;
   resize: none;
   width: 10em;
 
