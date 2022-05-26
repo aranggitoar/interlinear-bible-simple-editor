@@ -71,8 +71,6 @@ const uploadRequestHandler: FC<FileLoadHandlerMenuProps> = ({
         bibleBookNames = arrangeBibleBookName(bibleBookNames);
       }
 
-      console.log(updatedFileObject);
-
       updateUploadedBibleObject(updatedFileObject);
       updateUploadedBibleFileName(fileName);
       updateUploadedBibleBookNames(bibleBookNames);
