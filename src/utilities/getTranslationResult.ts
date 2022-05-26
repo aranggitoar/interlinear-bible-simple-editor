@@ -20,11 +20,17 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 // Get the translation result from the HTML.
-export function getTranslationResult(verseLength: number) {
+export function getTranslationResult() {
+  let verseLength = document.getElementsByClassName('row-target-language').length as number;
   let arrayOfResult = [] as Array<string>;
   for (let i = 0; verseLength > i; i++) {
     // @ts-ignore // property exists
-    arrayOfResult.push(document.getElementById('target-language-' + i).value);
+    let value = document.getElementById('target-language-' + i).value as string;
+    if (value === "") {
+      arrayOfResult.push("");
+    } else {
+      arrayOfResult.push(value);
+    }
   }
   return arrayOfResult;
 }
