@@ -19,11 +19,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-interface ILoadedVerse {
-  arrayOfTargetWords: Array<string>;
-  arrayOfOriginalWords: Array<string>;
-  arrayOfStrongs: Array<string>;
-  arrayOfMorphologies: Array<string>;
+interface ILoadedWord {
+  targetWord: string;
+  originalWord: string;
+  strongs: string;
+  morphology: string;
 }
 
 type LoadedBibleContextType = {
