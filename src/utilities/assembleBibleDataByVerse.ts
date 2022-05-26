@@ -28,15 +28,13 @@ import { getMorphologies } from './getMorphologies';
 
 // Accepts the local component copy of the Bible object,
 // outputs the formatted chosen verse.
-export function assembleBibleDataByVerse(bibleObjectCopy: ILoadedBible) {
+export function assembleBibleDataByVerse(bibleObject: Object, bibleInfo: Array<string>) {
   // Prepare the necessary variables.
-  let bibleObject = bibleObjectCopy.bibleObject as Object,
-      chosenBibleBookDetails = bibleObjectCopy.chosenBibleBookDetails as Array<string>,
-      chosenBibleBookName = chosenBibleBookDetails[0] as string,
+  let chosenBibleBookName = bibleInfo[0] as string,
       chosenBibleBookContents = [] as Array<Array<Array<string>>>,
-      chosenChapterIndex = chosenBibleBookDetails[1] as string,
+      chosenChapterIndex = bibleInfo[1] as string,
       chosenChapterContents = [] as Array<Array<string>>,
-      chosenVerseIndex = chosenBibleBookDetails[2] as string,
+      chosenVerseIndex = bibleInfo[2] as string,
       arrayOfChosenVerseContents = [] as Array<string>,
       stringOfChosenVerseContents = '' as string,
       arrayOfWordComponents = [] as Array<Array<string>>;
@@ -59,15 +57,12 @@ export function assembleBibleDataByVerse(bibleObjectCopy: ILoadedBible) {
     arrayOfWordComponents = getArrayOfWordComponents(arrayOfChosenVerseContents);
   }
 
-  // Save the source data into a defined object.
-  const arrayOfSourceData = {
+  // Return the source data
+  return {
     arrayOfTargetWords: getTargetWords(arrayOfWordComponents),
     arrayOfOriginalWords: getOriginalWords(arrayOfWordComponents),
     arrayOfStrongs: getStrongs(arrayOfWordComponents),
-    arrayOfMorphologies: getMorphologies(arrayOfWordComponents),
-    chosenBibleBookDetails: chosenBibleBookDetails
+    arrayOfMorphologies: getMorphologies(arrayOfWordComponents)
   } as ILoadedVerse;
-
-  return arrayOfSourceData;
 }
 
