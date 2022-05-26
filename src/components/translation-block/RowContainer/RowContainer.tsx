@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 import React from 'react';
-import { useState, FC, FormEvent } from 'react';
+import { FC, FormEvent } from 'react';
 
 import { filterDisplayedStrongsData } from '@/utilities/filterDisplayedStrongsData';
 import { filterDisplayedOriginalLanguage } from '@/utilities/filterDisplayedOriginalLanguage';
@@ -34,7 +34,6 @@ const updateWordTranslation = (
   e: FormEvent<HTMLTextAreaElement | HTMLInputElement>,
   loadedBibleObject: Object, displayedBibleInfo: Array<string>,
   updateUploadedBibleObject: (uploadedBibleObject: Object) => void,
-  setTranslatedWord: (newTranslatedWord: string) => void,
   translatedWordIndex: number
 ): void => {
   e.preventDefault();
@@ -44,9 +43,6 @@ const updateWordTranslation = (
         displayedBibleVerseIndex ] = displayedBibleInfo,
     // @ts-ignore // property exists
     newTranslatedWord = e.target.value;
-
-  // Update the translated word state
-  setTranslatedWord(newTranslatedWord);
 
   // Update the global Bible object
   updateUploadedBibleObject({
@@ -75,9 +71,6 @@ const rowContainerGenerator = (
     assembleBibleDataByWord(loadedBibleObject, [...displayedBibleInfo,
     wordIndex as unknown as string]) as ILoadedWord,
 
-  // Prepare a local state for the currently displayed target word.
-    [translatedWord, setTranslatedWord] = useState<string>(""),
-
   // Prepare translation index identification.
     targetLanguageID = 'target-language-' + wordIndex as unknown as string,
 
@@ -87,9 +80,7 @@ const rowContainerGenerator = (
       ["2" + wordIndex, "row-original-language", filterDisplayedOriginalLanguage(originalWord)],
       ["3" + wordIndex, "row-target-language", <TranslationInputField
         id={targetLanguageID} value={targetWord} onChange={(e) =>
-        updateWordTranslation(e, loadedBibleObject,
-        displayedBibleInfo, updateUploadedBibleObject,
-        setTranslatedWord, wordIndex)}/>],
+        updateWordTranslation(e, loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordIndex)}/>],
       ["4" + wordIndex, "row-morphology", filterDisplayedMorphologicalData(morphology)]
     ]
 
