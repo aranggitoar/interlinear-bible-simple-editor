@@ -11,6 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '..', 'ibse.benihyangbaik.com/'),
   },
+  target: ['web', 'es5'],
   module: {
     rules,
   },
