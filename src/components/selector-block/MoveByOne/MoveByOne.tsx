@@ -19,54 +19,71 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { MouseEvent } from 'react';
+import React, { useContext, FC, MouseEvent } from 'react';
 
+import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { ButtonContainer, MoveByOneButton } from './styles';
 
 
-// @ts-ignore // the type exists
-const updateVerseIndex = (e: MouseEvent<Button>, loadedBibleObject: Object, displayedBibleInfo: Array<string>, updateDisplayedBibleInfo: (newDisplayedBibleInfo: Array<string>) => void) : void => {
-  e.preventDefault();
-
-  const bibleBookName = displayedBibleInfo[0];
-  const chapterIndex = displayedBibleInfo[1];
-
-  let oldVerseIndex = displayedBibleInfo[2] as unknown;
-  let maxVerseIndex = loadedBibleObject[bibleBookName][chapterIndex].length - 1;
-  let newVerseIndex = oldVerseIndex as number;
-
-  if (e.currentTarget.id === "forward" && oldVerseIndex < maxVerseIndex) {
-    newVerseIndex++;
-  } else if (e.currentTarget.id === "backward" && oldVerseIndex > 0) {
-    newVerseIndex--;
+export const MoveBackwardByOne: FC = () => {
+  const [state, dispatch] = useContext(LoadedBibleContext);
+  let verseIndex: number
+  let chapterIndex: number
+  if (state.bibleInfo !== undefined) {
+    verseIndex = state.bibleInfo.bibleVerseIndex;
+    chapterIndex = state.bibleInfo.bibleChapterIndex;
+    if (chapterIndex >= 0 && verseIndex >= 0) {
+      verseIndex--;
+    }
   }
 
-  const newDisplayedBibleInfo = [bibleBookName, chapterIndex, newVerseIndex as unknown as string];
-
-  // Change the current picker value.
-  // @ts-ignore // the property exists
-  document.getElementById('verse-picker').value = newDisplayedBibleInfo[2];
-
-  updateDisplayedBibleInfo(newDisplayedBibleInfo);
-}
-
-export const MoveBackwardByOne: React.FC<NonBibleBookSelectorProps> = ({loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo}) => {
   return (
     <ButtonContainer>
       <MoveByOneButton id="backward" className="move-by-one"
-      onClick={(e) => updateVerseIndex(e, loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo)}>
+      // onClick={(e) => updateVerseIndex(e)}>
+      onClick={() => {
+        // If the verse index is negative:
+        // go back to the last verse of the chapter before
+        if (verseIndex == -1 && chapterIndex > 0) {
+          chapterIndex--;
+          if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+            if (state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex] !== undefined) {
+              let maxVerseIndex = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex].length + 1;
+              verseIndex = maxVerseIndex;
+            }
+          }
+          dispatch({ type: 'setBibleChapterIndexFromBibleInfo', bibleChapterIndex: chapterIndex as unknown as string })
+        }
+        if (verseIndex >= 0 && chapterIndex >= 0) {
+          dispatch({ type: 'setBibleVerseIndexFromBibleInfo', bibleVerseIndex: verseIndex as unknown as string });
+        }
+      }}>
       &#8249;
       </MoveByOneButton>
     </ButtonContainer>
   );
 }
 
-export const MoveForwardByOne: React.FC<NonBibleBookSelectorProps> = ({loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo}) => {
+export const MoveForwardByOne: FC = () => {
+  const [state, dispatch] = useContext(LoadedBibleContext);
+  let verseIndex: number
+  if (state.bibleInfo !== undefined) {
+    verseIndex = state.bibleInfo.bibleVerseIndex;
+    if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+      if (state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex] !== undefined) {
+        let maxVerseIndex = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex].length - 1;
+        if (verseIndex < maxVerseIndex) verseIndex++;
+      }
+    }
+  }
+
   return (
     <ButtonContainer>
       <MoveByOneButton id="forward" className="move-by-one"
-        onClick={(e) => updateVerseIndex(e, loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo)}>
+        // onClick={(e) => updateVerseIndex(e)}>
+        onClick={() => {
+          dispatch({ type: 'setBibleVerseIndexFromBibleInfo', bibleVerseIndex: verseIndex as unknown as string });
+        }}>
         &#8250;
       </MoveByOneButton>
     </ButtonContainer>

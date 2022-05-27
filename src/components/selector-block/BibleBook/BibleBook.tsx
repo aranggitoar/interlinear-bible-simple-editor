@@ -19,9 +19,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { useState, FC } from 'react';
+import React, { useContext, FC } from 'react';
 
+import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Option } from '../styles';
 
 
@@ -36,18 +36,18 @@ function createBibleBookSelector(bibleBookNameList: Array<string>) {
   return jsxMarkup as Array<JSX.Element>;
 }
 
-const updateBibleBookName = (e: React.FormEvent<HTMLSelectElement>, updateDisplayedBibleInfo: (newDisplayedBibleInfo: Array<string>) => void): void => {
-  e.preventDefault();
-  updateDisplayedBibleInfo([e.currentTarget.value, '0', '0']);
-}
+export const BibleBookSelectorBlock: FC = () => {
+  const [state, dispatch] = useContext(LoadedBibleContext);
+  console.log(state.bibleInfo.bibleBookName);
 
-export const BibleBookSelectorBlock: FC<BibleBookSelectorProps> = ({loadedBibleBookNames, displayedBibleInfo, updateDisplayedBibleInfo}) => {
   return (
     <select id="bible-book-picker" className="picker-items" name="bible-book-picker"
-      value={displayedBibleInfo[0] !== undefined ? displayedBibleInfo[0] : "undefined"}
-      onChange={(e) => updateBibleBookName(e, updateDisplayedBibleInfo)}
+      value={state.bibleInfo.bibleBookName !== '' ? state.bibleInfo.bibleBookName : "undefined"}
+      onChange={(event) => {
+        dispatch({ type: 'setBibleBookNameFromBibleInfo', bibleBookName: event.target.value });
+      }}
     >
-      {createBibleBookSelector(loadedBibleBookNames)}
+      {createBibleBookSelector(state.bibleBookNames)}
     </select>
   );
 }

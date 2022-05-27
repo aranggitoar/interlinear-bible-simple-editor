@@ -19,51 +19,24 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { useContext } from 'react';
+import React, { ReactElement } from 'react';
 
 import { BibleBookSelectorBlock } from './BibleBook/BibleBook';
 import { ChapterSelectorBlock } from './Chapter/Chapter';
 import { VerseSelectorBlock } from './Verse/Verse';
 import { MoveBackwardByOne, MoveForwardByOne } from './MoveByOne/MoveByOne';
 
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Container } from './styles';
 
 
-export function SelectorBlock(): React.ReactElement<Record<string, unknown>> {
-  const {
-    loadedBibleObject, loadedBibleBookNames, displayedBibleInfo,
-    updateDisplayedBibleInfo
-  } = useContext(LoadedBibleContext) as LoadedBibleContextType
-
+export function SelectorBlock(): ReactElement<Record<string, unknown>> {
   return (
     <Container>
-      <MoveBackwardByOne
-        loadedBibleObject={loadedBibleObject}
-        displayedBibleInfo={displayedBibleInfo}
-        updateDisplayedBibleInfo={updateDisplayedBibleInfo}
-      />
-      <BibleBookSelectorBlock
-        loadedBibleBookNames={loadedBibleBookNames}
-        displayedBibleInfo={displayedBibleInfo}
-        updateDisplayedBibleInfo={updateDisplayedBibleInfo}
-      />
-      <ChapterSelectorBlock
-        loadedBibleObject={loadedBibleObject}
-        displayedBibleInfo={displayedBibleInfo}
-        updateDisplayedBibleInfo={updateDisplayedBibleInfo}
-      />
-      <VerseSelectorBlock
-        loadedBibleObject={loadedBibleObject}
-        displayedBibleInfo={displayedBibleInfo}
-        updateDisplayedBibleInfo={updateDisplayedBibleInfo}
-      />
-      <MoveForwardByOne
-        loadedBibleObject={loadedBibleObject}
-        displayedBibleInfo={displayedBibleInfo}
-        updateDisplayedBibleInfo={updateDisplayedBibleInfo}
-      />
+      <MoveBackwardByOne />
+      <BibleBookSelectorBlock />
+      <ChapterSelectorBlock />
+      <VerseSelectorBlock />
+      <MoveForwardByOne />
     </Container>
   );
 }

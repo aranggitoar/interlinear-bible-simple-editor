@@ -19,26 +19,17 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { useContext, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { TranslationBlockColumnContainer } from './ColumnContainer/ColumnContainer';
 
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext'
 import { Container } from './styles';
 
 
 export function TranslationBlock(): ReactElement<Record<string, unknown>> {
-  const { loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject } = useContext(LoadedBibleContext) as LoadedBibleContextType;
   return (
     <Container>
-      <TranslationBlockColumnContainer
-        loadedBibleObject={loadedBibleObject}
-        displayedBibleInfo={displayedBibleInfo}
-        updateUploadedBibleObject={updateUploadedBibleObject}
-      />
+      <TranslationBlockColumnContainer />
     </Container>
   );
 }
-
-export default TranslationBlock;

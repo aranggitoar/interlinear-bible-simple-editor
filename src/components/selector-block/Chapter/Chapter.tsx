@@ -19,9 +19,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { useState, FormEvent } from 'react';
+import React, { useContext, FC } from 'react';
 
+import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Option } from '../styles';
 
 
@@ -36,24 +36,21 @@ function createChapterSelector(amountOfChapters: number,) {
   return jsxMarkup as Array<JSX.Element>;
 }
 
-const updateChapterIndex = (e: FormEvent<HTMLSelectElement>, selectedBibleBookName: string, updateDisplayedBibleInfo: (newDisplayedBibleInfo: Array<string>) => void): void => {
-  e.preventDefault();
-  updateDisplayedBibleInfo([selectedBibleBookName, e.currentTarget.value as string,'0']);
-}
+export const ChapterSelectorBlock: FC = () => {
+  const [state, dispatch] = useContext(LoadedBibleContext);
 
-export const ChapterSelectorBlock: React.FC<NonBibleBookSelectorProps> = ({loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo}) => {
   let amountOfChapters = 0 as number;
 
-  let selectedBibleBookName = displayedBibleInfo[0];
-
-  if (loadedBibleObject[selectedBibleBookName] !== undefined) {
-    amountOfChapters = loadedBibleObject[selectedBibleBookName].length;
+  if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+    amountOfChapters = state.bibleObject[state.bibleInfo.bibleBookName].length;
   }
 
   return (
     <select id="chapter-picker" className="picker-items" name="chapter-picker"
-      value={displayedBibleInfo[1] !== undefined ? displayedBibleInfo[1] : "undefined"}
-      onChange={(e) => updateChapterIndex(e, selectedBibleBookName, updateDisplayedBibleInfo)}
+      value={state.bibleInfo.bibleChapterIndex !== '' ? state.bibleInfo.bibleChapterIndex : "undefined"}
+      onChange={(event) => {
+        dispatch({ type: 'setBibleChapterIndexFromBibleInfo', bibleChapterIndex: event.target.value})
+      }}
     >
       {createChapterSelector(amountOfChapters)}
     </select>

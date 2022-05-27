@@ -21,7 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import React from 'react';
 
-import TranslationBlock from '@/components/translation-block';
+import { TranslationBlock } from '@/components/translation-block';
 import { MenuBlock } from '@/components/menu-block';
 import { SelectorBlock } from '@/components/selector-block';
 

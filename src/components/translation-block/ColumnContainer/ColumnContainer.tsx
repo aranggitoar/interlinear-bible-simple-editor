@@ -19,18 +19,18 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { FC } from 'react';
+import React, { useContext, FC, ReactElement } from 'react';
 
 import { TranslationBlockRowContainer } from '@/components/translation-block/RowContainer/RowContainer';
 
 import { arrayOfCorrectlyOrderedNTBibleBookName, arrayOfCorrectlyOrderedOTBibleBookName } from '@/utilities/correctlyOrderedBibleBookName';
+import { LoadedBibleContext } from '@/contexts/LoadedBibleContext'
 import { Container, ColumnContainer } from './styles';
 
 
 // Generate the column containers.
 // Return an array of JSX Elements.
-function columnContainerGenerator(loadedBibleObject: Object, displayedBibleInfo: Array<string>, updateUploadedBibleObject: (uploadedBibleObject: Object) => void, wordCount: number) {
+function columnContainerGenerator(wordCount: number): Array<JSX.Element> {
   let jsxMarkup = [] as Array<JSX.Element>;
 
   for (let i = 0; i < wordCount; i++) {
@@ -42,12 +42,7 @@ function columnContainerGenerator(loadedBibleObject: Object, displayedBibleInfo:
     // https://reactjs.org/docs/reconciliation.html#recursing-on-children
     jsxMarkup.push(
       <div key={i} id={columnId}>
-        {<TranslationBlockRowContainer
-          loadedBibleObject={loadedBibleObject}
-          displayedBibleInfo={displayedBibleInfo}
-          updateUploadedBibleObject={updateUploadedBibleObject}
-          wordIndex={i}
-        />}
+        <TranslationBlockRowContainer wordIndex={i as unknown as string}/>
       </div>
     );
   }
@@ -63,17 +58,20 @@ function verseDirection(currentBook: string) {
 }
 
 // Display translation block's column container.
-export const TranslationBlockColumnContainer: FC<TranslationColumnProps> = ({loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject}) => {
-  let currentBook = displayedBibleInfo[0] as string,
-    wordCount: number;
-  if (loadedBibleObject[displayedBibleInfo[0]] !== undefined) {
-    wordCount = loadedBibleObject[displayedBibleInfo[0]][displayedBibleInfo[1]][displayedBibleInfo[2]].length as number;
+export const TranslationBlockColumnContainer: FC = (): ReactElement => {
+  const [state, dispatch] = useContext(LoadedBibleContext);
+
+  let wordCount: number;
+  if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+    if (state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex] !== undefined) {
+        wordCount = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][state.bibleInfo.bibleVerseIndex].length as number;
+    }
   }
 
   return (
     <Container>
-      <ColumnContainer className={verseDirection(currentBook)}>
-        {columnContainerGenerator(loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordCount)}
+      <ColumnContainer className={verseDirection(state.bibleInfo.bibleBookName)}>
+        {columnContainerGenerator(wordCount)}
       </ColumnContainer>
     </Container>
   );

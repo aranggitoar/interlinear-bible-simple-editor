@@ -19,9 +19,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { useState, FormEvent } from 'react';
+import React, { useContext, FC, FormEvent } from 'react';
 
+import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Option } from '../styles';
 
 
@@ -36,24 +36,23 @@ function createVerseSelector(amountOfVerses: number) {
   return jsxMarkup as Array<JSX.Element>;
 }
 
-const updateVerseIndex = (e: FormEvent<HTMLSelectElement>, selectedBibleBookName: string, selectedChapterIndex: string, updateDisplayedBibleInfo: (newDisplayedBibleInfo: Array<string>) => void): void => {
-  updateDisplayedBibleInfo([selectedBibleBookName, selectedChapterIndex, e.currentTarget.value as string]);
-}
+export const VerseSelectorBlock: FC = () => {
+  const [state, dispatch] = useContext(LoadedBibleContext);
 
-export const VerseSelectorBlock: React.FC<NonBibleBookSelectorProps> = ({loadedBibleObject, displayedBibleInfo, updateDisplayedBibleInfo}) => {
   let amountOfVerses = 0 as number;
 
-  let selectedBibleBookName = displayedBibleInfo[0];
-  let selectedChapterIndex = displayedBibleInfo[1];
-
-  if (loadedBibleObject[selectedBibleBookName] !== undefined) {
-    amountOfVerses = loadedBibleObject[selectedBibleBookName][selectedChapterIndex].length;
+  if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+    if (state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex] !== undefined) {
+      amountOfVerses = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex].length;
+    }
   }
 
   return (
     <select id="verse-picker" className="picker-items" name="verse-picker"
-      value={displayedBibleInfo[2] !== undefined ? displayedBibleInfo[2] : "undefined"}
-      onChange={(e) => updateVerseIndex(e, selectedBibleBookName, selectedChapterIndex, updateDisplayedBibleInfo)}
+      value={state.bibleInfo.bibleVerseIndex !== '' ? state.bibleInfo.bibleVerseIndex : "undefined"}
+      onChange={(event) => {
+        dispatch({ type: 'setBibleVerseIndexFromBibleInfo', bibleVerseIndex: event.target.value })
+      }}
     >
       {createVerseSelector(amountOfVerses)}
     </select>

@@ -19,57 +19,27 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { FC, FormEvent } from 'react';
+import React, { useContext, FC } from 'react';
 
 import { filterDisplayedStrongsData } from '@/utilities/filterDisplayedStrongsData';
 import { filterDisplayedOriginalLanguage } from '@/utilities/filterDisplayedOriginalLanguage';
 import { filterDisplayedMorphologicalData } from '@/utilities/filterDisplayedMorphologicalData';
-import { assembleBibleDataByWord } from '@/utilities/assembleBibleDataByWord';
 
+import { LoadedBibleContext } from '@/contexts/LoadedBibleContext'
 import { Container, RowContainer, TranslationInputField } from './style';
 
 
-const updateWordTranslation = (
-  e: FormEvent<HTMLTextAreaElement | HTMLInputElement>,
-  loadedBibleObject: Object, displayedBibleInfo: Array<string>,
-  updateUploadedBibleObject: (uploadedBibleObject: Object) => void,
-  translatedWordIndex: number
-): void => {
-  e.preventDefault();
-
-  // Copy the currently displayed Bible information
-  const [ displayedBibleBookName, displayedBibleChapterIndex,
-        displayedBibleVerseIndex ] = displayedBibleInfo,
-    // @ts-ignore // property exists
-    newTranslatedWord = e.target.value;
-
-  // Update the global Bible object
-  updateUploadedBibleObject({
-    ...loadedBibleObject,
-    displayedBibleBookName: [
-      ...loadedBibleObject
-        [displayedBibleBookName]
-        [displayedBibleChapterIndex]
-        [displayedBibleVerseIndex]
-        [translatedWordIndex]
-        .splice(0, 1, newTranslatedWord)
-    ]
-  });
-}
-
 // Generate the row containers.
 // Return an array of JSX Elements.
-const rowContainerGenerator = (
-  loadedBibleObject: Object, displayedBibleInfo: Array<string>,
-  updateUploadedBibleObject: (uploadedBibleObject: Object) => void,
-  wordIndex: number
-): Array<JSX.Element> => {
+const rowContainerGenerator = (wordIndex: string): Array<JSX.Element> => {
+  const [state, dispatch] = useContext(LoadedBibleContext),
+    // wordIndex = state.bibleInfo.bibleWordIndex,
 
   // Get every component of the current word.
-  const { targetWord, originalWord, strongs, morphology } =
-    assembleBibleDataByWord(loadedBibleObject, [...displayedBibleInfo,
-    wordIndex as unknown as string]) as ILoadedWord,
+    targetWord = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][state.bibleInfo.bibleVerseIndex][wordIndex][0],
+    originalWord = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][state.bibleInfo.bibleVerseIndex][wordIndex][1],
+    strongs = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][state.bibleInfo.bibleVerseIndex][wordIndex][2],
+    morphology = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][state.bibleInfo.bibleVerseIndex][wordIndex][3],
 
   // Prepare translation index identification.
     targetLanguageID = 'target-language-' + wordIndex as unknown as string,
@@ -79,8 +49,10 @@ const rowContainerGenerator = (
       ["1" + wordIndex, "row-strongs", filterDisplayedStrongsData(strongs)],
       ["2" + wordIndex, "row-original-language", filterDisplayedOriginalLanguage(originalWord)],
       ["3" + wordIndex, "row-target-language", <TranslationInputField
-        id={targetLanguageID} value={targetWord} onChange={(e) =>
-        updateWordTranslation(e, loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordIndex)}/>],
+        id={targetLanguageID} value={targetWord} onChange={(event) => {
+          // @ts-ignore // property exists
+          dispatch({ type: 'setTranslatedWordFromBibleObject', wordIndex: wordIndex, newTranslatedWord: event.target.value })
+        }}/>],
       ["4" + wordIndex, "row-morphology", filterDisplayedMorphologicalData(morphology)]
     ]
 
@@ -96,13 +68,10 @@ const rowContainerGenerator = (
 }
 
 // Display translation block's row container.
-export const TranslationBlockRowContainer: FC<TranslationRowProps> = ({
-  loadedBibleObject, displayedBibleInfo, updateUploadedBibleObject, wordIndex
-}) => {
+export const TranslationBlockRowContainer: FC<WordIndexProps> = ({wordIndex}) => {
   return (
     <Container>
-      {rowContainerGenerator(loadedBibleObject, displayedBibleInfo,
-        updateUploadedBibleObject, wordIndex)}
+      {rowContainerGenerator(wordIndex)}
     </Container>
   );
 }

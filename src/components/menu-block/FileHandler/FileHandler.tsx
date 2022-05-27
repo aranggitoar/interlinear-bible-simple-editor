@@ -19,22 +19,27 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { FC, FormEvent } from 'react';
+import React, {
+  useContext, 
+  ReactElement,
+  FC,
+  MouseEventHandler,
+  FormEvent
+} from 'react';
 
 import { populateWithEmptyTargetLanguage } from '@/utilities/populateWithEmptyTargetLanguage';
 import { arrangeBibleBookName } from '@/utilities/arrangeBibleBookName';
 
+import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { FileHandlerButton, InvisibleInput, Container } from './style';
 
 
 const saveFileText = "Save";
 const loadFileText = "Load";
 
-const uploadRequestHandler: FC<FileLoadHandlerMenuProps> = ({
-  updateUploadedBibleObject, updateUploadedBibleFileName,
-  updateUploadedBibleBookNames, updateDisplayedBibleInfo, children
-}) => {
+const uploadRequestHandler: FC = (): ReactElement => {
+  const [state, dispatch] = useContext(LoadedBibleContext);
+
   var fileName = '';
 
   const handleChange = (e: FormEvent<HTMLInputElement>): void => {
@@ -71,10 +76,13 @@ const uploadRequestHandler: FC<FileLoadHandlerMenuProps> = ({
         bibleBookNames = arrangeBibleBookName(bibleBookNames);
       }
 
-      updateUploadedBibleObject(updatedFileObject);
-      updateUploadedBibleFileName(fileName);
-      updateUploadedBibleBookNames(bibleBookNames);
-      updateDisplayedBibleInfo([bibleBookName, '0', '0']);
+      dispatch({ type: 'setBibleFileName', bibleFileName: fileName });
+      dispatch({ type: 'setBibleBookNames', bibleBookNames: bibleBookNames });
+      dispatch({ type: 'setBibleObject', bibleObject: updatedFileObject });
+      dispatch({ type: 'setBibleInfo', bibleInfo: {
+        "bibleBookName": bibleBookName, "bibleChapterIndex": '0',
+        "bibleVerseIndex": '0', "bibleWordIndex": '0',
+      } as LoadedBibleInfoType });
     }
   };
 
@@ -86,14 +94,14 @@ const uploadRequestHandler: FC<FileLoadHandlerMenuProps> = ({
   );
 }
 
-const downloadRequestHandler: FC<FileSaveHandlerMenuProps> = ({
-  loadedBibleObject, loadedBibleFileName
-}) => {
-  const downloadBibleAsJSON = (): void => {
+const downloadRequestHandler: FC = (): ReactElement => {
+  const [state, dispatch] = useContext(LoadedBibleContext);
+
+  const downloadBibleAsJSON: MouseEventHandler<HTMLLabelElement> = (): void => {
     var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:attachment/text,' + encodeURI(JSON.stringify(loadedBibleObject));
+    hiddenElement.href = 'data:attachment/text,' + encodeURI(JSON.stringify(state.bibleObject));
     hiddenElement.target = '_blank';
-    hiddenElement.download = loadedBibleFileName as string;
+    hiddenElement.download = state.bibleFileName as string;
     hiddenElement.click();
   }
   
@@ -104,28 +112,16 @@ const downloadRequestHandler: FC<FileSaveHandlerMenuProps> = ({
   );
 }
 
-const MenuBlockFileHandler: FC<MenuProps> = ({
-  loadedBibleObject, loadedBibleFileName, updateUploadedBibleObject,
-  updateUploadedBibleFileName, updateUploadedBibleBookNames,
-  updateDisplayedBibleInfo
-}) => {
+const MenuBlockFileHandler: FC = () => {
   const FileLoadHandlerButton = uploadRequestHandler;
   const FileSaveHandlerButton = downloadRequestHandler;
   return (
     <>
       <Container>
-        <FileLoadHandlerButton
-          updateUploadedBibleObject={updateUploadedBibleObject}
-          updateUploadedBibleFileName={updateUploadedBibleFileName}
-          updateUploadedBibleBookNames={updateUploadedBibleBookNames}
-          updateDisplayedBibleInfo={updateDisplayedBibleInfo}
-        />
+        <FileLoadHandlerButton />
       </Container>
       <Container>
-        <FileSaveHandlerButton
-          loadedBibleObject={loadedBibleObject}
-          loadedBibleFileName={loadedBibleFileName}
-        />
+        <FileSaveHandlerButton />
       </Container>
     </>
   );

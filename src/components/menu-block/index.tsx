@@ -19,33 +19,18 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { ReactElement, useContext } from 'react';
+import React, { ReactElement } from 'react';
 
 import FileHandlerMenuBlock from './FileHandler/FileHandler';
 import { MenuBlockSettings } from './Settings/Settings';
 
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Container } from './styles';
 
 
 export function MenuBlock(): ReactElement<Record<string, unknown>> {
-  const {
-    loadedBibleObject, loadedBibleFileName,
-    updateUploadedBibleObject, updateUploadedBibleFileName,
-    updateUploadedBibleBookNames, updateDisplayedBibleInfo
-  } = useContext(LoadedBibleContext) as LoadedBibleContextType;
-
   return (
     <Container>
-      <FileHandlerMenuBlock
-        loadedBibleObject={loadedBibleObject}
-        loadedBibleFileName={loadedBibleFileName}
-        updateUploadedBibleObject={updateUploadedBibleObject}
-        updateUploadedBibleFileName={updateUploadedBibleFileName}
-        updateUploadedBibleBookNames={updateUploadedBibleBookNames}
-        updateDisplayedBibleInfo={updateDisplayedBibleInfo}
-      />
+      <FileHandlerMenuBlock />
     </Container>
   );
 }
