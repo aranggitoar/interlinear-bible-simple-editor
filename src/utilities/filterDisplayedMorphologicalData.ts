@@ -164,13 +164,17 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
   // If file is not OSHB.
   if (morphologicalData[0] !== "H") {
     if (/[-]/.test(morphologicalData)) {
-      console.log(morphologicalData[0])
       parsedMorphologicalData = byzMTParser(morphologicalData.split("-")[0])
     } else {
       parsedMorphologicalData = byzMTParser(morphologicalData)
     }
     console.log(parsedMorphologicalData)
     return parsedMorphologicalData;
+  }
+
+  // For special case of ByzMT morphological code which starts with H.
+  if (morphologicalData === "HEB") {
+    return byzMTParser(morphologicalData);
   }
 
   // Get the main morphological data codes into an array.
