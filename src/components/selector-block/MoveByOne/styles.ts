@@ -36,7 +36,6 @@ export const MoveByOneButton = styled.button`
 		color: #555;
 	}
 
-	&:after,
 	&:after {
 		background: none;
 		content: '';

@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { useContext, FC } from 'react';
 import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
-import { Option } from '../styles';
+import { Select, Option } from '../styles';
 
 const defaultBibleVerseSelectorText = 'Choose verse';
 
@@ -56,10 +56,7 @@ export const VerseSelectorBlock: FC = () => {
 	}
 
 	return (
-		<select
-			id="verse-picker"
-			className="picker-items"
-			name="verse-picker"
+		<Select
 			value={
 				state.bibleInfo.bibleVerseIndex !== ''
 					? state.bibleInfo.bibleVerseIndex
@@ -73,6 +70,6 @@ export const VerseSelectorBlock: FC = () => {
 			}}
 		>
 			{createVerseSelector(amountOfVerses)}
-		</select>
+		</Select>
 	);
 };

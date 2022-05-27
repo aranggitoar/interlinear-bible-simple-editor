@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { useContext, FC } from 'react';
 import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
-import { Option } from '../styles';
+import { Select, Option } from '../styles';
 
 const defaultBibleChapterSelectorText = 'Choose chapter';
 
@@ -47,10 +47,7 @@ export const ChapterSelectorBlock: FC = () => {
 	}
 
 	return (
-		<select
-			id="chapter-picker"
-			className="picker-items"
-			name="chapter-picker"
+		<Select
 			value={
 				state.bibleInfo.bibleChapterIndex !== ''
 					? state.bibleInfo.bibleChapterIndex
@@ -64,6 +61,6 @@ export const ChapterSelectorBlock: FC = () => {
 			}}
 		>
 			{createChapterSelector(amountOfChapters)}
-		</select>
+		</Select>
 	);
 };

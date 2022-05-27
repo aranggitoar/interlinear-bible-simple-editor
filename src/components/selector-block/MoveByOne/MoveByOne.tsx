@@ -38,8 +38,6 @@ export const MoveBackwardByOne: FC = () => {
 		<ButtonContainer>
 			<MoveByOneButton
 				id="backward"
-				className="move-by-one"
-				// onClick={(e) => updateVerseIndex(e)}>
 				onClick={() => {
 					// If the verse index is negative:
 					// go back to the last verse of the chapter before
@@ -101,7 +99,6 @@ export const MoveForwardByOne: FC = () => {
 		<ButtonContainer>
 			<MoveByOneButton
 				id="forward"
-				className="move-by-one"
 				onClick={() => {
 					dispatch({
 						type: 'setBibleVerseIndexFromBibleInfo',

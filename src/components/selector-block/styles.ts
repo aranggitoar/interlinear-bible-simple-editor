@@ -28,13 +28,13 @@ export const Container = styled.div`
 	justify-content: center;
 	padding: 0.75em 1em;
 	margin-top: 1em;
+`;
 
-	.picker-items {
-		cursor: pointer;
-		font-size: 16px;
-		margin: 0.5em 1.5em;
-		padding: 0.15em 0.3em;
-	}
+export const Select = styled.select`
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0.5em 1.5em;
+  padding: 0.15em 0.3em;
 `;
 
 export const Option = styled.option``;
