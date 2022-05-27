@@ -19,11 +19,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import { render } from 'react-dom';
 
 import { App } from './App';
 
-ReactDOM.render(<App />, document.getElementById('main'));
+render(<App />, document.getElementById('main'));
 
 export default App;
