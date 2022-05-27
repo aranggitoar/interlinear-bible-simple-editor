@@ -49,6 +49,18 @@ const LoadedBibleProvider: FC<ReactNode> = ({ children }) => {
           ...state.bibleObject,
           copyOfBibleObject
         }};
+        // The code that doesn't work, replace line 39 to 51 for these code block
+        // return { ...state, bibleObject: {
+        //   ...state.bibleObject,
+        //   [state.bibleInfo.bibleBookName]: [
+        //     ...state.bibleObject
+        //       [state.bibleInfo.bibleBookName]
+        //       [state.bibleInfo.bibleChapterIndex]
+        //       [state.bibleInfo.bibleVerseIndex]
+        //       [action.wordIndex]
+        //       .splice(0, 1, action.newTranslatedWord)
+        //   ]
+        // }};
       case 'setBibleFileName':
         return { ...state, bibleFileName: action.bibleFileName };
       case 'setBibleBookNames':
