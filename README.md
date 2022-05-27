@@ -4,10 +4,11 @@ translation of the Interlinear Bible format described
 [here](https://github.com/benihyangbaik/aist/blob/main/README.en.md#cheap-to-compute).
 
 ## **Technology**
-Because of the urgent need of this application, it is made to be simple. It
-also needs to be portable. So the web technologies (React library for the
-functionality and interface and TypeScript for easier debugging) and Electron
-as the wrapper for desktop GUIs are used. The fonts used are [SBL
+Because of the urgent need of this application, it is made to be simple and
+portable. So the web technologies (React library for the functionality and
+interface and TypeScript for easier debugging), Electron as the wrapper for
+desktop use, and Webpack as the bundler for web use are utilized. The fonts
+used are [SBL
 Biblit](https://www.sbl-site.org/educational/BiblicalFonts_SBLBibLit.aspx).
 
 
@@ -18,12 +19,17 @@ added gradually.
 _Phase I_ (**OK**)
 1. Input the equivalent of every word of the original language.
 2. Save and load the JSON file from certain directory.
-3. Automatically save every verse, chapter, and Bible book move.
+3. Automatically save ~~every verse, chapter, and Bible book move~~ on every change made.
 
 _Phase II_
 1. Display one chapter to translate.
 2. Change the font size.
 3. Detail for the root and family of a Strongs data.
+
+_Phase III_
+1. Verse references on the Strongs (dictionary) data.
+2. History of the traveled verses or chapters
+3. Mechanism to print the translated parts in a common digital book format such as PDF.
 
 
 ## **Usage**
@@ -32,8 +38,7 @@ Hebrew
 Bible](https://github.com/benihyangbaik/interlinear-bible-simple-editor/blob/main/data/morphhb.json)
 or [the Byzantine Majority Text by
 Robinson-Pierpoint](https://github.com/benihyangbaik/interlinear-bible-simple-editor/blob/main/data/byzmt.json)
-and start editing! Every edit is saved on verse change and persists as a React
-context.
+and start editing! Every edit is saved on every change you make.
 
 You can also download the repo and run,
 ```bash
