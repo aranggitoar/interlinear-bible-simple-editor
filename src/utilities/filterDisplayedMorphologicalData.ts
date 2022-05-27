@@ -48,6 +48,7 @@ const simpleByzMTMorphologicalDataReference = {
   HEB: "Hebrew Transliteration",
   INJ: "Interjection",
   PREP: "Preposition",
+  PRT: "Particle",
 }
 
 // Parse the inserted morphological data.
@@ -106,6 +107,9 @@ function byzMTParser(morphologicalData: string) {
       case 'PREP':
         parsedMorphologicalData = simpleByzMTMorphologicalDataReference['PREP'];
         break;
+      case 'PRT':
+        parsedMorphologicalData = simpleByzMTMorphologicalDataReference['PRT'];
+        break;
       case 'C': // Reciprocal pronoun
         parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
         break;
@@ -160,7 +164,8 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
   // If file is not OSHB.
   if (morphologicalData[0] !== "H") {
     if (/[-]/.test(morphologicalData)) {
-      parsedMorphologicalData = byzMTParser(morphologicalData[0])
+      console.log(morphologicalData[0])
+      parsedMorphologicalData = byzMTParser(morphologicalData.split("-")[0])
     } else {
       parsedMorphologicalData = byzMTParser(morphologicalData)
     }
