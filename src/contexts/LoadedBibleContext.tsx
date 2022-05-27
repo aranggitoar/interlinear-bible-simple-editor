@@ -19,37 +19,58 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-import { useState, createContext, FC, ReactNode } from 'react';
+import React, { createContext, useReducer, Dispatch, FC, ReactNode } from 'react';
 
-export const LoadedBibleContext = createContext<LoadedBibleContextType | null>(null);
+export const LoadedBibleContext = createContext<[any, Dispatch<any>]>(null);
 
 const LoadedBibleProvider: FC<ReactNode> = ({ children }) => {
-  const [loadedBibleObject, setLoadedBibleObject] = useState<Object>({});
-  const [loadedBibleFileName, setLoadedBibleFileName] = useState<string>('');
-  const [loadedBibleBookNames, setLoadedBibleBookNames] = useState<Array<string>>([]);
-  const [displayedBibleInfo, setDisplayedBibleInfo] = useState<Array<string>>([]);
+  const loadedBibleObject = {
+    bibleObject: {},
+    bibleFileName: '',
+    bibleBookNames: [],
+    bibleInfo: { "bibleBookName": '', "bibleChapterIndex": '', "bibleVerseIndex": '', "bibleWordIndex": '' },
+  } as LoadedBibleType;
 
-  const updateUploadedBibleObject = (uploadedBibleObject: Object) => {
-    setLoadedBibleObject(uploadedBibleObject);
-  };
+  const reducer = (state: LoadedBibleType, action: LoadedBibleType & LoadedBibleInfoType & LoadedBibleOtherType & WordIndexProps) => {
+    switch (action.type) {
+      case 'setBibleObject':
+        return { ...state, bibleObject: action.bibleObject };
+      case 'setTranslatedWordFromBibleObject':
+        const copyOfBibleObject = { ...state.bibleObject, [state.bibleInfo.bibleBookName]: [
+          ...state.bibleObject
+            [state.bibleInfo.bibleBookName]
+            [state.bibleInfo.bibleChapterIndex]
+            [state.bibleInfo.bibleVerseIndex]
+            [action.wordIndex]
+            .splice(0, 1, action.newTranslatedWord)
+          ]
+        };
+        return { ...state, bibleObject: {
+          ...state.bibleObject,
+          copyOfBibleObject
+        }};
+      case 'setBibleFileName':
+        return { ...state, bibleFileName: action.bibleFileName };
+      case 'setBibleBookNames':
+        return { ...state, bibleBookNames: action.bibleBookNames };
+      case 'setBibleInfo':
+        return { ...state, bibleInfo: action.bibleInfo };
+      case 'setBibleBookNameFromBibleInfo':
+        return { ...state, bibleInfo: { ...state.bibleInfo, bibleBookName: action.bibleBookName, bibleChapterIndex: '0', bibleVerseIndex: '0' } };
+      case 'setBibleChapterIndexFromBibleInfo':
+        return { ...state, bibleInfo: { ...state.bibleInfo, bibleChapterIndex: action.bibleChapterIndex, bibleVerseIndex: '0' } };
+      case 'setBibleVerseIndexFromBibleInfo':
+        return { ...state, bibleInfo: { ...state.bibleInfo, bibleVerseIndex: action.bibleVerseIndex } };
+      case 'setBibleWordIndexFromBibleInfo':
+        return { ...state, bibleInfo: { ...state.bibleInfo, bibleWordIndex: action.bibleWordIndex } };
+      default:
+        throw new Error('unexpected action type');
+    }
+  }
 
-  const updateUploadedBibleFileName = (uploadedBibleFileName: string) => {
-    setLoadedBibleFileName(uploadedBibleFileName);
-  };
-
-  const updateUploadedBibleBookNames = (uploadedBibleBookNames: Array<string>) => {
-    setLoadedBibleBookNames(uploadedBibleBookNames);
-  };
-
-  const updateDisplayedBibleInfo = (newDisplayedBibleInfo: Array<string>) => {
-    setDisplayedBibleInfo(newDisplayedBibleInfo);
-  };
-
+  const value = useReducer(reducer, loadedBibleObject);
   return (
-    <LoadedBibleContext.Provider value={{
-      loadedBibleObject, loadedBibleFileName, loadedBibleBookNames, displayedBibleInfo, updateUploadedBibleObject, updateUploadedBibleFileName, updateUploadedBibleBookNames, updateDisplayedBibleInfo
-    }}>
+    <LoadedBibleContext.Provider value={value}>
       {children}
     </LoadedBibleContext.Provider>
   );

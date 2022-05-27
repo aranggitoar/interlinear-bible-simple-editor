@@ -19,36 +19,25 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-interface ILoadedWord {
-  targetWord: string;
-  originalWord: string;
-  strongs: string;
-  morphology: string;
+type LoadedBibleInfoType = {
+  bibleBookName: string;
+  bibleChapterIndex: string;
+  bibleVerseIndex: string;
+  bibleWordIndex: string;
 }
 
-type LoadedBibleContextType = {
-  loadedBibleObject: Object;
-  loadedBibleFileName: string;
-  loadedBibleBookNames: Array<string>;
-  displayedBibleInfo: Array<string>;
-  updateUploadedBibleObject: (uploadedBibleObject: Object) => void;
-  updateUploadedBibleFileName: (uploadedBibleFileName: string) => void;
-  updateUploadedBibleBookNames: (uploadedBibleBookNames: Array<string>) => void;
-  updateDisplayedBibleInfo: (newDisplayedBibleInfo: Array<string>) => void;
-} 
+type LoadedBibleType = {
+  bibleObject: Object;
+  bibleFileName: string;
+  bibleBookNames: Array<string>;
+  bibleInfo: LoadedBibleInfoType;
+};
 
-type MenuProps = Omit<LoadedBibleContextType, "loadedBibleBookNames" | "displayedBibleInfo">
+type LoadedBibleOtherType = {
+  type: string;
+  newTranslatedWord: string;
+}
 
-type FileLoadHandlerMenuProps = Omit<MenuProps, "loadedBibleObject" | "loadedBibleFileName">
-
-type FileSaveHandlerMenuProps = Pick<MenuProps, "loadedBibleObject" | "loadedBibleFileName">
-
-type BibleBookSelectorProps = Pick<LoadedBibleContextType, "loadedBibleBookNames" | "displayedBibleInfo" | "updateDisplayedBibleInfo">
-
-type NonBibleBookSelectorProps = Pick<LoadedBibleContextType, "loadedBibleObject" | "displayedBibleInfo" | "updateDisplayedBibleInfo">
-
-type TranslationColumnProps = Pick<LoadedBibleContextType, "loadedBibleObject" | "displayedBibleInfo" | "updateUploadedBibleObject">
-
-type TranslationRowProps = {
-  wordIndex: number;
-} & TranslationColumnProps
+type WordIndexProps = {
+  wordIndex: string;
+}
