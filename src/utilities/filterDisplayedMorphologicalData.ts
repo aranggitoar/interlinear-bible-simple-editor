@@ -159,7 +159,6 @@ function byzMTParser(morphologicalData: string) {
 // Filter the displayed morphological data.
 export function filterDisplayedMorphologicalData(morphologicalData: string) {
   let parsedMorphologicalData: string;
-  console.log(morphologicalData);
 
   // If file is not OSHB.
   if (morphologicalData[0] !== "H") {
@@ -168,7 +167,6 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
     } else {
       parsedMorphologicalData = byzMTParser(morphologicalData)
     }
-    console.log(parsedMorphologicalData)
     return parsedMorphologicalData;
   }
 

@@ -37,15 +37,15 @@ export const RowContainer = styled.div`
   padding: .15em 0;
   max-width: 135px;
 
-  &.row-strongs {
+  &.strongs {
     color: #4444dd;
   }
 
-  &.row-original-language {
+  &.original-language {
     font-size: 1.5em;
   }
 
-  &.row-morphology {
+  &.morphology {
     color: #555555;
     text-align: center;
   }

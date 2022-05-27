@@ -46,14 +46,14 @@ const rowContainerGenerator = (wordIndex: string): Array<JSX.Element> => {
 
   // Prepare the variables to be consumed.
     containerVariables = [
-      ["1" + wordIndex, "row-strongs", filterDisplayedStrongsData(strongs)],
-      ["2" + wordIndex, "row-original-language", filterDisplayedOriginalLanguage(originalWord)],
-      ["3" + wordIndex, "row-target-language", <TranslationInputField
+      ["1" + wordIndex, "strongs", filterDisplayedStrongsData(strongs)],
+      ["2" + wordIndex, "original-language", filterDisplayedOriginalLanguage(originalWord)],
+      ["3" + wordIndex, "target-language", <TranslationInputField
         id={targetLanguageID} value={targetWord} onChange={(event) => {
           // @ts-ignore // property exists
           dispatch({ type: 'setTranslatedWordFromBibleObject', wordIndex: wordIndex, newTranslatedWord: event.target.value })
         }}/>],
-      ["4" + wordIndex, "row-morphology", filterDisplayedMorphologicalData(morphology)]
+      ["4" + wordIndex, "morphology", filterDisplayedMorphologicalData(morphology)]
     ]
 
   // Iterate the variables to be consumed into a container.
