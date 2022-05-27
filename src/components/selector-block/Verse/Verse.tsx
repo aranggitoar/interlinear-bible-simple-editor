@@ -18,43 +18,61 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import { useContext, FC } from 'react';
-
 import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Option } from '../styles';
 
-
-const defaultBibleVerseSelectorText = "Choose verse";
+const defaultBibleVerseSelectorText = 'Choose verse';
 
 function createVerseSelector(amountOfVerses: number) {
-  let jsxMarkup = [<Option disabled value="undefined">{defaultBibleVerseSelectorText}</Option>];
+	let jsxMarkup = [
+		<Option disabled value="undefined">
+			{defaultBibleVerseSelectorText}
+		</Option>,
+	];
 
-  for (let i = 0; i < amountOfVerses; i++) {
-    jsxMarkup.push(<Option value={i}>{i+1}</Option>)
-  }
-  return jsxMarkup as Array<JSX.Element>;
+	for (let i = 0; i < amountOfVerses; i++) {
+		jsxMarkup.push(<Option value={i}>{i + 1}</Option>);
+	}
+	return jsxMarkup as Array<JSX.Element>;
 }
 
 export const VerseSelectorBlock: FC = () => {
-  const [state, dispatch] = useContext(LoadedBibleContext);
+	const [state, dispatch] = useContext(LoadedBibleContext);
 
-  let amountOfVerses = 0 as number;
+	let amountOfVerses = 0 as number;
 
-  if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
-    if (state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex] !== undefined) {
-      amountOfVerses = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex].length;
-    }
-  }
+	if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+		if (
+			state.bibleObject[state.bibleInfo.bibleBookName][
+				state.bibleInfo.bibleChapterIndex
+			] !== undefined
+		) {
+			amountOfVerses =
+				state.bibleObject[state.bibleInfo.bibleBookName][
+					state.bibleInfo.bibleChapterIndex
+				].length;
+		}
+	}
 
-  return (
-    <select id="verse-picker" className="picker-items" name="verse-picker"
-      value={state.bibleInfo.bibleVerseIndex !== '' ? state.bibleInfo.bibleVerseIndex : "undefined"}
-      onChange={(event) => {
-        dispatch({ type: 'setBibleVerseIndexFromBibleInfo', bibleVerseIndex: event.target.value })
-      }}
-    >
-      {createVerseSelector(amountOfVerses)}
-    </select>
-  );
-}
+	return (
+		<select
+			id="verse-picker"
+			className="picker-items"
+			name="verse-picker"
+			value={
+				state.bibleInfo.bibleVerseIndex !== ''
+					? state.bibleInfo.bibleVerseIndex
+					: 'undefined'
+			}
+			onChange={(event) => {
+				dispatch({
+					type: 'setBibleVerseIndexFromBibleInfo',
+					bibleVerseIndex: event.target.value,
+				});
+			}}
+		>
+			{createVerseSelector(amountOfVerses)}
+		</select>
+	);
+};

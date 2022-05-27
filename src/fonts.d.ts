@@ -18,7 +18,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 declare module '*.ttf';
 
 declare module '*.woff2';

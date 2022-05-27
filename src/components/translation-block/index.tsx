@@ -18,18 +18,14 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import { ReactElement } from 'react';
-
 import { TranslationBlockColumnContainer } from './ColumnContainer/ColumnContainer';
-
 import { Container } from './styles';
 
-
 export function TranslationBlock(): ReactElement<Record<string, unknown>> {
-  return (
-    <Container>
-      <TranslationBlockColumnContainer />
-    </Container>
-  );
+	return (
+		<Container>
+			<TranslationBlockColumnContainer />
+		</Container>
+	);
 }

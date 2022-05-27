@@ -18,25 +18,22 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import { ReactElement } from 'react';
 
 import { BibleBookSelectorBlock } from './BibleBook/BibleBook';
 import { ChapterSelectorBlock } from './Chapter/Chapter';
 import { VerseSelectorBlock } from './Verse/Verse';
 import { MoveBackwardByOne, MoveForwardByOne } from './MoveByOne/MoveByOne';
-
 import { Container } from './styles';
 
-
 export function SelectorBlock(): ReactElement<Record<string, unknown>> {
-  return (
-    <Container>
-      <MoveBackwardByOne />
-      <BibleBookSelectorBlock />
-      <ChapterSelectorBlock />
-      <VerseSelectorBlock />
-      <MoveForwardByOne />
-    </Container>
-  );
+	return (
+		<Container>
+			<MoveBackwardByOne />
+			<BibleBookSelectorBlock />
+			<ChapterSelectorBlock />
+			<VerseSelectorBlock />
+			<MoveForwardByOne />
+		</Container>
+	);
 }

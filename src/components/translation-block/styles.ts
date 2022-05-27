@@ -18,23 +18,20 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 75%;
-  justify-content: center;
-  padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	height: 75%;
+	justify-content: center;
+	padding: 1rem;
 
-  .rtl {
-    direction: rtl !important;
-  }
+	.rtl {
+		direction: rtl !important;
+	}
 
-  .ltr {
-    direction: ltr !important;
-  }
+	.ltr {
+		direction: ltr !important;
+	}
 `;
-
-

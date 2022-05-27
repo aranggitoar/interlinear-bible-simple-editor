@@ -18,10 +18,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
-import { render }from 'react-dom';
+import { render } from 'react-dom';
 import { hot } from 'react-hot-loader';
-
 import { App } from './App';
 
 render(<App />, document.getElementById('main'));

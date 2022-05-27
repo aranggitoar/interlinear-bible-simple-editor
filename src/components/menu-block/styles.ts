@@ -18,14 +18,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  align-items: flex-start;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 0;
-  width: 100%;
+	align-items: flex-start;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	padding: 0;
+	width: 100%;
 `;

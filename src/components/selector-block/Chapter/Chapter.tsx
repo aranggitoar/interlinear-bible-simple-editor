@@ -18,41 +18,52 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import { useContext, FC } from 'react';
-
 import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Option } from '../styles';
 
+const defaultBibleChapterSelectorText = 'Choose chapter';
 
-const defaultBibleChapterSelectorText = "Choose chapter";
+function createChapterSelector(amountOfChapters: number) {
+	let jsxMarkup = [
+		<Option disabled value="undefined">
+			{defaultBibleChapterSelectorText}
+		</Option>,
+	];
 
-function createChapterSelector(amountOfChapters: number,) {
-  let jsxMarkup = [<Option disabled value="undefined">{defaultBibleChapterSelectorText}</Option>];
-
-  for (let i = 0; i < amountOfChapters; i++) {
-    jsxMarkup.push(<Option value={i}>{i+1}</Option>)
-  }
-  return jsxMarkup as Array<JSX.Element>;
+	for (let i = 0; i < amountOfChapters; i++) {
+		jsxMarkup.push(<Option value={i}>{i + 1}</Option>);
+	}
+	return jsxMarkup as Array<JSX.Element>;
 }
 
 export const ChapterSelectorBlock: FC = () => {
-  const [state, dispatch] = useContext(LoadedBibleContext);
+	const [state, dispatch] = useContext(LoadedBibleContext);
 
-  let amountOfChapters = 0 as number;
+	let amountOfChapters = 0 as number;
 
-  if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
-    amountOfChapters = state.bibleObject[state.bibleInfo.bibleBookName].length;
-  }
+	if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+		amountOfChapters = state.bibleObject[state.bibleInfo.bibleBookName].length;
+	}
 
-  return (
-    <select id="chapter-picker" className="picker-items" name="chapter-picker"
-      value={state.bibleInfo.bibleChapterIndex !== '' ? state.bibleInfo.bibleChapterIndex : "undefined"}
-      onChange={(event) => {
-        dispatch({ type: 'setBibleChapterIndexFromBibleInfo', bibleChapterIndex: event.target.value})
-      }}
-    >
-      {createChapterSelector(amountOfChapters)}
-    </select>
-  );
-}
+	return (
+		<select
+			id="chapter-picker"
+			className="picker-items"
+			name="chapter-picker"
+			value={
+				state.bibleInfo.bibleChapterIndex !== ''
+					? state.bibleInfo.bibleChapterIndex
+					: 'undefined'
+			}
+			onChange={(event) => {
+				dispatch({
+					type: 'setBibleChapterIndexFromBibleInfo',
+					bibleChapterIndex: event.target.value,
+				});
+			}}
+		>
+			{createChapterSelector(amountOfChapters)}
+		</select>
+	);
+};

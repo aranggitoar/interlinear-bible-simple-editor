@@ -18,49 +18,48 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding: .5em;
-  margin: 0 .5em;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	padding: 0.5em;
+	margin: 0 0.5em;
 `;
 
 export const RowContainer = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: .15em 0;
-  max-width: 135px;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0.15em 0;
+	max-width: 135px;
 
-  &.strongs {
-    color: #4444dd;
-  }
+	&.strongs {
+		color: #4444dd;
+	}
 
-  &.original-language {
-    font-size: 1.5em;
-  }
+	&.original-language {
+		font-size: 1.5em;
+	}
 
-  &.morphology {
-    color: #555555;
-    text-align: center;
-  }
+	&.morphology {
+		color: #555555;
+		text-align: center;
+	}
 `;
 
 export const TranslationInputField = styled.textarea`
-  border: 1px dashed rgb(188,186,184) !important;
-  border-radius: 2.5px !important;
-  color: #dd4444 !important;
-  height: 2em;
-  padding: .1em .4em;
-  resize: none;
-  width: 10em;
+	border: 1px dashed rgb(188, 186, 184) !important;
+	border-radius: 2.5px !important;
+	color: #dd4444 !important;
+	height: 2em;
+	padding: 0.1em 0.4em;
+	resize: none;
+	width: 10em;
 
-  &:hover {
-    border: 1px dashed rgb(142,140,138) !important;
-  }
+	&:hover {
+		border: 1px dashed rgb(142, 140, 138) !important;
+	}
 `;

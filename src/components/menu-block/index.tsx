@@ -18,19 +18,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import { ReactElement } from 'react';
-
-import FileHandlerMenuBlock from './FileHandler/FileHandler';
+import { FileHandlerMenuBlock } from './FileHandler/FileHandler';
 import { MenuBlockSettings } from './Settings/Settings';
-
 import { Container } from './styles';
 
-
 export function MenuBlock(): ReactElement<Record<string, unknown>> {
-  return (
-    <Container>
-      <FileHandlerMenuBlock />
-    </Container>
-  );
+	return (
+		<Container>
+			<FileHandlerMenuBlock />
+		</Container>
+	);
 }

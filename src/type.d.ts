@@ -14,30 +14,29 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 */
 
-
 type LoadedBibleInfoType = {
-  bibleBookName: string;
-  bibleChapterIndex: string;
-  bibleVerseIndex: string;
-  bibleWordIndex: string;
-}
+	bibleBookName: string;
+	bibleChapterIndex: string;
+	bibleVerseIndex: string;
+	bibleWordIndex: string;
+};
 
 type LoadedBibleType = {
-  bibleObject: Object;
-  bibleFileName: string;
-  bibleBookNames: Array<string>;
-  bibleInfo: LoadedBibleInfoType;
+	bibleObject: Object;
+	bibleFileName: string;
+	bibleBookNames: Array<string>;
+	bibleInfo: LoadedBibleInfoType;
 };
 
 type LoadedBibleOtherType = {
-  type: string;
-  newTranslatedWord: string;
-}
+	type: string;
+	newTranslatedWord: string;
+};
 
 type WordIndexProps = {
-  wordIndex: string;
-}
+	wordIndex: string;
+};

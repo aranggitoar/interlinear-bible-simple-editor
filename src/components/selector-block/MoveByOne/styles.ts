@@ -18,50 +18,48 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import styled from 'styled-components';
 
 export const ButtonContainer = styled.div`
-  position: relative;
-`
+	position: relative;
+`;
 
 export const MoveByOneButton = styled.button`
-  background: none;
-  border: none;
-  color: #777;
-  font-size: 50px;
-  transition: transform 500ms, color 150ms;
+	background: none;
+	border: none;
+	color: #777;
+	font-size: 50px;
+	transition: transform 500ms, color 150ms;
 
-  &:hover {
-    background: none;
-    color: #555;
-  }
+	&:hover {
+		background: none;
+		color: #555;
+	}
 
-  &:after,
-  &:after {
-    background: none;
-    content: "";
-    height: 150%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 150%;
-  }
+	&:after,
+	&:after {
+		background: none;
+		content: '';
+		height: 150%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 150%;
+	}
 
-  &#forward {
-    margin-left: 2em;
-  }
+	&#forward {
+		margin-left: 2em;
+	}
 
-  &#backward {
-    margin-right: 2em;
-  }
+	&#backward {
+		margin-right: 2em;
+	}
 
-  &#forward:hover {
-    transform: translateX(10px);
-  }
+	&#forward:hover {
+		transform: translateX(10px);
+	}
 
-  &#backward:hover {
-    transform: translateX(-10px);
-  }
-`
-
+	&#backward:hover {
+		transform: translateX(-10px);
+	}
+`;

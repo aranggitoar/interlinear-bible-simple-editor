@@ -18,11 +18,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import { createGlobalStyle } from 'styled-components';
 import SBLBibLitWoff from '@/assets/sbl_blit-webfont.woff2';
 import SBLBibLitTTF from '@/assets/SBL_BLit.ttf';
-
 
 export default createGlobalStyle`
   @font-face {

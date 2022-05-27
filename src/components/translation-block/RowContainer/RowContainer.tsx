@@ -18,60 +18,80 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 import { useContext, FC } from 'react';
-
 import { filterDisplayedStrongsData } from '@/utilities/filterDisplayedStrongsData';
 import { filterDisplayedOriginalLanguage } from '@/utilities/filterDisplayedOriginalLanguage';
 import { filterDisplayedMorphologicalData } from '@/utilities/filterDisplayedMorphologicalData';
-
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext'
+import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Container, RowContainer, TranslationInputField } from './style';
-
 
 // Generate the row containers.
 // Return an array of JSX Elements.
 const rowContainerGenerator = (wordIndex: string): Array<JSX.Element> => {
-  const [state, dispatch] = useContext(LoadedBibleContext),
-    // wordIndex = state.bibleInfo.bibleWordIndex,
+	const [state, dispatch] = useContext(LoadedBibleContext),
 
-  // Get every component of the current word.
-    targetWord = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][state.bibleInfo.bibleVerseIndex][wordIndex][0],
-    originalWord = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][state.bibleInfo.bibleVerseIndex][wordIndex][1],
-    strongs = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][state.bibleInfo.bibleVerseIndex][wordIndex][2],
-    morphology = state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][state.bibleInfo.bibleVerseIndex][wordIndex][3],
+		// Get every component of the current word.
+		targetWord =
+			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
+				state.bibleInfo.bibleVerseIndex
+			][wordIndex][0],
+		originalWord =
+			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
+				state.bibleInfo.bibleVerseIndex
+			][wordIndex][1],
+		strongs =
+			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
+				state.bibleInfo.bibleVerseIndex
+			][wordIndex][2],
+		morphology =
+			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
+				state.bibleInfo.bibleVerseIndex
+			][wordIndex][3],
 
-  // Prepare translation index identification.
-    targetLanguageID = 'target-language-' + wordIndex as unknown as string,
+		// Prepare translation index identification.
+		targetLanguageID = ('target-language-' + wordIndex) as unknown as string,
 
-  // Prepare the variables to be consumed.
-    containerVariables = [
-      ["1" + wordIndex, "strongs", filterDisplayedStrongsData(strongs)],
-      ["2" + wordIndex, "original-language", filterDisplayedOriginalLanguage(originalWord)],
-      ["3" + wordIndex, "target-language", <TranslationInputField
-        id={targetLanguageID} value={targetWord} onChange={(event) => {
-          // @ts-ignore // property exists
-          dispatch({ type: 'setTranslatedWordFromBibleObject', wordIndex: wordIndex, newTranslatedWord: event.target.value })
-        }}/>],
-      ["4" + wordIndex, "morphology", filterDisplayedMorphologicalData(morphology)]
-    ]
+		// Prepare the variables to be consumed.
+		containerVariables = [
+			['1' + wordIndex, 'strongs', filterDisplayedStrongsData(strongs)],
+			[
+				'2' + wordIndex,
+				'original-language',
+				filterDisplayedOriginalLanguage(originalWord),
+			],
+			[
+				'3' + wordIndex,
+				'target-language',
+				<TranslationInputField
+					id={targetLanguageID}
+					value={targetWord}
+					onChange={(event) => {
+						// @ts-ignore // property exists
+						dispatch({
+							type: 'setTranslatedWordFromBibleObject',
+							wordIndex: wordIndex,
+							newTranslatedWord: event.target.value,
+						});
+					}}
+				/>,
+			],
+			['4' + wordIndex, 'morphology', filterDisplayedMorphologicalData(morphology)],
+		];
 
-  // Iterate the variables to be consumed into a container.
-  return containerVariables.map((containerVariable) => {
-    return (
-      <RowContainer key={containerVariable[0] as unknown as string}
-        className={containerVariable[1] as unknown as string}>
-        {containerVariable[2]}
-      </RowContainer>
-    )
-  });
-}
+	// Iterate the variables to be consumed into a container.
+	return containerVariables.map((containerVariable) => {
+		return (
+			<RowContainer
+				key={containerVariable[0] as unknown as string}
+				className={containerVariable[1] as unknown as string}
+			>
+				{containerVariable[2]}
+			</RowContainer>
+		);
+	});
+};
 
 // Display translation block's row container.
-export const TranslationBlockRowContainer: FC<WordIndexProps> = ({wordIndex}) => {
-  return (
-    <Container>
-      {rowContainerGenerator(wordIndex)}
-    </Container>
-  );
-}
+export const TranslationBlockRowContainer: FC<WordIndexProps> = ({ wordIndex }) => {
+	return <Container>{rowContainerGenerator(wordIndex)}</Container>;
+};

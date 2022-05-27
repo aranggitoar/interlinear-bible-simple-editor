@@ -14,32 +14,28 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 */
 
-
 import { ReactElement, StrictMode } from 'react';
-
 import { TranslationBlock } from '@/components/translation-block';
 import { MenuBlock } from '@/components/menu-block';
 import { SelectorBlock } from '@/components/selector-block';
-
 import LoadedBibleProvider from '@/contexts/LoadedBibleContext';
 import GlobalStyle from '@/styles/global';
 import { Separator } from './styles';
 
-
 export function App(): ReactElement<Record<string, unknown>> {
-  return (
-    <StrictMode>
-      <GlobalStyle />
-      <LoadedBibleProvider>
-        <MenuBlock />
-        <SelectorBlock />
-        <Separator />
-        <TranslationBlock />
-      </LoadedBibleProvider>
-    </StrictMode>
-  );
+	return (
+		<StrictMode>
+			<GlobalStyle />
+			<LoadedBibleProvider>
+				<MenuBlock />
+				<SelectorBlock />
+				<Separator />
+				<TranslationBlock />
+			</LoadedBibleProvider>
+		</StrictMode>
+	);
 }

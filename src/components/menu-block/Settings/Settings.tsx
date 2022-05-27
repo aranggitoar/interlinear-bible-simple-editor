@@ -18,17 +18,14 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
-const settingsText = "Settings"
+const settingsText = 'Settings';
 
 export function MenuBlockSettings() {
-  return (
-    <div className="menu-items">
-      <button id="menu-settings">
-        {settingsText}
-      </button>
-    </div>
-  );
+	return (
+		<div className="menu-items">
+			<button id="menu-settings">{settingsText}</button>
+		</div>
+	);
 }
 
 export default MenuBlockSettings;
