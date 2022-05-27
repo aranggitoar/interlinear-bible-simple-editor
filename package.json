@@ -1,12 +1,12 @@
 {
-  "name": "interlinear-bible-simple-editor",
-  "productName": "Interlinear Bible Simple Editor",
+  "name": "ibse",
+  "productName": "ibse",
   "version": "0.4.0",
-  "description": "Interlinear Bible Simple Editor, makes Interlinear Bible translation easier!",
+  "description": "Interlinear Bible Simple Editor (IBSE), makes Interlinear Bible translation easier!",
   "main": ".webpack/main",
   "build": {
     "appID": "com.byb.ibse",
-    "productName": "Interlinear Bible Simple Editor",
+    "productName": "ibse",
     "icon": "./build/assets/icons/dove.ico"
   },
   "scripts": {
@@ -27,6 +27,8 @@
     "forge": {
       "forge": {
         "packagerConfig": {
+          "name": "ibse",
+          "executableName": "ibse",
           "icon": "./build/assets/icons/dove.ico"
         }
       },
@@ -35,7 +37,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "IBSE"
+            "name": "ibse"
           }
         },
         {
