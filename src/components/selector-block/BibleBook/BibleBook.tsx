@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React, { useContext, FC } from 'react';
+import { useContext, FC } from 'react';
 
 import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { Option } from '../styles';
@@ -38,7 +38,6 @@ function createBibleBookSelector(bibleBookNameList: Array<string>) {
 
 export const BibleBookSelectorBlock: FC = () => {
   const [state, dispatch] = useContext(LoadedBibleContext);
-  console.log(state.bibleInfo.bibleBookName);
 
   return (
     <select id="bible-book-picker" className="picker-items" name="bible-book-picker"

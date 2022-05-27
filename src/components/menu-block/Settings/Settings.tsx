@@ -19,8 +19,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
-
 const settingsText = "Settings"
 
 export function MenuBlockSettings() {

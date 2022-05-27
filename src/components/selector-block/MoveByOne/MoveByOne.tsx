@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React, { useContext, FC, MouseEvent } from 'react';
+import { useContext, FC } from 'react';
 
 import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
 import { ButtonContainer, MoveByOneButton } from './styles';

@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React from 'react';
+import { ReactElement, StrictMode } from 'react';
 
 import { TranslationBlock } from '@/components/translation-block';
 import { MenuBlock } from '@/components/menu-block';
@@ -30,9 +30,9 @@ import GlobalStyle from '@/styles/global';
 import { Separator } from './styles';
 
 
-export function App(): React.ReactElement<Record<string, unknown>> {
+export function App(): ReactElement<Record<string, unknown>> {
   return (
-    <React.StrictMode>
+    <StrictMode>
       <GlobalStyle />
       <LoadedBibleProvider>
         <MenuBlock />
@@ -40,6 +40,6 @@ export function App(): React.ReactElement<Record<string, unknown>> {
         <Separator />
         <TranslationBlock />
       </LoadedBibleProvider>
-    </React.StrictMode>
+    </StrictMode>
   );
 }

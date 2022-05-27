@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React, { useContext, FC, ReactElement } from 'react';
+import { useContext, FC, ReactElement } from 'react';
 
 import { TranslationBlockRowContainer } from '@/components/translation-block/RowContainer/RowContainer';
 

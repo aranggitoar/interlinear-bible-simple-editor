@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React, { createContext, useReducer, Dispatch, FC, ReactNode } from 'react';
+import { createContext, useReducer, Dispatch, FC, ReactNode } from 'react';
 
 export const LoadedBibleContext = createContext<[any, Dispatch<any>]>(null);
 

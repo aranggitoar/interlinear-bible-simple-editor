@@ -19,8 +19,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import * as React from 'react';
-
 // import { useId, useBoolean } from '@fluentui/react-hooks';
 // import {
 //   TextField,

@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 
-import React, { useContext, FC } from 'react';
+import { useContext, FC } from 'react';
 
 import { filterDisplayedStrongsData } from '@/utilities/filterDisplayedStrongsData';
 import { filterDisplayedOriginalLanguage } from '@/utilities/filterDisplayedOriginalLanguage';
