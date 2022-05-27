@@ -47,6 +47,7 @@ export const RowContainer = styled.div`
 
   &.row-morphology {
     color: #555555;
+    text-align: center;
   }
 `;
 
