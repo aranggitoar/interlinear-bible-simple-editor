@@ -21,35 +21,36 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 import { BibleDataObjectType } from 'types/BibleData';
 
 // Populate source file with empty arrays.
-export function populateWithEmptyTargetLanguage(bibleObject: BibleDataObjectType) {
-  let bibleBookCount = Object.keys(bibleObject).length;
+export const populateWithEmptyTargetLanguage = (bibleObject: BibleDataObjectType): BibleDataObjectType => {
+  const bibleBookCount = Object.keys(bibleObject).length;
+  const copyOfBibleObject = { ...bibleObject } as BibleDataObjectType;
 
   // Loop every book.
   for (let i = 0; bibleBookCount > i; i++) {
-    let currentBibleBookName = Object.keys(bibleObject)[i];
-    let currentBibleBookArray = bibleObject[currentBibleBookName];
+    const currentBibleBookName = Object.keys(bibleObject)[i];
+    const currentBibleBookArray = bibleObject[currentBibleBookName];
 
     // Loop every chapter.
-    for (let i = 0; currentBibleBookArray.length > i; i++) {
-      let currentChapterArray = currentBibleBookArray[i];
+    for (let n = 0; currentBibleBookArray.length > n; n++) {
+      const currentChapterArray = currentBibleBookArray[n];
 
       // Loop every verse.
-      for (let i = 0; currentChapterArray.length > i; i++) {
-        let currentVerseArray = currentChapterArray[i];
+      for (let d = 0; currentChapterArray.length > d; d++) {
+        const currentVerseArray = currentChapterArray[d];
 
         // Insert empty string to every word inside a verse.
-        for (let i = 0; currentVerseArray.length > i; i++) {
-          currentVerseArray[i].unshift('');
+        for (let e = 0; currentVerseArray.length > e; e++) {
+          currentVerseArray[e].unshift('');
         }
 
-        currentChapterArray[i] = currentVerseArray;
+        currentChapterArray[d] = currentVerseArray;
       }
 
-      currentBibleBookArray[i] = currentChapterArray;
+      currentBibleBookArray[n] = currentChapterArray;
     }
 
-    bibleObject[currentBibleBookName] = currentBibleBookArray;
+    copyOfBibleObject[currentBibleBookName] = currentBibleBookArray;
   }
 
-  return bibleObject;
+  return copyOfBibleObject;
 }

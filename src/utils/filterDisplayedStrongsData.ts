@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 // Filter the displayed strongs data.
-export function filterDisplayedStrongsData(strongsData: string) {
+export const filterDisplayedStrongsData = (strongsData: string): string => {
   let filteredStrongsData = strongsData as string;
 
   if (filteredStrongsData[0] === 'G') {
@@ -27,20 +27,19 @@ export function filterDisplayedStrongsData(strongsData: string) {
       filteredStrongsData = filteredStrongsData.replace('&', ' & ');
     }
     filteredStrongsData = filteredStrongsData.replace(/[G]/g, '');
-
-    return filteredStrongsData;
-  }
-
-  if (/\//.test(strongsData)) {
-    let temp = strongsData.split('/');
-    if (temp.length === 3) {
-      filteredStrongsData = temp[2];
-    } else {
-      filteredStrongsData = temp[1];
+  } else if (filteredStrongsData[0] === 'H') {
+    // The Strongs number for OSHB is always with a forward slash, but the Strongs number is always last
+    if (/\//.test(strongsData)) {
+      const temp = strongsData.split('/');
+      const [, posTwo, posThree] = temp;
+      if (temp.length === 3) {
+        filteredStrongsData = posThree;
+      } else {
+        filteredStrongsData = posTwo;
+      }
     }
+    filteredStrongsData = filteredStrongsData.replace('H', '');
   }
-
-  filteredStrongsData = filteredStrongsData.replace('H', '');
 
   return filteredStrongsData;
-}
+};
