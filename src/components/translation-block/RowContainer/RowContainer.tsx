@@ -29,64 +29,64 @@ import { Container, RowContainer, TranslationInputField } from './style';
 // Generate the row containers.
 // Return an array of JSX Elements.
 const rowContainerGenerator = (wordIndex: string): Array<JSX.Element> => {
-	const { state, dispatch } = useContext(LoadedBibleContext),
-		// Get every component of the current word.
-		targetWord =
-			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
-				state.bibleInfo.bibleVerseIndex
-			][wordIndex][0],
-		originalWord =
-			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
-				state.bibleInfo.bibleVerseIndex
-			][wordIndex][1],
-		strongs =
-			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
-				state.bibleInfo.bibleVerseIndex
-			][wordIndex][2],
-		morphology =
-			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
-				state.bibleInfo.bibleVerseIndex
-			][wordIndex][3],
-		// Prepare translation index identification.
-		targetLanguageID = ('target-language-' + wordIndex) as unknown as string,
-		// Prepare the variables to be consumed.
-		containerVariables = [
-			['1' + wordIndex, 'strongs', filterDisplayedStrongsData(strongs)],
-			[
-				'2' + wordIndex,
-				'original-language',
-				filterDisplayedOriginalLanguage(originalWord),
-			],
-			[
-				'3' + wordIndex,
-				'target-language',
-				<TranslationInputField
-					id={targetLanguageID}
-					value={targetWord}
-					onChange={(event) => {
-						dispatch(setTranslatedWordFromBibleObject(wordIndex, event.target.value));
-					}}
-				/>,
-			],
-			['4' + wordIndex, 'morphology', filterDisplayedMorphologicalData(morphology)],
-		];
+  const { state, dispatch } = useContext(LoadedBibleContext),
+    // Get every component of the current word.
+    targetWord =
+      state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
+        state.bibleInfo.bibleVerseIndex
+      ][wordIndex][0],
+    originalWord =
+      state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
+        state.bibleInfo.bibleVerseIndex
+      ][wordIndex][1],
+    strongs =
+      state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
+        state.bibleInfo.bibleVerseIndex
+      ][wordIndex][2],
+    morphology =
+      state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
+        state.bibleInfo.bibleVerseIndex
+      ][wordIndex][3],
+    // Prepare translation index identification.
+    targetLanguageID = ('target-language-' + wordIndex) as unknown as string,
+    // Prepare the variables to be consumed.
+    containerVariables = [
+      ['1' + wordIndex, 'strongs', filterDisplayedStrongsData(strongs)],
+      [
+        '2' + wordIndex,
+        'original-language',
+        filterDisplayedOriginalLanguage(originalWord),
+      ],
+      [
+        '3' + wordIndex,
+        'target-language',
+        <TranslationInputField
+          id={targetLanguageID}
+          value={targetWord}
+          onChange={(event) => {
+            dispatch(setTranslatedWordFromBibleObject(wordIndex, event.target.value));
+          }}
+        />,
+      ],
+      ['4' + wordIndex, 'morphology', filterDisplayedMorphologicalData(morphology)],
+    ];
 
-	// Iterate the variables to be consumed into a container.
-	return containerVariables.map((containerVariable) => {
-		return (
-			<RowContainer
-				key={containerVariable[0] as unknown as string}
-				className={containerVariable[1] as unknown as string}
-			>
-				{containerVariable[2]}
-			</RowContainer>
-		);
-	});
+  // Iterate the variables to be consumed into a container.
+  return containerVariables.map((containerVariable) => {
+    return (
+      <RowContainer
+        key={containerVariable[0] as unknown as string}
+        className={containerVariable[1] as unknown as string}
+      >
+        {containerVariable[2]}
+      </RowContainer>
+    );
+  });
 };
 
 // Display translation block's row container.
 export const TranslationBlockRowContainer: FC<{ wordIndex: string }> = ({
-	wordIndex,
+  wordIndex,
 }) => {
-	return <Container>{rowContainerGenerator(wordIndex)}</Container>;
+  return <Container>{rowContainerGenerator(wordIndex)}</Container>;
 };

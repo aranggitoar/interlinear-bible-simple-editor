@@ -21,20 +21,20 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 import styled from 'styled-components';
 
 export const Container = styled.div`
-	align-items: center;
-	display: flex;
-	flex-direction: row;
-	height: 75%;
-	justify-content: center;
-	padding: 0.75em 1em;
-	margin-top: 1em;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 75%;
+  justify-content: center;
+  padding: 0.75em 1em;
+  margin-top: 1em;
 `;
 
 export const Select = styled.select`
-	cursor: pointer;
-	font-size: 16px;
-	margin: 0.5em 1.5em;
-	padding: 0.15em 0.3em;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0.5em 1.5em;
+  padding: 0.15em 0.3em;
 `;
 
 export const Option = styled.option``;

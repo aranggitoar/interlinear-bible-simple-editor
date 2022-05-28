@@ -27,15 +27,15 @@ import GlobalStyle from '@/styles/global';
 import { Separator } from '@/styles/separators';
 
 export function App(): ReactElement<Record<string, unknown>> {
-	return (
-		<StrictMode>
-			<GlobalStyle />
-			<LoadedBibleProvider>
-				<MenuBlock />
-				<SelectorBlock />
-				<Separator />
-				<TranslationBlock />
-			</LoadedBibleProvider>
-		</StrictMode>
-	);
+  return (
+    <StrictMode>
+      <GlobalStyle />
+      <LoadedBibleProvider>
+        <MenuBlock />
+        <SelectorBlock />
+        <Separator />
+        <TranslationBlock />
+      </LoadedBibleProvider>
+    </StrictMode>
+  );
 }

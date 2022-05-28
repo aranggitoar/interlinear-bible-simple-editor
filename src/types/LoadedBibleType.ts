@@ -19,15 +19,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 export type LoadedBibleInfoType = {
-	bibleBookName: string;
-	bibleChapterIndex: string;
-	bibleVerseIndex: string;
-	bibleWordIndex: string;
+  bibleBookName: string;
+  bibleChapterIndex: string;
+  bibleVerseIndex: string;
+  bibleWordIndex: string;
 };
 
 export type LoadedBibleType = {
-	bibleObject: Object;
-	bibleFileName: string;
-	bibleBookNames: Array<string>;
-	bibleInfo: LoadedBibleInfoType;
+  bibleObject: Object;
+  bibleFileName: string;
+  bibleBookNames: Array<string>;
+  bibleInfo: LoadedBibleInfoType;
 };

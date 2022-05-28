@@ -20,91 +20,91 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { useContext, FC } from 'react';
 import {
-	setBibleChapterIndexFromBibleInfo,
-	setBibleVerseIndexFromBibleInfo,
+  setBibleChapterIndexFromBibleInfo,
+  setBibleVerseIndexFromBibleInfo,
 } from '@/utilities/reducerHelperFunctions';
 import { LoadedBibleContext } from '@/state/LoadedBibleContext';
 import { ButtonContainer, MoveByOneButton } from './styles';
 
 export const MoveBackwardByOne: FC = () => {
-	const { state, dispatch } = useContext(LoadedBibleContext);
-	let verseIndex: number;
-	let chapterIndex: number;
-	if (state.bibleInfo !== undefined) {
-		verseIndex = state.bibleInfo.bibleVerseIndex as unknown as number;
-		chapterIndex = state.bibleInfo.bibleChapterIndex as unknown as number;
-		if (chapterIndex >= 0 && verseIndex >= 0) {
-			verseIndex--;
-		}
-	}
+  const { state, dispatch } = useContext(LoadedBibleContext);
+  let verseIndex: number;
+  let chapterIndex: number;
+  if (state.bibleInfo !== undefined) {
+    verseIndex = state.bibleInfo.bibleVerseIndex as unknown as number;
+    chapterIndex = state.bibleInfo.bibleChapterIndex as unknown as number;
+    if (chapterIndex >= 0 && verseIndex >= 0) {
+      verseIndex--;
+    }
+  }
 
-	return (
-		<ButtonContainer>
-			<MoveByOneButton
-				id="backward"
-				onClick={() => {
-					// If the verse index is negative:
-					// go back to the last verse of the chapter before
-					if (verseIndex == -1 && chapterIndex > 0) {
-						chapterIndex--;
-						if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
-							if (
-								state.bibleObject[state.bibleInfo.bibleBookName][
-									state.bibleInfo.bibleChapterIndex
-								] !== undefined
-							) {
-								let maxVerseIndex =
-									state.bibleObject[state.bibleInfo.bibleBookName][
-										state.bibleInfo.bibleChapterIndex
-									].length + 1;
-								verseIndex = maxVerseIndex;
-							}
-						}
-						dispatch(
-							setBibleChapterIndexFromBibleInfo(chapterIndex as unknown as string)
-						);
-					}
-					if (verseIndex >= 0 && chapterIndex >= 0) {
-						dispatch(setBibleVerseIndexFromBibleInfo(verseIndex as unknown as string));
-					}
-				}}
-			>
-				&#8249;
-			</MoveByOneButton>
-		</ButtonContainer>
-	);
+  return (
+    <ButtonContainer>
+      <MoveByOneButton
+        id="backward"
+        onClick={() => {
+          // If the verse index is negative:
+          // go back to the last verse of the chapter before
+          if (verseIndex == -1 && chapterIndex > 0) {
+            chapterIndex--;
+            if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+              if (
+                state.bibleObject[state.bibleInfo.bibleBookName][
+                  state.bibleInfo.bibleChapterIndex
+                ] !== undefined
+              ) {
+                let maxVerseIndex =
+                  state.bibleObject[state.bibleInfo.bibleBookName][
+                    state.bibleInfo.bibleChapterIndex
+                  ].length + 1;
+                verseIndex = maxVerseIndex;
+              }
+            }
+            dispatch(
+              setBibleChapterIndexFromBibleInfo(chapterIndex as unknown as string)
+            );
+          }
+          if (verseIndex >= 0 && chapterIndex >= 0) {
+            dispatch(setBibleVerseIndexFromBibleInfo(verseIndex as unknown as string));
+          }
+        }}
+      >
+        &#8249;
+      </MoveByOneButton>
+    </ButtonContainer>
+  );
 };
 
 export const MoveForwardByOne: FC = () => {
-	const { state, dispatch } = useContext(LoadedBibleContext);
-	let verseIndex: number;
-	if (state.bibleInfo !== undefined) {
-		verseIndex = state.bibleInfo.bibleVerseIndex as unknown as number;
-		if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
-			if (
-				state.bibleObject[state.bibleInfo.bibleBookName][
-					state.bibleInfo.bibleChapterIndex
-				] !== undefined
-			) {
-				let maxVerseIndex =
-					state.bibleObject[state.bibleInfo.bibleBookName][
-						state.bibleInfo.bibleChapterIndex
-					].length - 1;
-				if (verseIndex < maxVerseIndex) verseIndex++;
-			}
-		}
-	}
+  const { state, dispatch } = useContext(LoadedBibleContext);
+  let verseIndex: number;
+  if (state.bibleInfo !== undefined) {
+    verseIndex = state.bibleInfo.bibleVerseIndex as unknown as number;
+    if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+      if (
+        state.bibleObject[state.bibleInfo.bibleBookName][
+          state.bibleInfo.bibleChapterIndex
+        ] !== undefined
+      ) {
+        let maxVerseIndex =
+          state.bibleObject[state.bibleInfo.bibleBookName][
+            state.bibleInfo.bibleChapterIndex
+          ].length - 1;
+        if (verseIndex < maxVerseIndex) verseIndex++;
+      }
+    }
+  }
 
-	return (
-		<ButtonContainer>
-			<MoveByOneButton
-				id="forward"
-				onClick={() => {
-					dispatch(setBibleVerseIndexFromBibleInfo(verseIndex as unknown as string));
-				}}
-			>
-				&#8250;
-			</MoveByOneButton>
-		</ButtonContainer>
-	);
+  return (
+    <ButtonContainer>
+      <MoveByOneButton
+        id="forward"
+        onClick={() => {
+          dispatch(setBibleVerseIndexFromBibleInfo(verseIndex as unknown as string));
+        }}
+      >
+        &#8250;
+      </MoveByOneButton>
+    </ButtonContainer>
+  );
 };

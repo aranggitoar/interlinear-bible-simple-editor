@@ -26,39 +26,39 @@ import { Select, Option } from '../styles';
 const defaultBibleChapterSelectorText = 'Choose chapter';
 
 function createChapterSelector(amountOfChapters: number) {
-	let jsxMarkup = [
-		<Option disabled value="undefined">
-			{defaultBibleChapterSelectorText}
-		</Option>,
-	];
+  let jsxMarkup = [
+    <Option disabled value="undefined">
+      {defaultBibleChapterSelectorText}
+    </Option>,
+  ];
 
-	for (let i = 0; i < amountOfChapters; i++) {
-		jsxMarkup.push(<Option value={i}>{i + 1}</Option>);
-	}
-	return jsxMarkup as Array<JSX.Element>;
+  for (let i = 0; i < amountOfChapters; i++) {
+    jsxMarkup.push(<Option value={i}>{i + 1}</Option>);
+  }
+  return jsxMarkup as Array<JSX.Element>;
 }
 
 export const ChapterSelectorBlock: FC = () => {
-	const { state, dispatch } = useContext(LoadedBibleContext);
+  const { state, dispatch } = useContext(LoadedBibleContext);
 
-	let amountOfChapters = 0 as number;
+  let amountOfChapters = 0 as number;
 
-	if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
-		amountOfChapters = state.bibleObject[state.bibleInfo.bibleBookName].length;
-	}
+  if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
+    amountOfChapters = state.bibleObject[state.bibleInfo.bibleBookName].length;
+  }
 
-	return (
-		<Select
-			value={
-				state.bibleInfo.bibleChapterIndex !== ''
-					? state.bibleInfo.bibleChapterIndex
-					: 'undefined'
-			}
-			onChange={(event) => {
-				dispatch(setBibleChapterIndexFromBibleInfo(event.target.value));
-			}}
-		>
-			{createChapterSelector(amountOfChapters)}
-		</Select>
-	);
+  return (
+    <Select
+      value={
+        state.bibleInfo.bibleChapterIndex !== ''
+          ? state.bibleInfo.bibleChapterIndex
+          : 'undefined'
+      }
+      onChange={(event) => {
+        dispatch(setBibleChapterIndexFromBibleInfo(event.target.value));
+      }}
+    >
+      {createChapterSelector(amountOfChapters)}
+    </Select>
+  );
 };

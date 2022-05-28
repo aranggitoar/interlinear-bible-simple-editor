@@ -22,17 +22,17 @@ import { arrayOfCorrectlyOrderedBibleBookName } from './correctlyOrderedBibleBoo
 
 // Arrange the array of Bible book names.
 export function arrangeBibleBookName(arrayOfBibleBookNames: Array<string>) {
-	const orderedArrayOfBibleBookNames = [] as Array<string>;
+  const orderedArrayOfBibleBookNames = [] as Array<string>;
 
-	for (let i = 0; arrayOfCorrectlyOrderedBibleBookName.length > i; i++) {
-		if (
-			arrayOfBibleBookNames.find((name) =>
-				name.match(arrayOfCorrectlyOrderedBibleBookName[i])
-			) !== undefined
-		) {
-			orderedArrayOfBibleBookNames.push(arrayOfCorrectlyOrderedBibleBookName[i]);
-		}
-	}
+  for (let i = 0; arrayOfCorrectlyOrderedBibleBookName.length > i; i++) {
+    if (
+      arrayOfBibleBookNames.find((name) =>
+        name.match(arrayOfCorrectlyOrderedBibleBookName[i])
+      ) !== undefined
+    ) {
+      orderedArrayOfBibleBookNames.push(arrayOfCorrectlyOrderedBibleBookName[i]);
+    }
+  }
 
-	return orderedArrayOfBibleBookNames;
+  return orderedArrayOfBibleBookNames;
 }

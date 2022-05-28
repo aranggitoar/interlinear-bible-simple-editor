@@ -22,80 +22,80 @@ import { LoadedBibleType } from '@/types/LoadedBibleType';
 import { ActionType, LoadedBibleActionsType } from '@/types/LoadedBibleActionsType';
 
 export const loadedBibleReducer = (
-	state: LoadedBibleType,
-	action: LoadedBibleActionsType
+  state: LoadedBibleType,
+  action: LoadedBibleActionsType
 ) => {
-	switch (action.type) {
-		case ActionType.SetBibleObject:
-			return { ...state, bibleObject: action.payload };
-		case ActionType.SetTranslatedWordFromBibleObject:
-			const copyOfBibleObject = {
-				...state.bibleObject,
-				[state.bibleInfo.bibleBookName]: [
-					...state.bibleObject[state.bibleInfo.bibleBookName][
-						state.bibleInfo.bibleChapterIndex
-					][state.bibleInfo.bibleVerseIndex][action.payload.wordIndex].splice(
-						0,
-						1,
-						action.payload.newTranslatedWord
-					),
-				],
-			};
-			return {
-				...state,
-				bibleObject: {
-					...state.bibleObject,
-					copyOfBibleObject,
-				},
-			};
-		// The code that doesn't work, replace line 39 to 51 for these code block
-		// return { ...state, bibleObject: {
-		//   ...state.bibleObject,
-		//   [state.bibleInfo.bibleBookName]: [
-		//     ...state.bibleObject
-		//       [state.bibleInfo.bibleBookName]
-		//       [state.bibleInfo.bibleChapterIndex]
-		//       [state.bibleInfo.bibleVerseIndex]
-		//       [action.payload.wordIndex]
-		//       .splice(0, 1, action.payload.newTranslatedWord)
-		//   ]
-		// }};
-		case ActionType.SetBibleFileName:
-			return { ...state, bibleFileName: action.payload };
-		case ActionType.SetBibleBookNames:
-			return { ...state, bibleBookNames: action.payload };
-		case ActionType.SetBibleInfo:
-			return { ...state, bibleInfo: action.payload };
-		case ActionType.SetBibleBookNameFromBibleInfo:
-			return {
-				...state,
-				bibleInfo: {
-					...state.bibleInfo,
-					bibleBookName: action.payload,
-					bibleChapterIndex: '0',
-					bibleVerseIndex: '0',
-				},
-			};
-		case ActionType.SetBibleChapterIndexFromBibleInfo:
-			return {
-				...state,
-				bibleInfo: {
-					...state.bibleInfo,
-					bibleChapterIndex: action.payload,
-					bibleVerseIndex: '0',
-				},
-			};
-		case ActionType.SetBibleVerseIndexFromBibleInfo:
-			return {
-				...state,
-				bibleInfo: { ...state.bibleInfo, bibleVerseIndex: action.payload },
-			};
-		case ActionType.SetBibleWordIndexFromBibleInfo:
-			return {
-				...state,
-				bibleInfo: { ...state.bibleInfo, bibleWordIndex: action.payload },
-			};
-		default:
-			throw new Error('unexpected action type');
-	}
+  switch (action.type) {
+    case ActionType.SetBibleObject:
+      return { ...state, bibleObject: action.payload };
+    case ActionType.SetTranslatedWordFromBibleObject:
+      const copyOfBibleObject = {
+        ...state.bibleObject,
+        [state.bibleInfo.bibleBookName]: [
+          ...state.bibleObject[state.bibleInfo.bibleBookName][
+            state.bibleInfo.bibleChapterIndex
+          ][state.bibleInfo.bibleVerseIndex][action.payload.wordIndex].splice(
+            0,
+            1,
+            action.payload.newTranslatedWord
+          ),
+        ],
+      };
+      return {
+        ...state,
+        bibleObject: {
+          ...state.bibleObject,
+          copyOfBibleObject,
+        },
+      };
+    // The code that doesn't work, replace line 39 to 51 for these code block
+    // return { ...state, bibleObject: {
+    //   ...state.bibleObject,
+    //   [state.bibleInfo.bibleBookName]: [
+    //     ...state.bibleObject
+    //       [state.bibleInfo.bibleBookName]
+    //       [state.bibleInfo.bibleChapterIndex]
+    //       [state.bibleInfo.bibleVerseIndex]
+    //       [action.payload.wordIndex]
+    //       .splice(0, 1, action.payload.newTranslatedWord)
+    //   ]
+    // }};
+    case ActionType.SetBibleFileName:
+      return { ...state, bibleFileName: action.payload };
+    case ActionType.SetBibleBookNames:
+      return { ...state, bibleBookNames: action.payload };
+    case ActionType.SetBibleInfo:
+      return { ...state, bibleInfo: action.payload };
+    case ActionType.SetBibleBookNameFromBibleInfo:
+      return {
+        ...state,
+        bibleInfo: {
+          ...state.bibleInfo,
+          bibleBookName: action.payload,
+          bibleChapterIndex: '0',
+          bibleVerseIndex: '0',
+        },
+      };
+    case ActionType.SetBibleChapterIndexFromBibleInfo:
+      return {
+        ...state,
+        bibleInfo: {
+          ...state.bibleInfo,
+          bibleChapterIndex: action.payload,
+          bibleVerseIndex: '0',
+        },
+      };
+    case ActionType.SetBibleVerseIndexFromBibleInfo:
+      return {
+        ...state,
+        bibleInfo: { ...state.bibleInfo, bibleVerseIndex: action.payload },
+      };
+    case ActionType.SetBibleWordIndexFromBibleInfo:
+      return {
+        ...state,
+        bibleInfo: { ...state.bibleInfo, bibleWordIndex: action.payload },
+      };
+    default:
+      throw new Error('unexpected action type');
+  }
 };

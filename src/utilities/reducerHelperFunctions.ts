@@ -19,77 +19,77 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import {
-	ActionType,
-	SetBibleObject,
-	SetTranslatedWordFromBibleObject,
-	SetBibleFileName,
-	SetBibleBookNames,
-	SetBibleInfo,
-	SetBibleBookNameFromBibleInfo,
-	SetBibleChapterIndexFromBibleInfo,
-	SetBibleVerseIndexFromBibleInfo,
-	SetBibleWordIndexFromBibleInfo,
+  ActionType,
+  SetBibleObject,
+  SetTranslatedWordFromBibleObject,
+  SetBibleFileName,
+  SetBibleBookNames,
+  SetBibleInfo,
+  SetBibleBookNameFromBibleInfo,
+  SetBibleChapterIndexFromBibleInfo,
+  SetBibleVerseIndexFromBibleInfo,
+  SetBibleWordIndexFromBibleInfo,
 } from '@/types/LoadedBibleActionsType';
 import { LoadedBibleType } from '@/types/LoadedBibleType';
 
 export const setBibleObject = (loadedBibleObject: LoadedBibleType): SetBibleObject => ({
-	type: ActionType.SetBibleObject,
-	payload: loadedBibleObject,
+  type: ActionType.SetBibleObject,
+  payload: loadedBibleObject,
 });
 
 export const setTranslatedWordFromBibleObject = (
-	wordIndex: string,
-	newTranslatedWord: string
+  wordIndex: string,
+  newTranslatedWord: string
 ): SetTranslatedWordFromBibleObject => ({
-	type: ActionType.SetTranslatedWordFromBibleObject,
-	payload: { wordIndex, newTranslatedWord },
+  type: ActionType.SetTranslatedWordFromBibleObject,
+  payload: { wordIndex, newTranslatedWord },
 });
 
 export const setBibleFileName = (
-	loadedBibleFileName: LoadedBibleType['bibleFileName']
+  loadedBibleFileName: LoadedBibleType['bibleFileName']
 ): SetBibleFileName => ({
-	type: ActionType.SetBibleFileName,
-	payload: loadedBibleFileName,
+  type: ActionType.SetBibleFileName,
+  payload: loadedBibleFileName,
 });
 
 export const setBibleBookNames = (
-	loadedBibleBookNames: LoadedBibleType['bibleBookNames']
+  loadedBibleBookNames: LoadedBibleType['bibleBookNames']
 ): SetBibleBookNames => ({
-	type: ActionType.SetBibleBookNames,
-	payload: loadedBibleBookNames,
+  type: ActionType.SetBibleBookNames,
+  payload: loadedBibleBookNames,
 });
 
 export const setBibleInfo = (
-	loadedBibleInfo: LoadedBibleType['bibleInfo']
+  loadedBibleInfo: LoadedBibleType['bibleInfo']
 ): SetBibleInfo => ({
-	type: ActionType.SetBibleInfo,
-	payload: loadedBibleInfo,
+  type: ActionType.SetBibleInfo,
+  payload: loadedBibleInfo,
 });
 
 export const setBibleBookNameFromBibleInfo = (
-	displayedBibleBookName: LoadedBibleType['bibleInfo']['bibleBookName']
+  displayedBibleBookName: LoadedBibleType['bibleInfo']['bibleBookName']
 ): SetBibleBookNameFromBibleInfo => ({
-	type: ActionType.SetBibleBookNameFromBibleInfo,
-	payload: displayedBibleBookName,
+  type: ActionType.SetBibleBookNameFromBibleInfo,
+  payload: displayedBibleBookName,
 });
 
 export const setBibleChapterIndexFromBibleInfo = (
-	displayedBibleChapterIndex: LoadedBibleType['bibleInfo']['bibleBookName']
+  displayedBibleChapterIndex: LoadedBibleType['bibleInfo']['bibleBookName']
 ): SetBibleChapterIndexFromBibleInfo => ({
-	type: ActionType.SetBibleChapterIndexFromBibleInfo,
-	payload: displayedBibleChapterIndex,
+  type: ActionType.SetBibleChapterIndexFromBibleInfo,
+  payload: displayedBibleChapterIndex,
 });
 
 export const setBibleVerseIndexFromBibleInfo = (
-	displayedBibleVerseIndex: LoadedBibleType['bibleInfo']['bibleVerseIndex']
+  displayedBibleVerseIndex: LoadedBibleType['bibleInfo']['bibleVerseIndex']
 ): SetBibleVerseIndexFromBibleInfo => ({
-	type: ActionType.SetBibleVerseIndexFromBibleInfo,
-	payload: displayedBibleVerseIndex,
+  type: ActionType.SetBibleVerseIndexFromBibleInfo,
+  payload: displayedBibleVerseIndex,
 });
 
 export const setBibleWordIndexFromBibleInfo = (
-	displayedBibleWordIndex: LoadedBibleType['bibleInfo']['bibleWordIndex']
+  displayedBibleWordIndex: LoadedBibleType['bibleInfo']['bibleWordIndex']
 ): SetBibleWordIndexFromBibleInfo => ({
-	type: ActionType.SetBibleWordIndexFromBibleInfo,
-	payload: displayedBibleWordIndex,
+  type: ActionType.SetBibleWordIndexFromBibleInfo,
+  payload: displayedBibleWordIndex,
 });

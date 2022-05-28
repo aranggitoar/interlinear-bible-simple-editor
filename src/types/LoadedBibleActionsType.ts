@@ -21,69 +21,69 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 import { LoadedBibleType } from './LoadedBibleType';
 
 export enum ActionType {
-	SetBibleObject,
-	SetTranslatedWordFromBibleObject,
-	SetBibleFileName,
-	SetBibleBookNames,
-	SetBibleInfo,
-	SetBibleBookNameFromBibleInfo,
-	SetBibleChapterIndexFromBibleInfo,
-	SetBibleVerseIndexFromBibleInfo,
-	SetBibleWordIndexFromBibleInfo,
+  SetBibleObject,
+  SetTranslatedWordFromBibleObject,
+  SetBibleFileName,
+  SetBibleBookNames,
+  SetBibleInfo,
+  SetBibleBookNameFromBibleInfo,
+  SetBibleChapterIndexFromBibleInfo,
+  SetBibleVerseIndexFromBibleInfo,
+  SetBibleWordIndexFromBibleInfo,
 }
 
 export interface SetBibleObject {
-	type: ActionType.SetBibleObject;
-	payload: LoadedBibleType;
+  type: ActionType.SetBibleObject;
+  payload: LoadedBibleType;
 }
 
 export interface SetTranslatedWordFromBibleObject {
-	type: ActionType.SetTranslatedWordFromBibleObject;
-	payload: { wordIndex: string; newTranslatedWord: string };
+  type: ActionType.SetTranslatedWordFromBibleObject;
+  payload: { wordIndex: string; newTranslatedWord: string };
 }
 
 export interface SetBibleFileName {
-	type: ActionType.SetBibleFileName;
-	payload: LoadedBibleType['bibleFileName'];
+  type: ActionType.SetBibleFileName;
+  payload: LoadedBibleType['bibleFileName'];
 }
 
 export interface SetBibleBookNames {
-	type: ActionType.SetBibleBookNames;
-	payload: LoadedBibleType['bibleBookNames'];
+  type: ActionType.SetBibleBookNames;
+  payload: LoadedBibleType['bibleBookNames'];
 }
 
 export interface SetBibleInfo {
-	type: ActionType.SetBibleInfo;
-	payload: LoadedBibleType['bibleInfo'];
+  type: ActionType.SetBibleInfo;
+  payload: LoadedBibleType['bibleInfo'];
 }
 
 export interface SetBibleBookNameFromBibleInfo {
-	type: ActionType.SetBibleBookNameFromBibleInfo;
-	payload: LoadedBibleType['bibleInfo']['bibleBookName'];
+  type: ActionType.SetBibleBookNameFromBibleInfo;
+  payload: LoadedBibleType['bibleInfo']['bibleBookName'];
 }
 
 export interface SetBibleChapterIndexFromBibleInfo {
-	type: ActionType.SetBibleChapterIndexFromBibleInfo;
-	payload: LoadedBibleType['bibleInfo']['bibleChapterIndex'];
+  type: ActionType.SetBibleChapterIndexFromBibleInfo;
+  payload: LoadedBibleType['bibleInfo']['bibleChapterIndex'];
 }
 
 export interface SetBibleVerseIndexFromBibleInfo {
-	type: ActionType.SetBibleVerseIndexFromBibleInfo;
-	payload: LoadedBibleType['bibleInfo']['bibleVerseIndex'];
+  type: ActionType.SetBibleVerseIndexFromBibleInfo;
+  payload: LoadedBibleType['bibleInfo']['bibleVerseIndex'];
 }
 
 export interface SetBibleWordIndexFromBibleInfo {
-	type: ActionType.SetBibleWordIndexFromBibleInfo;
-	payload: LoadedBibleType['bibleInfo']['bibleWordIndex'];
+  type: ActionType.SetBibleWordIndexFromBibleInfo;
+  payload: LoadedBibleType['bibleInfo']['bibleWordIndex'];
 }
 
 export type LoadedBibleActionsType =
-	| SetBibleObject
-	| SetTranslatedWordFromBibleObject
-	| SetBibleFileName
-	| SetBibleBookNames
-	| SetBibleInfo
-	| SetBibleBookNameFromBibleInfo
-	| SetBibleChapterIndexFromBibleInfo
-	| SetBibleVerseIndexFromBibleInfo
-	| SetBibleWordIndexFromBibleInfo;
+  | SetBibleObject
+  | SetTranslatedWordFromBibleObject
+  | SetBibleFileName
+  | SetBibleBookNames
+  | SetBibleInfo
+  | SetBibleBookNameFromBibleInfo
+  | SetBibleChapterIndexFromBibleInfo
+  | SetBibleVerseIndexFromBibleInfo
+  | SetBibleWordIndexFromBibleInfo;

@@ -23,9 +23,9 @@ import { TranslationBlockColumnContainer } from './ColumnContainer/ColumnContain
 import { Container } from './styles';
 
 export function TranslationBlock(): ReactElement<Record<string, unknown>> {
-	return (
-		<Container>
-			<TranslationBlockColumnContainer />
-		</Container>
-	);
+  return (
+    <Container>
+      <TranslationBlockColumnContainer />
+    </Container>
+  );
 }

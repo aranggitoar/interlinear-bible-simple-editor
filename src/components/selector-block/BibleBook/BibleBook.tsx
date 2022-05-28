@@ -26,31 +26,31 @@ import { Select, Option } from '../styles';
 const defaultBibleBookSelectorText = 'Choose bible book';
 
 function createBibleBookSelector(bibleBookNameList: Array<string>) {
-	let jsxMarkup = [
-		<Option disabled value="undefined">
-			{defaultBibleBookSelectorText}
-		</Option>,
-	];
+  let jsxMarkup = [
+    <Option disabled value="undefined">
+      {defaultBibleBookSelectorText}
+    </Option>,
+  ];
 
-	for (let i = 0; i < bibleBookNameList.length; i++) {
-		jsxMarkup.push(<Option value={bibleBookNameList[i]}>{bibleBookNameList[i]}</Option>);
-	}
-	return jsxMarkup as Array<JSX.Element>;
+  for (let i = 0; i < bibleBookNameList.length; i++) {
+    jsxMarkup.push(<Option value={bibleBookNameList[i]}>{bibleBookNameList[i]}</Option>);
+  }
+  return jsxMarkup as Array<JSX.Element>;
 }
 
 export const BibleBookSelectorBlock: FC = () => {
-	const { state, dispatch } = useContext(LoadedBibleContext);
+  const { state, dispatch } = useContext(LoadedBibleContext);
 
-	return (
-		<Select
-			value={
-				state.bibleInfo.bibleBookName !== '' ? state.bibleInfo.bibleBookName : 'undefined'
-			}
-			onChange={(event) => {
-				dispatch(setBibleBookNameFromBibleInfo(event.target.value));
-			}}
-		>
-			{createBibleBookSelector(state.bibleBookNames)}
-		</Select>
-	);
+  return (
+    <Select
+      value={
+        state.bibleInfo.bibleBookName !== '' ? state.bibleInfo.bibleBookName : 'undefined'
+      }
+      onChange={(event) => {
+        dispatch(setBibleBookNameFromBibleInfo(event.target.value));
+      }}
+    >
+      {createBibleBookSelector(state.bibleBookNames)}
+    </Select>
+  );
 };

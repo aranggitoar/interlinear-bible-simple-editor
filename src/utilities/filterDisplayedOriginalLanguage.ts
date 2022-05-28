@@ -20,9 +20,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Filter the displayed original language data.
 export function filterDisplayedOriginalLanguage(originalLanguageData: string) {
-	let filteredOriginalLanguageData = originalLanguageData;
-	if (/\//.test(originalLanguageData)) {
-		filteredOriginalLanguageData = originalLanguageData.replace(/\//g, '');
-	}
-	return filteredOriginalLanguageData;
+  let filteredOriginalLanguageData = originalLanguageData;
+  if (/\//.test(originalLanguageData)) {
+    filteredOriginalLanguageData = originalLanguageData.replace(/\//g, '');
+  }
+  return filteredOriginalLanguageData;
 }

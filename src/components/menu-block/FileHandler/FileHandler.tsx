@@ -22,10 +22,10 @@ import { useContext, ReactElement, FC, MouseEventHandler, FormEvent } from 'reac
 import { populateWithEmptyTargetLanguage } from '@/utilities/populateWithEmptyTargetLanguage';
 import { arrangeBibleBookName } from '@/utilities/arrangeBibleBookName';
 import {
-	setBibleObject,
-	setBibleFileName,
-	setBibleBookNames,
-	setBibleInfo,
+  setBibleObject,
+  setBibleFileName,
+  setBibleBookNames,
+  setBibleInfo,
 } from '@/utilities/reducerHelperFunctions';
 import { LoadedBibleInfoType } from '@/types/LoadedBibleType';
 import { LoadedBibleContext } from '@/state/LoadedBibleContext';
@@ -35,92 +35,92 @@ const saveFileText = 'Save';
 const loadFileText = 'Load';
 
 const uploadRequestHandler: FC = (): ReactElement => {
-	const { dispatch } = useContext(LoadedBibleContext);
+  const { dispatch } = useContext(LoadedBibleContext);
 
-	const handleChange = (event: FormEvent<HTMLInputElement>): void => {
-		event.preventDefault();
+  const handleChange = (event: FormEvent<HTMLInputElement>): void => {
+    event.preventDefault();
 
-		const fileReader = new FileReader();
-		// @ts-ignore // property "files" of "event.target" exists
-		fileReader.readAsText(event.target.files[0], 'UTF-8');
-		// @ts-ignore // property "files" of "event.target" exists
-		const fileName = event.target.files[0].name;
+    const fileReader = new FileReader();
+    // @ts-ignore // property "files" of "event.target" exists
+    fileReader.readAsText(event.target.files[0], 'UTF-8');
+    // @ts-ignore // property "files" of "event.target" exists
+    const fileName = event.target.files[0].name;
 
-		fileReader.onload = (fileReaderEvent) => {
-			// @ts-ignore // property "result" of "fileReaderEvent.currentTarget" exists
-			const fileObject = Object.assign(JSON.parse(fileReaderEvent.currentTarget.result));
-			let bibleBookNames = Object.keys(fileObject);
-			let updatedFileObject = fileObject;
+    fileReader.onload = (fileReaderEvent) => {
+      // @ts-ignore // property "result" of "fileReaderEvent.currentTarget" exists
+      const fileObject = Object.assign(JSON.parse(fileReaderEvent.currentTarget.result));
+      let bibleBookNames = Object.keys(fileObject);
+      let updatedFileObject = fileObject;
 
-			// Check which book exists.
-			let bibleBookName: string;
-			if (fileObject['Genesis'] !== undefined) {
-				bibleBookName = 'Genesis';
-			} else if (fileObject['Matthew'] !== undefined) {
-				bibleBookName = 'Matthew';
-			}
+      // Check which book exists.
+      let bibleBookName: string;
+      if (fileObject['Genesis'] !== undefined) {
+        bibleBookName = 'Genesis';
+      } else if (fileObject['Matthew'] !== undefined) {
+        bibleBookName = 'Matthew';
+      }
 
-			// If the file is a default Open Scripture's Hebrew Bible format, add the
-			// container for target language.
-			if (fileObject[bibleBookName][0][0][0].length === 3) {
-				updatedFileObject = populateWithEmptyTargetLanguage(fileObject);
-			}
+      // If the file is a default Open Scripture's Hebrew Bible format, add the
+      // container for target language.
+      if (fileObject[bibleBookName][0][0][0].length === 3) {
+        updatedFileObject = populateWithEmptyTargetLanguage(fileObject);
+      }
 
-			// If there is more than one Bible book, arrange the order;
-			if (bibleBookNames.length > 1) {
-				bibleBookNames = arrangeBibleBookName(bibleBookNames);
-			}
+      // If there is more than one Bible book, arrange the order;
+      if (bibleBookNames.length > 1) {
+        bibleBookNames = arrangeBibleBookName(bibleBookNames);
+      }
 
-			dispatch(setBibleFileName(fileName));
-			dispatch(setBibleBookNames(bibleBookNames));
-			dispatch(setBibleObject(updatedFileObject));
-			dispatch(
-				setBibleInfo({
-					bibleBookName: bibleBookName,
-					bibleChapterIndex: '0',
-					bibleVerseIndex: '0',
-					bibleWordIndex: '0',
-				} as LoadedBibleInfoType)
-			);
-		};
-	};
+      dispatch(setBibleFileName(fileName));
+      dispatch(setBibleBookNames(bibleBookNames));
+      dispatch(setBibleObject(updatedFileObject));
+      dispatch(
+        setBibleInfo({
+          bibleBookName: bibleBookName,
+          bibleChapterIndex: '0',
+          bibleVerseIndex: '0',
+          bibleWordIndex: '0',
+        } as LoadedBibleInfoType)
+      );
+    };
+  };
 
-	return (
-		<FileHandlerButton>
-			{loadFileText}
-			<InvisibleInput type="file" onChange={handleChange} />
-		</FileHandlerButton>
-	);
+  return (
+    <FileHandlerButton>
+      {loadFileText}
+      <InvisibleInput type="file" onChange={handleChange} />
+    </FileHandlerButton>
+  );
 };
 
 const downloadRequestHandler: FC = (): ReactElement => {
-	const { state } = useContext(LoadedBibleContext);
+  const { state } = useContext(LoadedBibleContext);
 
-	const downloadBibleAsJSON: MouseEventHandler<HTMLLabelElement> = (): void => {
-		var hiddenElement = document.createElement('a');
-		hiddenElement.href =
-			'data:attachment/text,' + encodeURI(JSON.stringify(state.bibleObject));
-		hiddenElement.target = '_blank';
-		hiddenElement.download = state.bibleFileName as string;
-		hiddenElement.click();
-	};
+  const downloadBibleAsJSON: MouseEventHandler<HTMLLabelElement> = (): void => {
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href =
+      'data:attachment/text,' + encodeURI(JSON.stringify(state.bibleObject));
+    hiddenElement.target = '_blank';
+    hiddenElement.download = state.bibleFileName as string;
+    hiddenElement.click();
+  };
 
-	return (
-		<FileHandlerButton onClick={downloadBibleAsJSON}>{saveFileText}</FileHandlerButton>
-	);
+  return (
+    <FileHandlerButton onClick={downloadBibleAsJSON}>{saveFileText}</FileHandlerButton>
+  );
 };
 
 export const FileHandlerMenuBlock: FC = () => {
-	const FileLoadHandlerButton = uploadRequestHandler;
-	const FileSaveHandlerButton = downloadRequestHandler;
-	return (
-		<>
-			<Container>
-				<FileLoadHandlerButton />
-			</Container>
-			<Container>
-				<FileSaveHandlerButton />
-			</Container>
-		</>
-	);
+  const FileLoadHandlerButton = uploadRequestHandler;
+  const FileSaveHandlerButton = downloadRequestHandler;
+  return (
+    <>
+      <Container>
+        <FileLoadHandlerButton />
+      </Container>
+      <Container>
+        <FileSaveHandlerButton />
+      </Container>
+    </>
+  );
 };

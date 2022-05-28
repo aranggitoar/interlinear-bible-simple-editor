@@ -24,27 +24,27 @@ import { LoadedBibleActionsType } from '@/types/LoadedBibleActionsType';
 import { loadedBibleReducer } from './loadedBibleReducer';
 
 const initialLoadedBibleObjectState = {
-	bibleObject: {},
-	bibleFileName: '',
-	bibleBookNames: [],
-	bibleInfo: {
-		bibleBookName: '',
-		bibleChapterIndex: '',
-		bibleVerseIndex: '',
-		bibleWordIndex: '',
-	},
+  bibleObject: {},
+  bibleFileName: '',
+  bibleBookNames: [],
+  bibleInfo: {
+    bibleBookName: '',
+    bibleChapterIndex: '',
+    bibleVerseIndex: '',
+    bibleWordIndex: '',
+  },
 } as LoadedBibleType;
 
 export const LoadedBibleContext = createContext<{
-	state: LoadedBibleType;
-	dispatch: Dispatch<LoadedBibleActionsType>;
+  state: LoadedBibleType;
+  dispatch: Dispatch<LoadedBibleActionsType>;
 }>({ state: initialLoadedBibleObjectState, dispatch: () => undefined });
 
 export const LoadedBibleProvider: FC<ReactNode> = ({ children }) => {
-	const [state, dispatch] = useReducer(loadedBibleReducer, initialLoadedBibleObjectState);
-	return (
-		<LoadedBibleContext.Provider value={{ state, dispatch }}>
-			{children}
-		</LoadedBibleContext.Provider>
-	);
+  const [state, dispatch] = useReducer(loadedBibleReducer, initialLoadedBibleObjectState);
+  return (
+    <LoadedBibleContext.Provider value={{ state, dispatch }}>
+      {children}
+    </LoadedBibleContext.Provider>
+  );
 };

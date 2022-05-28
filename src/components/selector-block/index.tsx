@@ -26,13 +26,13 @@ import { MoveBackwardByOne, MoveForwardByOne } from './MoveByOne/MoveByOne';
 import { Container } from './styles';
 
 export function SelectorBlock(): ReactElement<Record<string, unknown>> {
-	return (
-		<Container>
-			<MoveBackwardByOne />
-			<BibleBookSelectorBlock />
-			<ChapterSelectorBlock />
-			<VerseSelectorBlock />
-			<MoveForwardByOne />
-		</Container>
-	);
+  return (
+    <Container>
+      <MoveBackwardByOne />
+      <BibleBookSelectorBlock />
+      <ChapterSelectorBlock />
+      <VerseSelectorBlock />
+      <MoveForwardByOne />
+    </Container>
+  );
 }

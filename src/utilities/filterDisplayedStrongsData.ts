@@ -20,27 +20,27 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Filter the displayed strongs data.
 export function filterDisplayedStrongsData(strongsData: string) {
-	let filteredStrongsData = strongsData as string;
+  let filteredStrongsData = strongsData as string;
 
-	if (filteredStrongsData[0] === 'G') {
-		if (filteredStrongsData.indexOf('&') > -1) {
-			filteredStrongsData = filteredStrongsData.replace('&', ' & ');
-		}
-		filteredStrongsData = filteredStrongsData.replace(/[G]/g, '');
+  if (filteredStrongsData[0] === 'G') {
+    if (filteredStrongsData.indexOf('&') > -1) {
+      filteredStrongsData = filteredStrongsData.replace('&', ' & ');
+    }
+    filteredStrongsData = filteredStrongsData.replace(/[G]/g, '');
 
-		return filteredStrongsData;
-	}
+    return filteredStrongsData;
+  }
 
-	if (/\//.test(strongsData)) {
-		let temp = strongsData.split('/');
-		if (temp.length === 3) {
-			filteredStrongsData = temp[2];
-		} else {
-			filteredStrongsData = temp[1];
-		}
-	}
+  if (/\//.test(strongsData)) {
+    let temp = strongsData.split('/');
+    if (temp.length === 3) {
+      filteredStrongsData = temp[2];
+    } else {
+      filteredStrongsData = temp[1];
+    }
+  }
 
-	filteredStrongsData = filteredStrongsData.replace('H', '');
+  filteredStrongsData = filteredStrongsData.replace('H', '');
 
-	return filteredStrongsData;
+  return filteredStrongsData;
 }
