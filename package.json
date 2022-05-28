@@ -77,45 +77,55 @@
       ]
     }
   },
-  "eslintConfig":
-    {
-      "env": {
-        "browser": true,
-        "es2021": true
-      },
-      "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "airbnb",
-        "airbnb-typescript",
-        "prettier"
-      ],
-      "parser": "@typescript-eslint/parser",
-      "parserOptions": {
-        "project": "./tsconfig.json",
-        "ecmaVersion": 12,
-        "ecmaFeatures": { "jsx": true }
-      },
-      "rules": {
-        "no-unused-vars": "off",
-        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-        "no-multiple-empty-lines": 0,
-        "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "[state|dispatch]"}],
-        "@typescript-eslint/ban-ts-comment": { "ts-ignore": "allow-with-description" },
-        "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
-        "react/react-in-jsx-scope": "off",
-        "import/prefer-default-export": 0,
-        "import/extensions": [
-          "error",
-          "ignorePackages",
-          {
-            "": "never",
-            "ts": "never",
-            "tsx": "never"
-          }
-        ]
-      }
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
     },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "airbnb",
+      "airbnb-typescript",
+      "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json",
+      "ecmaVersion": 12,
+      "ecmaFeatures": { "jsx": true }
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+      "no-multiple-empty-lines": 0,
+      "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "[state|dispatch]"}],
+      "@typescript-eslint/ban-ts-comment": { "ts-ignore": "allow-with-description" },
+      "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+      "react/react-in-jsx-scope": "off",
+      "import/prefer-default-export": 0,
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+      ]
+    }
+  },
+  "prettier": {
+    "printWidth": 90,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "endOfLine": "lf"
+  },
   "devDependencies": {
     "@electron-forge/cli": "6.0.0-beta.57",
     "@electron-forge/maker-deb": "6.0.0-beta.57",
