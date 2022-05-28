@@ -48,22 +48,22 @@ const uploadRequestHandler: FC = (): ReactElement => {
 
     fileReader.onload = (fileReaderEvent) => {
       // @ts-ignore // property "result" of "fileReaderEvent.currentTarget" exists
-      const fileObject = Object.assign(JSON.parse(fileReaderEvent.currentTarget.result));
-      let bibleBookNames = Object.keys(fileObject);
-      let updatedFileObject = fileObject;
+      const bibleObject = Object.assign(JSON.parse(fileReaderEvent.currentTarget.result));
+      let bibleBookNames = Object.keys(bibleObject);
+      let updatedBibleObject = bibleObject;
 
       // Check which book exists.
       let bibleBookName = '' as string;
-      if (fileObject['Genesis'] !== undefined) {
+      if (bibleObject['Genesis'] !== undefined) {
         bibleBookName = 'Genesis';
-      } else if (fileObject['Matthew'] !== undefined) {
+      } else if (bibleObject['Matthew'] !== undefined) {
         bibleBookName = 'Matthew';
       }
 
       // If the file is a default Open Scripture's Hebrew Bible format, add the
       // container for target language.
-      if (fileObject[bibleBookName][0][0][0].length === 3) {
-        updatedFileObject = populateWithEmptyTargetLanguage(fileObject);
+      if (bibleObject[bibleBookName][0][0][0].length === 3) {
+        updatedBibleObject = populateWithEmptyTargetLanguage(bibleObject);
       }
 
       // If there is more than one Bible book, arrange the order;
@@ -73,7 +73,7 @@ const uploadRequestHandler: FC = (): ReactElement => {
 
       dispatch(setBibleFileName(fileName));
       dispatch(setBibleBookNames(bibleBookNames));
-      dispatch(setBibleObject(updatedFileObject));
+      dispatch(setBibleObject(updatedBibleObject));
       dispatch(
         setBibleInfo({
           bibleBookName: bibleBookName,
