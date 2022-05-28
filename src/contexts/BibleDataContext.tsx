@@ -18,7 +18,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import { createContext, Dispatch, useReducer, FC, ReactNode } from 'react';
+import { createContext, Dispatch, useReducer, useMemo, FC, ReactNode } from 'react';
 import { BibleDataType } from 'types/BibleData';
 import { BibleDataActionsType } from 'types/BibleDataActions';
 import { BibleDataReducer } from './BibleDataReducer';
@@ -43,7 +43,9 @@ export const BibleDataContext = createContext<{
 export const BibleDataProvider: FC<ReactNode> = ({ children }) => {
   const [state, dispatch] = useReducer(BibleDataReducer, initialBibleDataState);
   return (
-    <BibleDataContext.Provider value={{ state, dispatch }}>
+    <BibleDataContext.Provider
+      value={ useMemo(() => ({ state, dispatch }), [state, dispatch]) }
+    >
       {children}
     </BibleDataContext.Provider>
   );
