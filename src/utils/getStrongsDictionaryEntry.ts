@@ -18,29 +18,36 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
+import * as gL from 'assets/data/lexicon-greek.json';
+import * as hL from 'assets/data/lexicon-hebrew.json';
+import { LexiconDataType } from 'types/LexiconData';
 import { filterDisplayedStrongsData } from './filterDisplayedStrongsData';
-const strongsHebrewDictionary = require('$/strongs-dictionary.json');
-const strongsGreekDictionary = require('$/strongs-greek-dictionary.json');
 
 // Get lexicon data by a strongs number.
-export function getStrongsDictionaryEntry(stringOfStrongsNumber: string) {
+export const getStrongsDictionaryEntry = (stringOfStrongsNumber: string): Array<string> => {
+  const greekLexicon: LexiconDataType = <LexiconDataType> gL;
+  const hebrewLexicon: LexiconDataType = <LexiconDataType> hL;
+  const lexiconDataHTMLMarkup = [] as Array<string>;
+
   if (stringOfStrongsNumber[0] === 'H') {
-    return strongsHebrewDictionary[
+    lexiconDataHTMLMarkup.push(hebrewLexicon[
       `H${filterDisplayedStrongsData(stringOfStrongsNumber)}`
-    ];
+    ]);
   }
 
   if (stringOfStrongsNumber[0] === 'G') {
+    // Some words have two strongs number on them, split and output them in the first and second index
     if (/&/.test(stringOfStrongsNumber)) {
-      let temp = stringOfStrongsNumber.split('&');
-      return [
-        strongsGreekDictionary[`G${filterDisplayedStrongsData(temp[0])}`],
-        strongsGreekDictionary[`G${filterDisplayedStrongsData(temp[1])}`],
-      ];
+      const temp = stringOfStrongsNumber.split('&');
+      lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongsData(temp[0])}`]);
+      lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongsData(temp[1])}`]);
+      
+    } else {
+      lexiconDataHTMLMarkup.push(greekLexicon[
+        `G${filterDisplayedStrongsData(stringOfStrongsNumber)}`
+      ]);
     }
-    // Outputs the individual strongs object correctly
-    return strongsGreekDictionary[
-      `G${filterDisplayedStrongsData(stringOfStrongsNumber)}`
-    ];
   }
+
+  return lexiconDataHTMLMarkup;
 }
