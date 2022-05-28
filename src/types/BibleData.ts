@@ -26,8 +26,8 @@ export type BibleDataInfoType = {
 };
 
 export type BibleDataObjectType = {
-  [key: string]: Array<Array<Array<Array<string>>>>
-}
+  [key: string]: Array<Array<Array<Array<string>>>>;
+};
 
 export type BibleDataType = {
   bibleObject: BibleDataObjectType;

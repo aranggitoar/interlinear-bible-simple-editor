@@ -32,7 +32,9 @@ import {
 } from 'types/BibleDataActions';
 import { BibleDataType } from 'types/BibleData';
 
-export const setBibleObject = (bibleObject: BibleDataType['bibleObject']): SetBibleObject => ({
+export const setBibleObject = (
+  bibleObject: BibleDataType['bibleObject']
+): SetBibleObject => ({
   type: ActionType.SetBibleObject,
   payload: bibleObject,
 });
@@ -59,9 +61,7 @@ export const setBibleBookNames = (
   payload: bibleBookNames,
 });
 
-export const setBibleInfo = (
-  bibleInfo: BibleDataType['bibleInfo']
-): SetBibleInfo => ({
+export const setBibleInfo = (bibleInfo: BibleDataType['bibleInfo']): SetBibleInfo => ({
   type: ActionType.SetBibleInfo,
   payload: bibleInfo,
 });

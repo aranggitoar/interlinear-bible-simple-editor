@@ -34,11 +34,9 @@ export const BibleDataReducer = (
         [state.bibleInfo.bibleBookName]: [
           ...state.bibleObject[state.bibleInfo.bibleBookName][
             state.bibleInfo.bibleChapterIndex as unknown as number
-          ][state.bibleInfo.bibleVerseIndex as unknown as number][action.payload.wordIndex as unknown as number].splice(
-            0,
-            1,
-            action.payload.newTranslatedWord
-          ),
+          ][state.bibleInfo.bibleVerseIndex as unknown as number][
+            action.payload.wordIndex as unknown as number
+          ].splice(0, 1, action.payload.newTranslatedWord),
         ],
       } as BibleDataObjectType;
       return {
