@@ -1,6 +1,6 @@
-import * as rules from './webpack.rules';
-import * as resolve from './webpack.resolve';
-import * as path from 'path'
+const rules = require('./webpack.rules');
+const resolve = require('./webpack.resolve');
+const path = require('path')
 
 module.exports = {
   entry: path.resolve(__dirname, '..', 'src/desktop.tsx'),

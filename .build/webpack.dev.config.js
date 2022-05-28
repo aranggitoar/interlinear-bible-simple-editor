@@ -1,6 +1,6 @@
-import * as rules from './webpack.rules';
-import * as resolve from './webpack.resolve';
-import * as rules from './webpack.plugins';
+const rules = require('./webpack.rules');
+const resolve = require('./webpack.resolve');
+const plugins = require('./webpack.plugins');
 
 module.exports = {
   module: {

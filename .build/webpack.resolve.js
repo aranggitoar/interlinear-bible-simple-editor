@@ -1,4 +1,4 @@
-import * as TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   plugins: [new TsconfigPathsPlugin()],
