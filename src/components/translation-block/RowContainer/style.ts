@@ -57,7 +57,7 @@ export const TranslationInputField = styled.textarea`
   height: 2em;
   padding: 0.1em 0.4em;
   resize: none;
-  width: 10em;
+  width: 100%;
 
   &:hover {
     border: 1px dashed rgb(142, 140, 138) !important;
