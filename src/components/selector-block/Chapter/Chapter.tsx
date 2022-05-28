@@ -19,7 +19,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { useContext, FC } from 'react';
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
+import { setBibleChapterIndexFromBibleInfo } from '@/utilities/reducerHelperFunctions';
+import { LoadedBibleContext } from '@/state/LoadedBibleContext';
 import { Select, Option } from '../styles';
 
 const defaultBibleChapterSelectorText = 'Choose chapter';
@@ -38,7 +39,7 @@ function createChapterSelector(amountOfChapters: number) {
 }
 
 export const ChapterSelectorBlock: FC = () => {
-	const [state, dispatch] = useContext(LoadedBibleContext);
+	const { state, dispatch } = useContext(LoadedBibleContext);
 
 	let amountOfChapters = 0 as number;
 
@@ -54,10 +55,7 @@ export const ChapterSelectorBlock: FC = () => {
 					: 'undefined'
 			}
 			onChange={(event) => {
-				dispatch({
-					type: 'setBibleChapterIndexFromBibleInfo',
-					bibleChapterIndex: event.target.value,
-				});
+				dispatch(setBibleChapterIndexFromBibleInfo(event.target.value));
 			}}
 		>
 			{createChapterSelector(amountOfChapters)}

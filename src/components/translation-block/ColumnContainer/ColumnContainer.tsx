@@ -24,7 +24,7 @@ import {
 	arrayOfCorrectlyOrderedNTBibleBookName,
 	arrayOfCorrectlyOrderedOTBibleBookName,
 } from '@/utilities/correctlyOrderedBibleBookName';
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
+import { LoadedBibleContext } from '@/state/LoadedBibleContext';
 import { Container, ColumnContainer } from './styles';
 
 // Generate the column containers.
@@ -58,7 +58,7 @@ function verseDirection(currentBook: string) {
 
 // Display translation block's column container.
 export const TranslationBlockColumnContainer: FC = (): ReactElement => {
-	const [state, dispatch] = useContext(LoadedBibleContext);
+	const { state } = useContext(LoadedBibleContext);
 
 	let wordCount: number;
 	if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {

@@ -19,7 +19,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { useContext, FC } from 'react';
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
+import { setBibleBookNameFromBibleInfo } from '@/utilities/reducerHelperFunctions';
+import { LoadedBibleContext } from '@/state/LoadedBibleContext';
 import { Select, Option } from '../styles';
 
 const defaultBibleBookSelectorText = 'Choose bible book';
@@ -38,7 +39,7 @@ function createBibleBookSelector(bibleBookNameList: Array<string>) {
 }
 
 export const BibleBookSelectorBlock: FC = () => {
-	const [state, dispatch] = useContext(LoadedBibleContext);
+	const { state, dispatch } = useContext(LoadedBibleContext);
 
 	return (
 		<Select
@@ -46,10 +47,7 @@ export const BibleBookSelectorBlock: FC = () => {
 				state.bibleInfo.bibleBookName !== '' ? state.bibleInfo.bibleBookName : 'undefined'
 			}
 			onChange={(event) => {
-				dispatch({
-					type: 'setBibleBookNameFromBibleInfo',
-					bibleBookName: event.target.value,
-				});
+				dispatch(setBibleBookNameFromBibleInfo(event.target.value));
 			}}
 		>
 			{createBibleBookSelector(state.bibleBookNames)}

@@ -19,7 +19,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { useContext, FC } from 'react';
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
+import { setBibleVerseIndexFromBibleInfo } from '@/utilities/reducerHelperFunctions';
+import { LoadedBibleContext } from '@/state/LoadedBibleContext';
 import { Select, Option } from '../styles';
 
 const defaultBibleVerseSelectorText = 'Choose verse';
@@ -38,7 +39,7 @@ function createVerseSelector(amountOfVerses: number) {
 }
 
 export const VerseSelectorBlock: FC = () => {
-	const [state, dispatch] = useContext(LoadedBibleContext);
+	const { state, dispatch } = useContext(LoadedBibleContext);
 
 	let amountOfVerses = 0 as number;
 
@@ -63,10 +64,7 @@ export const VerseSelectorBlock: FC = () => {
 					: 'undefined'
 			}
 			onChange={(event) => {
-				dispatch({
-					type: 'setBibleVerseIndexFromBibleInfo',
-					bibleVerseIndex: event.target.value,
-				});
+				dispatch(setBibleVerseIndexFromBibleInfo(event.target.value));
 			}}
 		>
 			{createVerseSelector(amountOfVerses)}

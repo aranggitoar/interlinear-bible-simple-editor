@@ -19,16 +19,20 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { useContext, FC } from 'react';
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
+import {
+	setBibleChapterIndexFromBibleInfo,
+	setBibleVerseIndexFromBibleInfo,
+} from '@/utilities/reducerHelperFunctions';
+import { LoadedBibleContext } from '@/state/LoadedBibleContext';
 import { ButtonContainer, MoveByOneButton } from './styles';
 
 export const MoveBackwardByOne: FC = () => {
-	const [state, dispatch] = useContext(LoadedBibleContext);
+	const { state, dispatch } = useContext(LoadedBibleContext);
 	let verseIndex: number;
 	let chapterIndex: number;
 	if (state.bibleInfo !== undefined) {
-		verseIndex = state.bibleInfo.bibleVerseIndex;
-		chapterIndex = state.bibleInfo.bibleChapterIndex;
+		verseIndex = state.bibleInfo.bibleVerseIndex as unknown as number;
+		chapterIndex = state.bibleInfo.bibleChapterIndex as unknown as number;
 		if (chapterIndex >= 0 && verseIndex >= 0) {
 			verseIndex--;
 		}
@@ -56,16 +60,12 @@ export const MoveBackwardByOne: FC = () => {
 								verseIndex = maxVerseIndex;
 							}
 						}
-						dispatch({
-							type: 'setBibleChapterIndexFromBibleInfo',
-							bibleChapterIndex: chapterIndex as unknown as string,
-						});
+						dispatch(
+							setBibleChapterIndexFromBibleInfo(chapterIndex as unknown as string)
+						);
 					}
 					if (verseIndex >= 0 && chapterIndex >= 0) {
-						dispatch({
-							type: 'setBibleVerseIndexFromBibleInfo',
-							bibleVerseIndex: verseIndex as unknown as string,
-						});
+						dispatch(setBibleVerseIndexFromBibleInfo(verseIndex as unknown as string));
 					}
 				}}
 			>
@@ -76,10 +76,10 @@ export const MoveBackwardByOne: FC = () => {
 };
 
 export const MoveForwardByOne: FC = () => {
-	const [state, dispatch] = useContext(LoadedBibleContext);
+	const { state, dispatch } = useContext(LoadedBibleContext);
 	let verseIndex: number;
 	if (state.bibleInfo !== undefined) {
-		verseIndex = state.bibleInfo.bibleVerseIndex;
+		verseIndex = state.bibleInfo.bibleVerseIndex as unknown as number;
 		if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
 			if (
 				state.bibleObject[state.bibleInfo.bibleBookName][
@@ -100,10 +100,7 @@ export const MoveForwardByOne: FC = () => {
 			<MoveByOneButton
 				id="forward"
 				onClick={() => {
-					dispatch({
-						type: 'setBibleVerseIndexFromBibleInfo',
-						bibleVerseIndex: verseIndex as unknown as string,
-					});
+					dispatch(setBibleVerseIndexFromBibleInfo(verseIndex as unknown as string));
 				}}
 			>
 				&#8250;

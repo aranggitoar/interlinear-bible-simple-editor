@@ -22,9 +22,9 @@ import { ReactElement, StrictMode } from 'react';
 import { TranslationBlock } from '@/components/translation-block';
 import { MenuBlock } from '@/components/menu-block';
 import { SelectorBlock } from '@/components/selector-block';
-import LoadedBibleProvider from '@/contexts/LoadedBibleContext';
+import { LoadedBibleProvider } from '@/state/LoadedBibleContext';
 import GlobalStyle from '@/styles/global';
-import { Separator } from './styles';
+import { Separator } from '@/styles/separators';
 
 export function App(): ReactElement<Record<string, unknown>> {
 	return (

@@ -19,7 +19,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { ReactElement } from 'react';
-
 import { BibleBookSelectorBlock } from './BibleBook/BibleBook';
 import { ChapterSelectorBlock } from './Chapter/Chapter';
 import { VerseSelectorBlock } from './Verse/Verse';

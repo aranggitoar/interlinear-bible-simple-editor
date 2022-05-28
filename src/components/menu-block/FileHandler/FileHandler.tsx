@@ -19,33 +19,36 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { useContext, ReactElement, FC, MouseEventHandler, FormEvent } from 'react';
-
 import { populateWithEmptyTargetLanguage } from '@/utilities/populateWithEmptyTargetLanguage';
 import { arrangeBibleBookName } from '@/utilities/arrangeBibleBookName';
-
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
+import {
+	setBibleObject,
+	setBibleFileName,
+	setBibleBookNames,
+	setBibleInfo,
+} from '@/utilities/reducerHelperFunctions';
+import { LoadedBibleInfoType } from '@/types/LoadedBibleType';
+import { LoadedBibleContext } from '@/state/LoadedBibleContext';
 import { FileHandlerButton, InvisibleInput, Container } from './style';
 
 const saveFileText = 'Save';
 const loadFileText = 'Load';
 
 const uploadRequestHandler: FC = (): ReactElement => {
-	const [state, dispatch] = useContext(LoadedBibleContext);
+	const { dispatch } = useContext(LoadedBibleContext);
 
-	var fileName = '';
-
-	const handleChange = (e: FormEvent<HTMLInputElement>): void => {
-		e.preventDefault();
+	const handleChange = (event: FormEvent<HTMLInputElement>): void => {
+		event.preventDefault();
 
 		const fileReader = new FileReader();
-		// @ts-ignore // the element exists
-		fileReader.readAsText(e.target.files[0], 'UTF-8');
-		// @ts-ignore // the element exists
-		fileName = e.target.files[0].name;
+		// @ts-ignore // property "files" of "event.target" exists
+		fileReader.readAsText(event.target.files[0], 'UTF-8');
+		// @ts-ignore // property "files" of "event.target" exists
+		const fileName = event.target.files[0].name;
 
-		fileReader.onload = (e2) => {
-			// @ts-ignore // the property exists
-			const fileObject = Object.assign(JSON.parse(e2.currentTarget.result));
+		fileReader.onload = (fileReaderEvent) => {
+			// @ts-ignore // property "result" of "fileReaderEvent.currentTarget" exists
+			const fileObject = Object.assign(JSON.parse(fileReaderEvent.currentTarget.result));
 			let bibleBookNames = Object.keys(fileObject);
 			let updatedFileObject = fileObject;
 
@@ -68,18 +71,17 @@ const uploadRequestHandler: FC = (): ReactElement => {
 				bibleBookNames = arrangeBibleBookName(bibleBookNames);
 			}
 
-			dispatch({ type: 'setBibleFileName', bibleFileName: fileName });
-			dispatch({ type: 'setBibleBookNames', bibleBookNames: bibleBookNames });
-			dispatch({ type: 'setBibleObject', bibleObject: updatedFileObject });
-			dispatch({
-				type: 'setBibleInfo',
-				bibleInfo: {
+			dispatch(setBibleFileName(fileName));
+			dispatch(setBibleBookNames(bibleBookNames));
+			dispatch(setBibleObject(updatedFileObject));
+			dispatch(
+				setBibleInfo({
 					bibleBookName: bibleBookName,
 					bibleChapterIndex: '0',
 					bibleVerseIndex: '0',
 					bibleWordIndex: '0',
-				} as LoadedBibleInfoType,
-			});
+				} as LoadedBibleInfoType)
+			);
 		};
 	};
 
@@ -92,7 +94,7 @@ const uploadRequestHandler: FC = (): ReactElement => {
 };
 
 const downloadRequestHandler: FC = (): ReactElement => {
-	const [state, dispatch] = useContext(LoadedBibleContext);
+	const { state } = useContext(LoadedBibleContext);
 
 	const downloadBibleAsJSON: MouseEventHandler<HTMLLabelElement> = (): void => {
 		var hiddenElement = document.createElement('a');

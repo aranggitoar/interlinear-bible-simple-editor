@@ -22,14 +22,14 @@ import { useContext, FC } from 'react';
 import { filterDisplayedStrongsData } from '@/utilities/filterDisplayedStrongsData';
 import { filterDisplayedOriginalLanguage } from '@/utilities/filterDisplayedOriginalLanguage';
 import { filterDisplayedMorphologicalData } from '@/utilities/filterDisplayedMorphologicalData';
-import { LoadedBibleContext } from '@/contexts/LoadedBibleContext';
+import { setTranslatedWordFromBibleObject } from '@/utilities/reducerHelperFunctions';
+import { LoadedBibleContext } from '@/state/LoadedBibleContext';
 import { Container, RowContainer, TranslationInputField } from './style';
 
 // Generate the row containers.
 // Return an array of JSX Elements.
 const rowContainerGenerator = (wordIndex: string): Array<JSX.Element> => {
-	const [state, dispatch] = useContext(LoadedBibleContext),
-
+	const { state, dispatch } = useContext(LoadedBibleContext),
 		// Get every component of the current word.
 		targetWord =
 			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
@@ -47,10 +47,8 @@ const rowContainerGenerator = (wordIndex: string): Array<JSX.Element> => {
 			state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
 				state.bibleInfo.bibleVerseIndex
 			][wordIndex][3],
-
 		// Prepare translation index identification.
 		targetLanguageID = ('target-language-' + wordIndex) as unknown as string,
-
 		// Prepare the variables to be consumed.
 		containerVariables = [
 			['1' + wordIndex, 'strongs', filterDisplayedStrongsData(strongs)],
@@ -66,12 +64,7 @@ const rowContainerGenerator = (wordIndex: string): Array<JSX.Element> => {
 					id={targetLanguageID}
 					value={targetWord}
 					onChange={(event) => {
-						// @ts-ignore // property exists
-						dispatch({
-							type: 'setTranslatedWordFromBibleObject',
-							wordIndex: wordIndex,
-							newTranslatedWord: event.target.value,
-						});
+						dispatch(setTranslatedWordFromBibleObject(wordIndex, event.target.value));
 					}}
 				/>,
 			],
@@ -92,6 +85,8 @@ const rowContainerGenerator = (wordIndex: string): Array<JSX.Element> => {
 };
 
 // Display translation block's row container.
-export const TranslationBlockRowContainer: FC<WordIndexProps> = ({ wordIndex }) => {
+export const TranslationBlockRowContainer: FC<{ wordIndex: string }> = ({
+	wordIndex,
+}) => {
 	return <Container>{rowContainerGenerator(wordIndex)}</Container>;
 };

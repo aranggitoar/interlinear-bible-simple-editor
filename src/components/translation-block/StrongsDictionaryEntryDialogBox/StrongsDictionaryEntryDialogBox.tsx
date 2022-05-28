@@ -18,7 +18,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-
 // import { useId, useBoolean } from '@fluentui/react-hooks';
 // import {
 //   TextField,
@@ -29,12 +28,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 //   Toggle,
 // } from '@fluentui/react';
 
-
 // https://developer.microsoft.com/en-us/fluentui#/controls/web/modal
 // function strongsDictionaryEntryDialogBox(strongsDictionaryEntry: Object) {
 //   const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] = useBoolean(false);
 //   const [isDraggable, { toggle: toggleIsDraggable }] = useBoolean(false);
 //   const [keepInBounds, { toggle: toggleKeepInBounds }] = useBoolean(false);
-  
-// }
 
+// }
