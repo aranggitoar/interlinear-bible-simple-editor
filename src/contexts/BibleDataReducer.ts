@@ -47,18 +47,23 @@ export const BibleDataReducer = (
           copyOfBibleObject,
         },
       };
-    // The code that doesn't work, replace line 39 to 51 for these code block
+      // The code that doesn't work, replace line 32 to 49 for these code block
+      // For one thing it is clear that without line 56 and the ({}) it is
+      // missing an object spread operation, hence it will return only the
+      // spliced string
     // return { ...state, bibleObject: {
-    //   ...state.bibleObject,
-    //   [state.bibleInfo.bibleBookName]: [
-    //     ...state.bibleObject
+    //   ...state.bibleObject, ({
+    //     ...state.bibleObject,
+    //     [state.bibleInfo.bibleBookName]: [
+    //       ...state.bibleObject
     //       [state.bibleInfo.bibleBookName]
-    //       [state.bibleInfo.bibleChapterIndex]
-    //       [state.bibleInfo.bibleVerseIndex]
-    //       [action.payload.wordIndex]
+    //       [state.bibleInfo.bibleChapterIndex as unknown as number]
+    //       [state.bibleInfo.bibleVerseIndex as unknown as number]
+    //       [action.payload.wordIndex as unknown as number]
     //       .splice(0, 1, action.payload.newTranslatedWord)
-    //   ]
-    // }};
+    //     ]
+    //   })
+    // } as BibleDataObjectType};
     case ActionType.SetBibleFileName:
       return { ...state, bibleFileName: action.payload };
     case ActionType.SetBibleBookNames:
