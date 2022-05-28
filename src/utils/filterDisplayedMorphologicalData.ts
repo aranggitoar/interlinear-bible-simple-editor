@@ -55,28 +55,30 @@ function morphHBParser(morphologicalData: string) {
   let parsedMorphologicalData = morphologicalData;
   switch (parsedMorphologicalData) {
     case 'A':
-      parsedMorphologicalData = simpleMorphologicalDataReference['A'];
+      parsedMorphologicalData = simpleMorphologicalDataReference.A;
       break;
     case 'C':
-      parsedMorphologicalData = simpleMorphologicalDataReference['C'];
+      parsedMorphologicalData = simpleMorphologicalDataReference.C;
       break;
     case 'D':
-      parsedMorphologicalData = simpleMorphologicalDataReference['D'];
+      parsedMorphologicalData = simpleMorphologicalDataReference.D;
       break;
     case 'N':
-      parsedMorphologicalData = simpleMorphologicalDataReference['N'];
+      parsedMorphologicalData = simpleMorphologicalDataReference.N;
       break;
     case 'P':
-      parsedMorphologicalData = simpleMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleMorphologicalDataReference.P;
       break;
     case 'R':
-      parsedMorphologicalData = simpleMorphologicalDataReference['R'];
+      parsedMorphologicalData = simpleMorphologicalDataReference.R;
       break;
     case 'T':
-      parsedMorphologicalData = simpleMorphologicalDataReference['T'];
+      parsedMorphologicalData = simpleMorphologicalDataReference.T;
       break;
     case 'V':
-      parsedMorphologicalData = simpleMorphologicalDataReference['V'];
+      parsedMorphologicalData = simpleMorphologicalDataReference.V;
+      break;
+    default:
       break;
   }
   return parsedMorphologicalData;
@@ -86,70 +88,72 @@ function byzMTParser(morphologicalData: string) {
   let parsedMorphologicalData = morphologicalData;
   switch (parsedMorphologicalData) {
     case 'ADV':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['ADV'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.ADV;
       break;
     case 'ARAM':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['ARAM'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.ARAM;
       break;
     case 'CONJ':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['CONJ'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.CONJ;
       break;
     case 'COND':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['COND'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.COND;
       break;
     case 'HEB':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['HEB'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.HEB;
       break;
     case 'INJ':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['INJ'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.INJ;
       break;
     case 'PREP':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['PREP'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.PREP;
       break;
     case 'PRT':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['PRT'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.PRT;
       break;
     case 'C': // Reciprocal pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     case 'D': // Demonstrative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     case 'F': // Reflexive pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     case 'I': // Interrogative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     case 'K': // Correlative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     case 'N':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['N'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.N;
       break;
     case 'P':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     case 'Q': // Correlative or interrogative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     case 'R': // Relative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     case 'A':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['A'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.A;
       break;
     case 'S': // Possesive adjective
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['A'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.A;
       break;
     case 'T':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['T'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.T;
       break;
     case 'V':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['V'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.V;
       break;
     case 'X': // Indefinite pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference['P'];
+      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
+      break;
+    default:
       break;
   }
   return parsedMorphologicalData;
@@ -175,12 +179,13 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
   }
 
   // Get the main morphological data codes into an array.
-  let mainMorphologicalDataPoints = morphologicalData.match(/[A-Z]/g);
+  const mainMorphologicalDataPoints = morphologicalData.match(/[A-Z]/g);
 
   if (mainMorphologicalDataPoints !== null) {
     mainMorphologicalDataPoints.shift();
 
     if (mainMorphologicalDataPoints.length === 1) {
+      parsedMorphologicalData = morphHBParser(mainMorphologicalDataPoints[0]);
     }
 
     if (mainMorphologicalDataPoints.length === 2) {
