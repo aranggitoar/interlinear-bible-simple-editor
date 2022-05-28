@@ -18,25 +18,16 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-type LoadedBibleInfoType = {
+export type LoadedBibleInfoType = {
 	bibleBookName: string;
 	bibleChapterIndex: string;
 	bibleVerseIndex: string;
 	bibleWordIndex: string;
 };
 
-type LoadedBibleType = {
+export type LoadedBibleType = {
 	bibleObject: Object;
 	bibleFileName: string;
 	bibleBookNames: Array<string>;
 	bibleInfo: LoadedBibleInfoType;
-};
-
-type LoadedBibleOtherType = {
-	type: string;
-	newTranslatedWord: string;
-};
-
-type WordIndexProps = {
-	wordIndex: string;
 };
