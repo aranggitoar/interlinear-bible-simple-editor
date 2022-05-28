@@ -28,12 +28,13 @@ export const MoveByOneButton = styled.button`
   background: none;
   border: none;
   color: #777;
+  cursor: pointer;
   font-size: 50px;
   transition: transform 500ms, color 150ms;
 
   &:hover {
     background: none;
-    color: #555;
+    color: #444;
   }
 
   &:after {

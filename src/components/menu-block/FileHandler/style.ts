@@ -31,7 +31,7 @@ export const FileHandlerButton = styled.label`
   justify-content: center;
   text-transform: uppercase;
   transition: all 500ms;
-  pointer: cursor;
+  cursor: pointer;
   width: 4em;
 `;
 

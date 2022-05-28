@@ -27,7 +27,6 @@ export const Container = styled.div`
   height: 75%;
   justify-content: center;
   padding: 0.75em 1em;
-  margin-top: 1em;
 `;
 
 export const Select = styled.select`
@@ -35,6 +34,14 @@ export const Select = styled.select`
   font-size: 16px;
   margin: 0.5em 1.5em;
   padding: 0.15em 0.3em;
+`;
+
+export const Separator = styled.hr`
+  border: .75px solid #bbb;
+  box-shadow: 20px 20px 200px 3px;
+  margin: 1em 0;
+  width: 30%;
+  transition: all 400ms;
 `;
 
 export const Option = styled.option``;

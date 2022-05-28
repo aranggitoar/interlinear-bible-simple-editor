@@ -24,7 +24,6 @@ import { MenuBlock } from 'components/menu-block';
 import { SelectorBlock } from 'components/selector-block';
 import { BibleDataProvider } from 'contexts/BibleDataContext';
 import GlobalStyle from 'styles/global';
-import { Separator } from 'styles/separators';
 
 export function App(): ReactElement<Record<string, unknown>> {
   return (
@@ -33,7 +32,6 @@ export function App(): ReactElement<Record<string, unknown>> {
       <BibleDataProvider>
         <MenuBlock />
         <SelectorBlock />
-        <Separator />
         <TranslationBlock />
       </BibleDataProvider>
     </StrictMode>
