@@ -4,6 +4,7 @@ const plugins = require('./webpack.plugins');
 const path = require('path')
 
 module.exports = {
+  mode: 'production',
   entry: {
     import: path.resolve(__dirname, '..', 'src/web.tsx'),
     dependOn: ['react', 'styled-components'],
