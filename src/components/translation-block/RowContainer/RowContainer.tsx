@@ -19,56 +19,50 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { useContext, FC } from 'react';
-import { filterDisplayedStrongsData } from '@/utilities/filterDisplayedStrongsData';
-import { filterDisplayedOriginalLanguage } from '@/utilities/filterDisplayedOriginalLanguage';
-import { filterDisplayedMorphologicalData } from '@/utilities/filterDisplayedMorphologicalData';
-import { setTranslatedWordFromBibleObject } from '@/utilities/reducerHelperFunctions';
-import { LoadedBibleContext } from '@/state/LoadedBibleContext';
+import { filterDisplayedStrongsData } from 'utils/filterDisplayedStrongsData';
+import { filterDisplayedOriginalLanguage } from 'utils/filterDisplayedOriginalLanguage';
+import { filterDisplayedMorphologicalData } from 'utils/filterDisplayedMorphologicalData';
+import { setTranslatedWordFromBibleObject } from 'utils/bibleDataReducerHelperFunctions';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { Container, RowContainer, TranslationInputField } from './style';
 
 // Generate the row containers.
 // Return an array of JSX Elements.
 const rowContainerGenerator = (wordIndex: string): Array<JSX.Element> => {
-  const { state, dispatch } = useContext(LoadedBibleContext),
+  const { state, dispatch } = useContext(BibleDataContext),
     // Get every component of the current word.
-    targetWord =
-      state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
-        state.bibleInfo.bibleVerseIndex
-      ][wordIndex][0],
-    originalWord =
-      state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
-        state.bibleInfo.bibleVerseIndex
-      ][wordIndex][1],
-    strongs =
-      state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
-        state.bibleInfo.bibleVerseIndex
-      ][wordIndex][2],
-    morphology =
-      state.bibleObject[state.bibleInfo.bibleBookName][state.bibleInfo.bibleChapterIndex][
-        state.bibleInfo.bibleVerseIndex
-      ][wordIndex][3],
+    wordComponents =
+      state.bibleObject[state.bibleInfo.bibleBookName][
+        state.bibleInfo.bibleChapterIndex as unknown as number
+      ][state.bibleInfo.bibleVerseIndex as unknown as number][
+        wordIndex as unknown as number
+      ],
     // Prepare translation index identification.
     targetLanguageID = ('target-language-' + wordIndex) as unknown as string,
     // Prepare the variables to be consumed.
     containerVariables = [
-      ['1' + wordIndex, 'strongs', filterDisplayedStrongsData(strongs)],
+      ['1' + wordIndex, 'strongs', filterDisplayedStrongsData(wordComponents[2])],
       [
         '2' + wordIndex,
         'original-language',
-        filterDisplayedOriginalLanguage(originalWord),
+        filterDisplayedOriginalLanguage(wordComponents[1]),
       ],
       [
         '3' + wordIndex,
         'target-language',
         <TranslationInputField
           id={targetLanguageID}
-          value={targetWord}
+          value={wordComponents[0]}
           onChange={(event) => {
             dispatch(setTranslatedWordFromBibleObject(wordIndex, event.target.value));
           }}
         />,
       ],
-      ['4' + wordIndex, 'morphology', filterDisplayedMorphologicalData(morphology)],
+      [
+        '4' + wordIndex,
+        'morphology',
+        filterDisplayedMorphologicalData(wordComponents[3]),
+      ],
     ];
 
   // Iterate the variables to be consumed into a container.

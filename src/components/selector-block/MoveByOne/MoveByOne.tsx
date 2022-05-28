@@ -22,12 +22,12 @@ import { useContext, FC } from 'react';
 import {
   setBibleChapterIndexFromBibleInfo,
   setBibleVerseIndexFromBibleInfo,
-} from '@/utilities/reducerHelperFunctions';
-import { LoadedBibleContext } from '@/state/LoadedBibleContext';
+} from 'utils/bibleDataReducerHelperFunctions';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { ButtonContainer, MoveByOneButton } from './styles';
 
 export const MoveBackwardByOne: FC = () => {
-  const { state, dispatch } = useContext(LoadedBibleContext);
+  const { state, dispatch } = useContext(BibleDataContext);
   let verseIndex: number;
   let chapterIndex: number;
   if (state.bibleInfo !== undefined) {
@@ -50,12 +50,12 @@ export const MoveBackwardByOne: FC = () => {
             if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
               if (
                 state.bibleObject[state.bibleInfo.bibleBookName][
-                  state.bibleInfo.bibleChapterIndex
+                  state.bibleInfo.bibleChapterIndex as unknown as number
                 ] !== undefined
               ) {
                 let maxVerseIndex =
                   state.bibleObject[state.bibleInfo.bibleBookName][
-                    state.bibleInfo.bibleChapterIndex
+                    state.bibleInfo.bibleChapterIndex as unknown as number
                   ].length + 1;
                 verseIndex = maxVerseIndex;
               }
@@ -76,19 +76,19 @@ export const MoveBackwardByOne: FC = () => {
 };
 
 export const MoveForwardByOne: FC = () => {
-  const { state, dispatch } = useContext(LoadedBibleContext);
+  const { state, dispatch } = useContext(BibleDataContext);
   let verseIndex: number;
   if (state.bibleInfo !== undefined) {
     verseIndex = state.bibleInfo.bibleVerseIndex as unknown as number;
     if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
       if (
         state.bibleObject[state.bibleInfo.bibleBookName][
-          state.bibleInfo.bibleChapterIndex
+          state.bibleInfo.bibleChapterIndex as unknown as number
         ] !== undefined
       ) {
         let maxVerseIndex =
           state.bibleObject[state.bibleInfo.bibleBookName][
-            state.bibleInfo.bibleChapterIndex
+            state.bibleInfo.bibleChapterIndex as unknown as number
           ].length - 1;
         if (verseIndex < maxVerseIndex) verseIndex++;
       }

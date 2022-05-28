@@ -3,23 +3,29 @@
     "target": "es5",
     "allowJs": true,
     "module": "commonjs",
+    "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "noImplicitAny": false,
+    "removeComments": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src/",
     "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "paths": {
-      "*": ["node_modules/*"],
-      "@/*": ["src/*"],
-      "$/*": ["data/*"]
-    },
     "jsx": "react-jsx"
   },
   "include": [
     "src/**/*"
   ],
-  "exclude": ["node_modules", "out"]
+  "exclude": [
+    "node_modules",
+    "out",
+    "build",
+    ".webpack",
+    ".git",
+    "data"
+  ]
 }

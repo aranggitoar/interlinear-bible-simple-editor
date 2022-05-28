@@ -19,23 +19,23 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { useContext, ReactElement, FC, MouseEventHandler, FormEvent } from 'react';
-import { populateWithEmptyTargetLanguage } from '@/utilities/populateWithEmptyTargetLanguage';
-import { arrangeBibleBookName } from '@/utilities/arrangeBibleBookName';
+import { populateWithEmptyTargetLanguage } from 'utils/populateWithEmptyTargetLanguage';
+import { arrangeBibleBookName } from 'utils/arrangeBibleBookName';
 import {
   setBibleObject,
   setBibleFileName,
   setBibleBookNames,
   setBibleInfo,
-} from '@/utilities/reducerHelperFunctions';
-import { LoadedBibleInfoType } from '@/types/LoadedBibleType';
-import { LoadedBibleContext } from '@/state/LoadedBibleContext';
+} from 'utils/bibleDataReducerHelperFunctions';
+import { BibleDataInfoType } from 'types/BibleData';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { FileHandlerButton, InvisibleInput, Container } from './style';
 
 const saveFileText = 'Save';
 const loadFileText = 'Load';
 
 const uploadRequestHandler: FC = (): ReactElement => {
-  const { dispatch } = useContext(LoadedBibleContext);
+  const { dispatch } = useContext(BibleDataContext);
 
   const handleChange = (event: FormEvent<HTMLInputElement>): void => {
     event.preventDefault();
@@ -53,7 +53,7 @@ const uploadRequestHandler: FC = (): ReactElement => {
       let updatedFileObject = fileObject;
 
       // Check which book exists.
-      let bibleBookName: string;
+      let bibleBookName = '' as string;
       if (fileObject['Genesis'] !== undefined) {
         bibleBookName = 'Genesis';
       } else if (fileObject['Matthew'] !== undefined) {
@@ -80,7 +80,7 @@ const uploadRequestHandler: FC = (): ReactElement => {
           bibleChapterIndex: '0',
           bibleVerseIndex: '0',
           bibleWordIndex: '0',
-        } as LoadedBibleInfoType)
+        } as BibleDataInfoType)
       );
     };
   };
@@ -94,7 +94,7 @@ const uploadRequestHandler: FC = (): ReactElement => {
 };
 
 const downloadRequestHandler: FC = (): ReactElement => {
-  const { state } = useContext(LoadedBibleContext);
+  const { state } = useContext(BibleDataContext);
 
   const downloadBibleAsJSON: MouseEventHandler<HTMLLabelElement> = (): void => {
     var hiddenElement = document.createElement('a');

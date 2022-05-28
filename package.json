@@ -7,15 +7,16 @@
   "build": {
     "appID": "com.byb.ibse",
     "productName": "ibse",
-    "icon": "./build/assets/icons/dove.ico"
+    "icon": "./.build/assets/icons/dove.ico"
   },
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "webpack": "webpack --config ./build/webpack.web.config.js",
-    "lint": "eslint --ext src/**/*.ts{,x}"
+    "webpack": "webpack --config ./.build/webpack.web.config.js",
+    "lint": "eslint --ext src/**/*.ts{,x}",
+    "format": "prettier -w src/**/*.ts{,x}"
   },
   "keywords": [],
   "author": {
@@ -29,7 +30,7 @@
         "packagerConfig": {
           "name": "ibse",
           "executableName": "ibse",
-          "icon": "./build/assets/icons/dove.ico"
+          "icon": "./.build/assets/icons/dove.ico"
         }
       },
       "packagerConfig": {},
@@ -60,10 +61,10 @@
           "@electron-forge/plugin-webpack",
           {
             "devContentSecurityPolicy": "default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-eval' 'unsafe-inline' data:",
-            "mainConfig": "./build/webpack.main.config.js",
+            "mainConfig": "./.build/webpack.main.config.js",
             "renderer": {
               "nodeIntegration": true,
-              "config": "./build/webpack.dev.config.js",
+              "config": "./.build/webpack.dev.config.js",
               "entryPoints": [
                 {
                   "html": "./src/index.html",
@@ -93,15 +94,34 @@
     "parserOptions": {
       "project": "./tsconfig.json",
       "ecmaVersion": 12,
-      "ecmaFeatures": { "jsx": true }
+      "ecmaFeatures": {
+        "jsx": true
+      }
     },
     "rules": {
       "no-unused-vars": "off",
-      "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+      "no-plusplus": [
+        "error",
+        {
+          "allowForLoopAfterthoughts": true
+        }
+      ],
       "no-multiple-empty-lines": 0,
-      "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "[state|dispatch]"}],
-      "@typescript-eslint/ban-ts-comment": { "ts-ignore": "allow-with-description" },
-      "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "varsIgnorePattern": "[state|dispatch]"
+        }
+      ],
+      "@typescript-eslint/ban-ts-comment": {
+        "ts-ignore": "allow-with-description"
+      },
+      "react/function-component-definition": [
+        2,
+        {
+          "namedComponents": "arrow-function"
+        }
+      ],
       "react/react-in-jsx-scope": "off",
       "import/prefer-default-export": 0,
       "import/extensions": [

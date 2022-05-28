@@ -19,12 +19,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { useContext, FC, ReactElement } from 'react';
-import { TranslationBlockRowContainer } from '@/components/translation-block/RowContainer/RowContainer';
+import { TranslationBlockRowContainer } from 'components/translation-block/RowContainer/RowContainer';
 import {
   arrayOfCorrectlyOrderedNTBibleBookName,
   arrayOfCorrectlyOrderedOTBibleBookName,
-} from '@/utilities/correctlyOrderedBibleBookName';
-import { LoadedBibleContext } from '@/state/LoadedBibleContext';
+} from 'utils/correctlyOrderedBibleBookName';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { Container, ColumnContainer } from './styles';
 
 // Generate the column containers.
@@ -58,18 +58,18 @@ function verseDirection(currentBook: string) {
 
 // Display translation block's column container.
 export const TranslationBlockColumnContainer: FC = (): ReactElement => {
-  const { state } = useContext(LoadedBibleContext);
+  const { state } = useContext(BibleDataContext);
 
-  let wordCount: number;
+  let wordCount = 0 as number;
   if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
     if (
       state.bibleObject[state.bibleInfo.bibleBookName][
-        state.bibleInfo.bibleChapterIndex
+        state.bibleInfo.bibleChapterIndex as unknown as number
       ] !== undefined
     ) {
       wordCount = state.bibleObject[state.bibleInfo.bibleBookName][
-        state.bibleInfo.bibleChapterIndex
-      ][state.bibleInfo.bibleVerseIndex].length as number;
+        state.bibleInfo.bibleChapterIndex as unknown as number
+      ][state.bibleInfo.bibleVerseIndex as unknown as number].length as number;
     }
   }
 

@@ -19,23 +19,23 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { ReactElement, StrictMode } from 'react';
-import { TranslationBlock } from '@/components/translation-block';
-import { MenuBlock } from '@/components/menu-block';
-import { SelectorBlock } from '@/components/selector-block';
-import { LoadedBibleProvider } from '@/state/LoadedBibleContext';
-import GlobalStyle from '@/styles/global';
-import { Separator } from '@/styles/separators';
+import { TranslationBlock } from 'components/translation-block';
+import { MenuBlock } from 'components/menu-block';
+import { SelectorBlock } from 'components/selector-block';
+import { BibleDataProvider } from 'contexts/BibleDataContext';
+import GlobalStyle from 'styles/global';
+import { Separator } from 'styles/separators';
 
 export function App(): ReactElement<Record<string, unknown>> {
   return (
     <StrictMode>
       <GlobalStyle />
-      <LoadedBibleProvider>
+      <BibleDataProvider>
         <MenuBlock />
         <SelectorBlock />
         <Separator />
         <TranslationBlock />
-      </LoadedBibleProvider>
+      </BibleDataProvider>
     </StrictMode>
   );
 }
