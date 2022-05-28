@@ -24,15 +24,17 @@ import { LexiconDataType } from 'types/LexiconData';
 import { filterDisplayedStrongsData } from './filterDisplayedStrongsData';
 
 // Get lexicon data by a strongs number.
-export const getStrongsDictionaryEntry = (stringOfStrongsNumber: string): Array<string> => {
-  const greekLexicon: LexiconDataType = <LexiconDataType> gL;
-  const hebrewLexicon: LexiconDataType = <LexiconDataType> hL;
+export const getStrongsDictionaryEntry = (
+  stringOfStrongsNumber: string
+): Array<string> => {
+  const greekLexicon: LexiconDataType = <LexiconDataType>gL;
+  const hebrewLexicon: LexiconDataType = <LexiconDataType>hL;
   const lexiconDataHTMLMarkup = [] as Array<string>;
 
   if (stringOfStrongsNumber[0] === 'H') {
-    lexiconDataHTMLMarkup.push(hebrewLexicon[
-      `H${filterDisplayedStrongsData(stringOfStrongsNumber)}`
-    ]);
+    lexiconDataHTMLMarkup.push(
+      hebrewLexicon[`H${filterDisplayedStrongsData(stringOfStrongsNumber)}`]
+    );
   }
 
   if (stringOfStrongsNumber[0] === 'G') {
@@ -41,13 +43,12 @@ export const getStrongsDictionaryEntry = (stringOfStrongsNumber: string): Array<
       const temp = stringOfStrongsNumber.split('&');
       lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongsData(temp[0])}`]);
       lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongsData(temp[1])}`]);
-      
     } else {
-      lexiconDataHTMLMarkup.push(greekLexicon[
-        `G${filterDisplayedStrongsData(stringOfStrongsNumber)}`
-      ]);
+      lexiconDataHTMLMarkup.push(
+        greekLexicon[`G${filterDisplayedStrongsData(stringOfStrongsNumber)}`]
+      );
     }
   }
 
   return lexiconDataHTMLMarkup;
-}
+};

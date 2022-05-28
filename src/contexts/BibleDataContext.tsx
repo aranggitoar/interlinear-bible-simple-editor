@@ -44,7 +44,7 @@ export const BibleDataProvider: FC<ReactNode> = ({ children }) => {
   const [state, dispatch] = useReducer(BibleDataReducer, initialBibleDataState);
   return (
     <BibleDataContext.Provider
-      value={ useMemo(() => ({ state, dispatch }), [state, dispatch]) }
+      value={useMemo(() => ({ state, dispatch }), [state, dispatch])}
     >
       {children}
     </BibleDataContext.Provider>

@@ -21,7 +21,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 import { BibleDataObjectType } from 'types/BibleData';
 
 // Populate source file with empty arrays.
-export const populateWithEmptyTargetLanguage = (bibleObject: BibleDataObjectType): BibleDataObjectType => {
+export const populateWithEmptyTargetLanguage = (
+  bibleObject: BibleDataObjectType
+): BibleDataObjectType => {
   const bibleBookCount = Object.keys(bibleObject).length;
   const copyOfBibleObject = { ...bibleObject } as BibleDataObjectType;
 
@@ -53,4 +55,4 @@ export const populateWithEmptyTargetLanguage = (bibleObject: BibleDataObjectType
   }
 
   return copyOfBibleObject;
-}
+};
