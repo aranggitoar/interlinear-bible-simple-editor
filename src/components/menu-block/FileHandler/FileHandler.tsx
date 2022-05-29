@@ -112,7 +112,7 @@ const downloadRequestHandler: FC = (): ReactElement => {
   );
 };
 
-export const FileHandlerMenuBlock: FC = () => {
+export const FileHandlerMenuBlock: FC = (): ReactElement => {
   const FileLoadHandlerButton = uploadRequestHandler;
   const FileSaveHandlerButton = downloadRequestHandler;
   return (
