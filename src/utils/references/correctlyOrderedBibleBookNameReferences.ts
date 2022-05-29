@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 // Array of correct Bible book name order.
-export const arrayOfCorrectlyOrderedBibleBookName = [
+export const correctlyOrderedBibleBookNameReference = [
   'Genesis',
   'Exodus',
   'Leviticus',
@@ -89,7 +89,7 @@ export const arrayOfCorrectlyOrderedBibleBookName = [
 ];
 
 // Array of correct OT Bible book name order.
-export const arrayOfCorrectlyOrderedOTBibleBookName = [
+export const correctlyOrderedOTBibleBookNameReference = [
   'Genesis',
   'Exodus',
   'Leviticus',
@@ -132,7 +132,7 @@ export const arrayOfCorrectlyOrderedOTBibleBookName = [
 ];
 
 // Array of correct NT Bible book name order.
-export const arrayOfCorrectlyOrderedNTBibleBookName = [
+export const correctlyOrderedNTBibleBookNameReference = [
   'Matthew',
   'Mark',
   'Luke',

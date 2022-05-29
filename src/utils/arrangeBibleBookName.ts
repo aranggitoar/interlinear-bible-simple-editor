@@ -18,21 +18,21 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import { arrayOfCorrectlyOrderedBibleBookName } from './correctlyOrderedBibleBookName';
+import { correctlyOrderedBibleBookNameReference } from './references/correctlyOrderedBibleBookNameReferences';
 
 // Arrange the array of Bible book names.
-export function arrangeBibleBookName(arrayOfBibleBookNames: Array<string>) {
-  const orderedArrayOfBibleBookNames = [] as Array<string>;
+export function arrangeBibleBookName(bibleBookNames: Array<string>) {
+  const orderedBibleBookNames = [] as Array<string>;
 
-  for (let i = 0; arrayOfCorrectlyOrderedBibleBookName.length > i; i++) {
+  for (let i = 0; correctlyOrderedBibleBookNameReference.length > i; i++) {
     if (
-      arrayOfBibleBookNames.find((name) =>
-        name.match(arrayOfCorrectlyOrderedBibleBookName[i])
+      bibleBookNames.find((name) =>
+        name.match(correctlyOrderedBibleBookNameReference[i])
       ) !== undefined
     ) {
-      orderedArrayOfBibleBookNames.push(arrayOfCorrectlyOrderedBibleBookName[i]);
+      orderedBibleBookNames.push(correctlyOrderedBibleBookNameReference[i]);
     }
   }
 
-  return orderedArrayOfBibleBookNames;
+  return orderedBibleBookNames;
 }

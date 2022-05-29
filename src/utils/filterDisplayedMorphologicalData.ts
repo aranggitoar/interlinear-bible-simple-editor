@@ -18,73 +18,44 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-// Object of main morphological data code as keys and parsed as values.
-const simpleMorphologicalDataReference = {
-  A: 'Adjective',
-  C: 'Conjunction',
-  D: 'Adverb',
-  N: 'Noun',
-  P: 'Pronoun',
-  R: 'Preposition',
-  T: 'Particle',
-  V: 'Verb',
-};
-
-// Unique morphological codes of the Byzantine Majority Text
-// References:
-// https://github.com/byztxt/robinson-documentation/blob/master/doc/DECLINE.COD
-// https://github.com/byztxt/robinson-documentation/blob/master/doc/PARSING.COD
-const simpleByzMTMorphologicalDataReference = {
-  A: 'Adjective',
-  N: 'Noun',
-  P: 'Pronoun',
-  T: 'Definite Article',
-  V: 'Verb',
-  ADV: 'Adverb',
-  ARAM: 'Aramaic Transliteration',
-  CONJ: 'Conjunction',
-  COND: 'Conditional Particle',
-  HEB: 'Hebrew Transliteration',
-  INJ: 'Interjection',
-  PREP: 'Preposition',
-  PRT: 'Particle',
-};
+import { simpleMorphHBMorphologicalDataReference, simpleByzMTMorphologicalDataReference} from 'utils/references/morphologicalCodesReferences';
 
 // Parse the inserted morphological data.
-function morphHBParser(morphologicalData: string) {
+export function morphHBParser(morphologicalData: string) {
   let parsedMorphologicalData = morphologicalData;
   switch (parsedMorphologicalData) {
     case 'A':
-      parsedMorphologicalData = simpleMorphologicalDataReference.A;
+      parsedMorphologicalData = simpleMorphHBMorphologicalDataReference.A;
       break;
     case 'C':
-      parsedMorphologicalData = simpleMorphologicalDataReference.C;
+      parsedMorphologicalData = simpleMorphHBMorphologicalDataReference.C;
       break;
     case 'D':
-      parsedMorphologicalData = simpleMorphologicalDataReference.D;
+      parsedMorphologicalData = simpleMorphHBMorphologicalDataReference.D;
       break;
     case 'N':
-      parsedMorphologicalData = simpleMorphologicalDataReference.N;
+      parsedMorphologicalData = simpleMorphHBMorphologicalDataReference.N;
       break;
     case 'P':
-      parsedMorphologicalData = simpleMorphologicalDataReference.P;
+      parsedMorphologicalData = simpleMorphHBMorphologicalDataReference.P;
       break;
     case 'R':
-      parsedMorphologicalData = simpleMorphologicalDataReference.R;
+      parsedMorphologicalData = simpleMorphHBMorphologicalDataReference.R;
       break;
     case 'T':
-      parsedMorphologicalData = simpleMorphologicalDataReference.T;
+      parsedMorphologicalData = simpleMorphHBMorphologicalDataReference.T;
       break;
     case 'V':
-      parsedMorphologicalData = simpleMorphologicalDataReference.V;
+      parsedMorphologicalData = simpleMorphHBMorphologicalDataReference.V;
       break;
     default:
+      parsedMorphologicalData = "Unknown"
       break;
   }
   return parsedMorphologicalData;
 }
 
-function byzMTParser(morphologicalData: string) {
+export function byzMTParser(morphologicalData: string) {
   let parsedMorphologicalData = morphologicalData;
   switch (parsedMorphologicalData) {
     case 'ADV':
@@ -154,6 +125,7 @@ function byzMTParser(morphologicalData: string) {
       parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     default:
+      parsedMorphologicalData = "Unknown"
       break;
   }
   return parsedMorphologicalData;
@@ -182,6 +154,7 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
   const mainMorphologicalDataPoints = morphologicalData.match(/[A-Z]/g);
 
   if (mainMorphologicalDataPoints !== null) {
+    // Remove the first character, which is just an 'H' to identify it as Hebrew morphological data
     mainMorphologicalDataPoints.shift();
 
     if (mainMorphologicalDataPoints.length === 1) {
@@ -189,7 +162,8 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
     }
 
     if (mainMorphologicalDataPoints.length === 2) {
-      if (mainMorphologicalDataPoints[1] === 'S') {
+      // Parse the first character if it is V, because the second one would be the stem category
+      if (mainMorphologicalDataPoints[1] === 'S' || mainMorphologicalDataPoints[0] === 'V') {
         parsedMorphologicalData = morphHBParser(mainMorphologicalDataPoints[0]);
       } else {
         parsedMorphologicalData = morphHBParser(mainMorphologicalDataPoints[1]);
@@ -202,6 +176,10 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
       } else {
         parsedMorphologicalData = morphHBParser(mainMorphologicalDataPoints[1]);
       }
+    }
+
+    if (mainMorphologicalDataPoints.length === 4) {
+      parsedMorphologicalData = morphHBParser(mainMorphologicalDataPoints[2]);
     }
   }
 
