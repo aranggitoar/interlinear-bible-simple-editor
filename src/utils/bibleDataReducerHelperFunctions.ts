@@ -40,7 +40,7 @@ export const setBibleObject = (
 });
 
 export const setTranslatedWordFromBibleObject = (
-  wordIndex: string,
+  wordIndex: number,
   newTranslatedWord: string
 ): SetTranslatedWordFromBibleObject => ({
   type: ActionType.SetTranslatedWordFromBibleObject,
@@ -74,7 +74,7 @@ export const setBibleBookNameFromBibleInfo = (
 });
 
 export const setBibleChapterIndexFromBibleInfo = (
-  displayedBibleChapterIndex: BibleDataType['bibleInfo']['bibleBookName']
+  displayedBibleChapterIndex: BibleDataType['bibleInfo']['bibleChapterIndex']
 ): SetBibleChapterIndexFromBibleInfo => ({
   type: ActionType.SetBibleChapterIndexFromBibleInfo,
   payload: displayedBibleChapterIndex,
