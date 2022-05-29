@@ -21,7 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 import { simpleMorphHBMorphologicalDataReference } from 'utils/references/morphologicalCodesReferences';
 
 // Parse the OSHB's (Westminster Leningrad Codex) morphological data.
-export const morphHBMorphologyParser = (morphologicalData: string):string => {
+export const morphHBMorphologyParser = (morphologicalData: string): string => {
   let parsedMorphologicalData = morphologicalData;
   switch (parsedMorphologicalData) {
     case 'A':
@@ -53,4 +53,4 @@ export const morphHBMorphologyParser = (morphologicalData: string):string => {
       break;
   }
   return parsedMorphologicalData;
-}
+};

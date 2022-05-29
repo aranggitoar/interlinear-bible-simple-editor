@@ -94,4 +94,4 @@ export const byzMTMorphologyParser = (morphologicalData: string): string => {
       break;
   }
   return parsedMorphologicalData;
-}
+};

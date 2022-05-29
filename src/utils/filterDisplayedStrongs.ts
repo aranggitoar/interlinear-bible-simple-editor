@@ -43,4 +43,3 @@ export const filterDisplayedStrongs = (data: string): string => {
 
   return filteredStrongs;
 };
-
