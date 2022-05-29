@@ -18,7 +18,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import { simpleMorphHBMorphologicalDataReference, simpleByzMTMorphologicalDataReference} from 'utils/references/morphologicalCodesReferences';
+import {
+  simpleMorphHBMorphologicalDataReference,
+  simpleByzMTMorphologicalDataReference,
+} from 'utils/references/morphologicalCodesReferences';
 
 // Parse the inserted morphological data.
 export function morphHBParser(morphologicalData: string) {
@@ -49,7 +52,7 @@ export function morphHBParser(morphologicalData: string) {
       parsedMorphologicalData = simpleMorphHBMorphologicalDataReference.V;
       break;
     default:
-      parsedMorphologicalData = "Unknown"
+      parsedMorphologicalData = 'Unknown';
       break;
   }
   return parsedMorphologicalData;
@@ -125,7 +128,7 @@ export function byzMTParser(morphologicalData: string) {
       parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
       break;
     default:
-      parsedMorphologicalData = "Unknown"
+      parsedMorphologicalData = 'Unknown';
       break;
   }
   return parsedMorphologicalData;
@@ -163,7 +166,10 @@ export function filterDisplayedMorphologicalData(morphologicalData: string) {
 
     if (mainMorphologicalDataPoints.length === 2) {
       // Parse the first character if it is V, because the second one would be the stem category
-      if (mainMorphologicalDataPoints[1] === 'S' || mainMorphologicalDataPoints[0] === 'V') {
+      if (
+        mainMorphologicalDataPoints[1] === 'S' ||
+        mainMorphologicalDataPoints[0] === 'V'
+      ) {
         parsedMorphologicalData = morphHBParser(mainMorphologicalDataPoints[0]);
       } else {
         parsedMorphologicalData = morphHBParser(mainMorphologicalDataPoints[1]);
