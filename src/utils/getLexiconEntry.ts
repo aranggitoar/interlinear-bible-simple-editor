@@ -21,7 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 import * as gL from 'assets/data/lexicon-greek.json';
 import * as hL from 'assets/data/lexicon-hebrew.json';
 import { LexiconDataType } from 'types/LexiconData';
-import { filterDisplayedStrongsData } from './filterDisplayedStrongsData';
+import { filterDisplayedStrongs } from 'utils/filterDisplayedStrongs';
 
 // Get lexicon data by a strongs number.
 export const getStrongsDictionaryEntry = (
@@ -33,7 +33,7 @@ export const getStrongsDictionaryEntry = (
 
   if (stringOfStrongsNumber[0] === 'H') {
     lexiconDataHTMLMarkup.push(
-      hebrewLexicon[`H${filterDisplayedStrongsData(stringOfStrongsNumber)}`]
+      hebrewLexicon[`H${filterDisplayedStrongs(stringOfStrongsNumber)}`]
     );
   }
 
@@ -41,11 +41,11 @@ export const getStrongsDictionaryEntry = (
     // Some words have two strongs number on them, split and output them in the first and second index
     if (/&/.test(stringOfStrongsNumber)) {
       const temp = stringOfStrongsNumber.split('&');
-      lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongsData(temp[0])}`]);
-      lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongsData(temp[1])}`]);
+      lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongs(temp[0])}`]);
+      lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongs(temp[1])}`]);
     } else {
       lexiconDataHTMLMarkup.push(
-        greekLexicon[`G${filterDisplayedStrongsData(stringOfStrongsNumber)}`]
+        greekLexicon[`G${filterDisplayedStrongs(stringOfStrongsNumber)}`]
       );
     }
   }
