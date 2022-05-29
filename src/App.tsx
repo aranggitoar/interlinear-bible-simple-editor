@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { ReactElement, StrictMode } from 'react';
-import { TranslationBlock } from 'components/translation-block';
+import { DisplayBlock } from 'components/display-block';
 import { MenuBlock } from 'components/menu-block';
 import { SelectorBlock } from 'components/selector-block';
 import { BibleDataProvider, BibleDataProviderTracked } from 'contexts/BibleDataContext';
@@ -31,7 +31,7 @@ export const App = ():ReactElement<Record<string, unknown>> => (
     <BibleDataProvider>
       <MenuBlock />
       <SelectorBlock />
-      <TranslationBlock />
+      <DisplayBlock />
     </BibleDataProvider>
   </StrictMode>
 );

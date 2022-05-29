@@ -18,11 +18,18 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-// Filter the displayed original language data.
-export function filterDisplayedOriginalLanguage(originalLanguageData: string) {
-  let filteredOriginalLanguageData = originalLanguageData;
-  if (/\//.test(originalLanguageData)) {
-    filteredOriginalLanguageData = originalLanguageData.replace(/\//g, '');
+import styled from 'styled-components';
+
+export const TranslationField = styled.textarea`
+  border: 1px dashed rgb(188, 186, 184) !important;
+  border-radius: 2.5px !important;
+  color: #dd4444 !important;
+  height: 2em;
+  padding: 0.1em 0.4em;
+  resize: none;
+  width: 100%;
+
+  &:hover {
+    border: 1px dashed rgb(142, 140, 138) !important;
   }
-  return filteredOriginalLanguageData;
-}
+`;

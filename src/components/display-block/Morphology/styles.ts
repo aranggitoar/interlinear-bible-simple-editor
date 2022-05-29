@@ -18,14 +18,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import { ReactElement } from 'react';
-import { TranslationBlockColumnContainer } from './ColumnContainer/ColumnContainer';
-import { Container } from './styles';
+import styled from 'styled-components';
 
-export function TranslationBlock(): ReactElement<Record<string, unknown>> {
-  return (
-    <Container>
-      <TranslationBlockColumnContainer />
-    </Container>
-  );
-}
+export const MorphologyContainer = styled.div`
+  align-items: center;
+  color: #555555;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.15em 0;
+  max-width: 135px;
+  text-align: center;
+`;

@@ -18,20 +18,14 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-// import { useId, useBoolean } from '@fluentui/react-hooks';
-// import {
-//   TextField,
-//   Modal,
-//   IDragOptions,
-//   Stack,
-//   IStackProps,
-//   Toggle,
-// } from '@fluentui/react';
+import styled from 'styled-components';
 
-// https://developer.microsoft.com/en-us/fluentui#/controls/web/modal
-// function strongsDictionaryEntryDialogBox(strongsDictionaryEntry: Object) {
-//   const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] = useBoolean(false);
-//   const [isDraggable, { toggle: toggleIsDraggable }] = useBoolean(false);
-//   const [keepInBounds, { toggle: toggleKeepInBounds }] = useBoolean(false);
-
-// }
+export const StrongsContainer = styled.div`
+  align-items: center;
+  color: #4444dd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.15em 0;
+  max-width: 135px;
+`;

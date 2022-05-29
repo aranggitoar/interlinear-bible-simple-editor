@@ -18,20 +18,21 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import styled from 'styled-components';
+import { FC, ReactElement, useContext } from 'react';
+import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
+import { filterDisplayedStrongs } from 'utils/filterDisplayedStrongs';
+import { StrongsContainer } from './styles';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 75%;
-  justify-content: center;
-  padding: 1rem;
+export const StrongsDisplayBlock: FC<{ wordIndex: number }> = ({
+  wordIndex,
+}): ReactElement<Record<string, unknown>> => {
+  const { state } = useContext(BibleDataContext);
+  // const state = useTracked();
+  const { bibleObject, bibleInfo } = state;
+  const { bibleBookName, bibleChapterIndex, bibleVerseIndex } = bibleInfo;
 
-  .rtl {
-    direction: rtl !important;
-  }
+  const strongs =
+    bibleObject[bibleBookName][bibleChapterIndex][bibleVerseIndex][wordIndex][2];
 
-  .ltr {
-    direction: ltr !important;
-  }
-`;
+  return <StrongsContainer>{filterDisplayedStrongs(strongs)}</StrongsContainer>;
+};
