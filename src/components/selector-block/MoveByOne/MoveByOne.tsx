@@ -94,7 +94,6 @@ export const MoveForwardByOne: FC = () => {
       <MoveByOneButton
         id="forward"
         onClick={() => {
-          console.log(verseIndex);
           dispatch(setBibleVerseIndexFromBibleInfo(verseIndex));
         }}
       >
