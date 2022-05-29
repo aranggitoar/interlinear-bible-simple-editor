@@ -54,7 +54,7 @@ const rowContainerGenerator = (wordIndex: number): Array<JSX.Element> => {
       'target-language',
       <TranslationInputField
         id={targetLanguageID}
-        value={wordComponents[0]}
+        value={wordComponents[0] !== null ? wordComponents[0] : ''}
         onChange={(event) => {
           dispatch(setTranslatedWordFromBibleObject(wordIndex, event.target.value));
           // dispatch(setBibleWordIndexFromBibleInfo(wordIndex));
