@@ -19,27 +19,28 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 // Filter the displayed strongs data.
-export const filterDisplayedStrongsData = (strongsData: string): string => {
-  let filteredStrongsData = strongsData as string;
+export const filterDisplayedStrongs = (data: string): string => {
+  let filteredStrongs = data as string;
 
-  if (filteredStrongsData[0] === 'G') {
-    if (filteredStrongsData.indexOf('&') > -1) {
-      filteredStrongsData = filteredStrongsData.replace('&', ' & ');
+  if (filteredStrongs[0] === 'G') {
+    if (filteredStrongs.indexOf('&') > -1) {
+      filteredStrongs = filteredStrongs.replace('&', ' & ');
     }
-    filteredStrongsData = filteredStrongsData.replace(/[G]/g, '');
-  } else if (filteredStrongsData[0] === 'H') {
+    filteredStrongs = filteredStrongs.replace(/[G]/g, '');
+  } else if (filteredStrongs[0] === 'H') {
     // The Strongs number for OSHB is always with a forward slash, but the Strongs number is always last
-    if (/\//.test(strongsData)) {
-      const temp = strongsData.split('/');
+    if (/\//.test(data)) {
+      const temp = data.split('/');
       const [, posTwo, posThree] = temp;
       if (temp.length === 3) {
-        filteredStrongsData = posThree;
+        filteredStrongs = posThree;
       } else {
-        filteredStrongsData = posTwo;
+        filteredStrongs = posTwo;
       }
     }
-    filteredStrongsData = filteredStrongsData.replace('H', '');
+    filteredStrongs = filteredStrongs.replace('H', '');
   }
 
-  return filteredStrongsData;
+  return filteredStrongs;
 };
+
