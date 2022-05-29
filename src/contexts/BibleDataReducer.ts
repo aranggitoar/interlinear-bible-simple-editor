@@ -33,9 +33,9 @@ export const BibleDataReducer = (
         ...state.bibleObject,
         [state.bibleInfo.bibleBookName]: [
           ...state.bibleObject[state.bibleInfo.bibleBookName][
-            state.bibleInfo.bibleChapterIndex as unknown as number
-          ][state.bibleInfo.bibleVerseIndex as unknown as number][
-            action.payload.wordIndex as unknown as number
+            state.bibleInfo.bibleChapterIndex
+          ][state.bibleInfo.bibleVerseIndex][
+            action.payload.wordIndex
           ].splice(0, 1, action.payload.newTranslatedWord),
         ],
       } as BibleDataObjectType;
@@ -57,9 +57,9 @@ export const BibleDataReducer = (
       //     [state.bibleInfo.bibleBookName]: [
       //       ...state.bibleObject
       //       [state.bibleInfo.bibleBookName]
-      //       [state.bibleInfo.bibleChapterIndex as unknown as number]
-      //       [state.bibleInfo.bibleVerseIndex as unknown as number]
-      //       [action.payload.wordIndex as unknown as number]
+      //       [state.bibleInfo.bibleChapterIndex]
+      //       [state.bibleInfo.bibleVerseIndex]
+      //       [action.payload.wordIndex]
       //       .splice(0, 1, action.payload.newTranslatedWord)
       //     ]
       //   })
@@ -77,8 +77,8 @@ export const BibleDataReducer = (
         bibleInfo: {
           ...state.bibleInfo,
           bibleBookName: action.payload,
-          bibleChapterIndex: '0',
-          bibleVerseIndex: '0',
+          bibleChapterIndex: 0,
+          bibleVerseIndex: 0,
         },
       };
     case ActionType.SetBibleChapterIndexFromBibleInfo:
@@ -87,7 +87,7 @@ export const BibleDataReducer = (
         bibleInfo: {
           ...state.bibleInfo,
           bibleChapterIndex: action.payload,
-          bibleVerseIndex: '0',
+          bibleVerseIndex: 0,
         },
       };
     case ActionType.SetBibleVerseIndexFromBibleInfo:

@@ -39,7 +39,7 @@ export interface SetBibleObject {
 
 export interface SetTranslatedWordFromBibleObject {
   type: ActionType.SetTranslatedWordFromBibleObject;
-  payload: { wordIndex: string; newTranslatedWord: string };
+  payload: { wordIndex: number; newTranslatedWord: string };
 }
 
 export interface SetBibleFileName {

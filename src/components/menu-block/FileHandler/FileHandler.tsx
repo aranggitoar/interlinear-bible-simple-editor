@@ -28,7 +28,7 @@ import {
   setBibleInfo,
 } from 'utils/bibleDataReducerHelperFunctions';
 import { BibleDataInfoType } from 'types/BibleData';
-import { BibleDataContext } from 'contexts/BibleDataContext';
+import { BibleDataContext, useUpdate, useTrackedState } from 'contexts/BibleDataContext';
 import { FileHandlerButton, InvisibleInput, Container } from './style';
 
 const saveFileText = 'Save';
@@ -36,6 +36,7 @@ const loadFileText = 'Load';
 
 const uploadRequestHandler: FC = (): ReactElement => {
   const { dispatch } = useContext(BibleDataContext);
+  // const dispatch = useUpdate();
 
   const handleChange = (event: FormEvent<HTMLInputElement>): void => {
     event.preventDefault();
@@ -54,9 +55,9 @@ const uploadRequestHandler: FC = (): ReactElement => {
 
       // Check which book exists.
       let bibleBookName = '' as string;
-      if (bibleObject['Genesis'] !== undefined) {
+      if (bibleObject.Genesis !== undefined) {
         bibleBookName = 'Genesis';
-      } else if (bibleObject['Matthew'] !== undefined) {
+      } else if (bibleObject.Matthew !== undefined) {
         bibleBookName = 'Matthew';
       }
 
@@ -76,10 +77,10 @@ const uploadRequestHandler: FC = (): ReactElement => {
       dispatch(setBibleObject(updatedBibleObject));
       dispatch(
         setBibleInfo({
-          bibleBookName: bibleBookName,
-          bibleChapterIndex: '0',
-          bibleVerseIndex: '0',
-          bibleWordIndex: '0',
+          bibleBookName,
+          bibleChapterIndex: 0,
+          bibleVerseIndex: 0,
+          bibleWordIndex: 0,
         } as BibleDataInfoType)
       );
     };
@@ -95,11 +96,12 @@ const uploadRequestHandler: FC = (): ReactElement => {
 
 const downloadRequestHandler: FC = (): ReactElement => {
   const { state } = useContext(BibleDataContext);
+  // const state = useTrackedState();
 
   const downloadBibleAsJSON: MouseEventHandler<HTMLLabelElement> = (): void => {
-    var hiddenElement = document.createElement('a');
+    const hiddenElement = document.createElement('a');
     hiddenElement.href =
-      'data:attachment/text,' + encodeURI(JSON.stringify(state.bibleObject));
+      `data:attachment/text,${encodeURI(JSON.stringify(state.bibleObject))}`;
     hiddenElement.target = '_blank';
     hiddenElement.download = state.bibleFileName as string;
     hiddenElement.click();

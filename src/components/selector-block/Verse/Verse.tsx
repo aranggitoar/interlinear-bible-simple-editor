@@ -20,13 +20,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { useContext, FC } from 'react';
 import { setBibleVerseIndexFromBibleInfo } from 'utils/bibleDataReducerHelperFunctions';
-import { BibleDataContext } from 'contexts/BibleDataContext';
+import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
 import { Select, Option } from '../styles';
 
 const defaultBibleVerseSelectorText = 'Choose verse';
 
 function createVerseSelector(amountOfVerses: number) {
-  let jsxMarkup = [
+  const jsxMarkup = [
     <Option disabled value="undefined">
       {defaultBibleVerseSelectorText}
     </Option>,
@@ -40,6 +40,7 @@ function createVerseSelector(amountOfVerses: number) {
 
 export const VerseSelectorBlock: FC = () => {
   const { state, dispatch } = useContext(BibleDataContext);
+  // const [state, dispatch] = useTracked();
 
   let amountOfVerses = 0 as number;
 
@@ -59,12 +60,12 @@ export const VerseSelectorBlock: FC = () => {
   return (
     <Select
       value={
-        state.bibleInfo.bibleVerseIndex !== ''
+        state.bibleInfo.bibleBookName !== ''
           ? state.bibleInfo.bibleVerseIndex
           : 'undefined'
       }
       onChange={(event) => {
-        dispatch(setBibleVerseIndexFromBibleInfo(event.target.value));
+        dispatch(setBibleVerseIndexFromBibleInfo(event.target.value as unknown as number));
       }}
     >
       {createVerseSelector(amountOfVerses)}

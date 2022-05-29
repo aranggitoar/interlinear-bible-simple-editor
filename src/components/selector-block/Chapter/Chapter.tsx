@@ -20,13 +20,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { useContext, FC } from 'react';
 import { setBibleChapterIndexFromBibleInfo } from 'utils/bibleDataReducerHelperFunctions';
-import { BibleDataContext } from 'contexts/BibleDataContext';
+import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
 import { Select, Option } from '../styles';
 
 const defaultBibleChapterSelectorText = 'Choose chapter';
 
 function createChapterSelector(amountOfChapters: number) {
-  let jsxMarkup = [
+  const jsxMarkup = [
     <Option disabled value="undefined">
       {defaultBibleChapterSelectorText}
     </Option>,
@@ -40,6 +40,7 @@ function createChapterSelector(amountOfChapters: number) {
 
 export const ChapterSelectorBlock: FC = () => {
   const { state, dispatch } = useContext(BibleDataContext);
+  // const [state, dispatch] = useTracked();
 
   let amountOfChapters = 0 as number;
 
@@ -50,12 +51,12 @@ export const ChapterSelectorBlock: FC = () => {
   return (
     <Select
       value={
-        state.bibleInfo.bibleChapterIndex !== ''
+        state.bibleInfo.bibleBookName !== ''
           ? state.bibleInfo.bibleChapterIndex
           : 'undefined'
       }
       onChange={(event) => {
-        dispatch(setBibleChapterIndexFromBibleInfo(event.target.value));
+        dispatch(setBibleChapterIndexFromBibleInfo(event.target.value as unknown as number));
       }}
     >
       {createChapterSelector(amountOfChapters)}

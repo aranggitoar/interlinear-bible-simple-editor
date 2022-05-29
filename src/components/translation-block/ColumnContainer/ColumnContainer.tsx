@@ -21,19 +21,19 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 import { useContext, FC, ReactElement } from 'react';
 import { TranslationBlockRowContainer } from 'components/translation-block/RowContainer/RowContainer';
 import {
-  arrayOfCorrectlyOrderedNTBibleBookName,
-  arrayOfCorrectlyOrderedOTBibleBookName,
-} from 'utils/correctlyOrderedBibleBookName';
-import { BibleDataContext } from 'contexts/BibleDataContext';
+  correctlyOrderedNTBibleBookNameReference,
+  correctlyOrderedOTBibleBookNameReference,
+} from 'utils/references/correctlyOrderedBibleBookNameReferences';
+import { BibleDataContext, useTrackedState } from 'contexts/BibleDataContext';
 import { Container, ColumnContainer } from './styles';
 
 // Generate the column containers.
 // Return an array of JSX Elements.
 function columnContainerGenerator(wordCount: number): Array<JSX.Element> {
-  let jsxMarkup = [] as Array<JSX.Element>;
+  const jsxMarkup = [] as Array<JSX.Element>;
 
   for (let i = 0; i < wordCount; i++) {
-    let columnId = ('column-' + i) as string;
+    const columnId = `column-${i}` as string;
     // Key attribute is a necessary internal component for React to not output warnings.
     // It is implicitly defined but it's defined explicitly here to be safe.
     // References:
@@ -41,7 +41,7 @@ function columnContainerGenerator(wordCount: number): Array<JSX.Element> {
     // https://reactjs.org/docs/reconciliation.html#recursing-on-children
     jsxMarkup.push(
       <div key={i} id={columnId}>
-        <TranslationBlockRowContainer wordIndex={i as unknown as string} />
+        <TranslationBlockRowContainer wordIndex={i} />
       </div>
     );
   }
@@ -49,33 +49,52 @@ function columnContainerGenerator(wordCount: number): Array<JSX.Element> {
   return jsxMarkup as Array<JSX.Element>;
 }
 
-// Interpret the verse direction.
-// Return a string of the direction.
-function verseDirection(currentBook: string) {
-  if (arrayOfCorrectlyOrderedOTBibleBookName.indexOf(currentBook) > -1) return 'rtl';
-  else if (arrayOfCorrectlyOrderedNTBibleBookName.indexOf(currentBook) > -1) return 'ltr';
-}
-
 // Display translation block's column container.
 export const TranslationBlockColumnContainer: FC = (): ReactElement => {
   const { state } = useContext(BibleDataContext);
+  // const state = useTrackedState();
 
   let wordCount = 0 as number;
   if (state.bibleObject[state.bibleInfo.bibleBookName] !== undefined) {
     if (
       state.bibleObject[state.bibleInfo.bibleBookName][
-        state.bibleInfo.bibleChapterIndex as unknown as number
+        state.bibleInfo.bibleChapterIndex
       ] !== undefined
     ) {
-      wordCount = state.bibleObject[state.bibleInfo.bibleBookName][
-        state.bibleInfo.bibleChapterIndex as unknown as number
-      ][state.bibleInfo.bibleVerseIndex as unknown as number].length as number;
+      if (
+        state.bibleObject[state.bibleInfo.bibleBookName][
+          state.bibleInfo.bibleChapterIndex
+        ][state.bibleInfo.bibleVerseIndex] !== undefined
+      ) {
+        wordCount = state.bibleObject[state.bibleInfo.bibleBookName][
+          state.bibleInfo.bibleChapterIndex
+        ][state.bibleInfo.bibleVerseIndex].length as number;
+      }
     }
   }
 
   return (
     <Container>
-      <ColumnContainer className={verseDirection(state.bibleInfo.bibleBookName)}>
+      <ColumnContainer
+        className={(() => {
+          // Interpret the verse direction.
+          // Return a string of the direction.
+          let direction = '';
+          if (
+            correctlyOrderedOTBibleBookNameReference.indexOf(
+              state.bibleInfo.bibleBookName
+            ) > -1
+          )
+            direction = 'rtl';
+          if (
+            correctlyOrderedNTBibleBookNameReference.indexOf(
+              state.bibleInfo.bibleBookName
+            ) > -1
+          )
+            direction = 'ltr';
+          return direction;
+        })()}
+      >
         {columnContainerGenerator(wordCount)}
       </ColumnContainer>
     </Container>

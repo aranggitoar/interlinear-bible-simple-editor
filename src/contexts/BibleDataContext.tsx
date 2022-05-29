@@ -19,6 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { createContext, Dispatch, useReducer, useMemo, FC, ReactNode } from 'react';
+import { createContainer } from 'react-tracked';
 import { BibleDataType } from 'types/BibleData';
 import { BibleDataActionsType } from 'types/BibleDataActions';
 import { BibleDataReducer } from './BibleDataReducer';
@@ -29,9 +30,9 @@ const initialBibleDataState = {
   bibleBookNames: [],
   bibleInfo: {
     bibleBookName: '',
-    bibleChapterIndex: '',
-    bibleVerseIndex: '',
-    bibleWordIndex: '',
+    bibleChapterIndex: 0,
+    bibleVerseIndex: 0,
+    bibleWordIndex: 0,
   },
 } as BibleDataType;
 
@@ -39,6 +40,14 @@ export const BibleDataContext = createContext<{
   state: BibleDataType;
   dispatch: Dispatch<BibleDataActionsType>;
 }>({ state: initialBibleDataState, dispatch: () => undefined });
+
+export const { Provider, useTracked, useUpdate, useTrackedState } = createContainer(() =>
+  useReducer(BibleDataReducer, initialBibleDataState)
+);
+
+export const BibleDataProviderTracked: FC<ReactNode> = ({ children }) => (
+  <Provider>{children}</Provider>
+);
 
 export const BibleDataProvider: FC<ReactNode> = ({ children }) => {
   const [state, dispatch] = useReducer(BibleDataReducer, initialBibleDataState);

@@ -20,9 +20,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 export type BibleDataInfoType = {
   bibleBookName: string;
-  bibleChapterIndex: string;
-  bibleVerseIndex: string;
-  bibleWordIndex: string;
+  bibleChapterIndex: number;
+  bibleVerseIndex: number;
+  bibleWordIndex: number;
 };
 
 export type BibleDataObjectType = {
