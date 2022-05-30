@@ -20,33 +20,33 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import * as gL from 'assets/data/lexicon-greek.json';
 import * as hL from 'assets/data/lexicon-hebrew.json';
-import { LexiconDataType } from 'types/LexiconData';
+import { StrongsEntryType } from 'types/StrongsEntryType';
 import { filterDisplayedStrongs } from 'utils/filterDisplayedStrongs';
 
 // Get lexicon data by a strongs number.
-export const getStrongsDictionaryEntry = (
-  stringOfStrongsNumber: string
-): Array<string> => {
-  const greekLexicon: LexiconDataType = <LexiconDataType>gL;
-  const hebrewLexicon: LexiconDataType = <LexiconDataType>hL;
+export const getStrongsEntry = (stringOfStrongsNumber: string): Array<string> => {
+  const greekLexicon: StrongsEntryType = <StrongsEntryType>gL;
+  const hebrewLexicon: StrongsEntryType = <StrongsEntryType>hL;
   const lexiconDataHTMLMarkup = [] as Array<string>;
 
   if (stringOfStrongsNumber[0] === 'H') {
-    lexiconDataHTMLMarkup.push(
-      hebrewLexicon[`H${filterDisplayedStrongs(stringOfStrongsNumber)}`]
-    );
+    const key = `H${filterDisplayedStrongs(stringOfStrongsNumber)}`;
+    lexiconDataHTMLMarkup.push(hebrewLexicon[key]);
   }
 
   if (stringOfStrongsNumber[0] === 'G') {
     // Some words have two strongs number on them, split and output them in the first and second index
     if (/&/.test(stringOfStrongsNumber)) {
       const temp = stringOfStrongsNumber.split('&');
-      lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongs(temp[0])}`]);
-      lexiconDataHTMLMarkup.push(greekLexicon[`G${filterDisplayedStrongs(temp[1])}`]);
+      const key = [
+        `G${filterDisplayedStrongs(temp[0])}`,
+        `G${filterDisplayedStrongs(temp[1])}`,
+      ];
+      lexiconDataHTMLMarkup.push(greekLexicon[key[0]]);
+      lexiconDataHTMLMarkup.push(greekLexicon[key[1]]);
     } else {
-      lexiconDataHTMLMarkup.push(
-        greekLexicon[`G${filterDisplayedStrongs(stringOfStrongsNumber)}`]
-      );
+      const key = `G${filterDisplayedStrongs(stringOfStrongsNumber)}`;
+      lexiconDataHTMLMarkup.push(greekLexicon[key]);
     }
   }
 

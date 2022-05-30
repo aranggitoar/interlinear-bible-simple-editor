@@ -18,6 +18,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-export type LexiconDataType = {
+export type StrongsEntryType = {
   [key: string]: string;
 };
