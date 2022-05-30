@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { useContext, FC } from 'react';
 import { setBibleChapterIndexFromBibleInfo } from 'utils/bibleDataReducerHelperFunctions';
-import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { Select, Option } from '../styles';
 
 const defaultBibleChapterSelectorText = 'Choose chapter';
@@ -40,7 +40,6 @@ function createChapterSelector(amountOfChapters: number) {
 
 export const ChapterSelectorBlock: FC = () => {
   const { state, dispatch } = useContext(BibleDataContext);
-  // const [state, dispatch] = useTracked();
 
   let amountOfChapters = 0 as number;
 

@@ -23,16 +23,16 @@ import { StrongsDisplayBlock } from 'components/display-block/Strongs/Strongs';
 import { OriginalDisplayBlock } from 'components/display-block/Original/Original';
 import { TranslationDisplayBlock } from 'components/display-block/Translation/Translation';
 import { MorphologyDisplayBlock } from 'components/display-block/Morphology/Morphology';
+import { StrongsEntryDialogBox } from 'components/display-block/StrongsEntryDialog/StrongsEntryDialog';
 import {
   correctlyOrderedNTBibleBookNameReference,
   correctlyOrderedOTBibleBookNameReference,
 } from 'utils/references/correctlyOrderedBibleBookNameReferences';
-import { BibleDataContext, useTrackedState } from 'contexts/BibleDataContext';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { ColumnContainer, RowContainer } from './styles';
 
 export const DisplayBlock: FC = (): ReactElement<Record<string, unknown>> => {
   const { state } = useContext(BibleDataContext);
-  // const state = useTrackedState();
   const { bibleObject, bibleInfo } = state;
   const { bibleBookName, bibleChapterIndex, bibleVerseIndex } = bibleInfo;
 
@@ -62,12 +62,17 @@ export const DisplayBlock: FC = (): ReactElement<Record<string, unknown>> => {
     rowContainers.push(
       <RowContainer key={`${wordIndex}4`}>
         <StrongsDisplayBlock key={`${wordIndex}0`} wordIndex={wordIndex} />
-        <OriginalDisplayBlock  key={`${wordIndex}1`} wordIndex={wordIndex} />
+        <OriginalDisplayBlock key={`${wordIndex}1`} wordIndex={wordIndex} />
         <TranslationDisplayBlock key={`${wordIndex}2`} wordIndex={wordIndex} />
         <MorphologyDisplayBlock key={`${wordIndex}3`} wordIndex={wordIndex} />
       </RowContainer>
     );
   }
 
-  return <ColumnContainer id={direction}>{rowContainers}</ColumnContainer>;
+  return (
+    <ColumnContainer id={direction}>
+      <StrongsEntryDialogBox />
+      {rowContainers}
+    </ColumnContainer>
+  );
 };

@@ -23,12 +23,11 @@ import {
   setBibleChapterIndexFromBibleInfo,
   setBibleVerseIndexFromBibleInfo,
 } from 'utils/bibleDataReducerHelperFunctions';
-import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { ButtonContainer, MoveByOneButton } from './styles';
 
 export const MoveBackwardByOne: FC = () => {
   const { state, dispatch } = useContext(BibleDataContext);
-  // const [state, dispatch] = useTracked();
 
   let verseIndex: number;
   let chapterIndex: number;
@@ -73,7 +72,6 @@ export const MoveBackwardByOne: FC = () => {
 
 export const MoveForwardByOne: FC = () => {
   const { state, dispatch } = useContext(BibleDataContext);
-  // const [state, dispatch] = useTracked();
 
   let verseIndex: number;
   // Object definition check.

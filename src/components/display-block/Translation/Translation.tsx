@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { FC, ReactElement, useContext } from 'react';
-import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { setTranslatedWordFromBibleObject } from 'utils/bibleDataReducerHelperFunctions';
 import { TranslationField } from './styles';
 
@@ -27,7 +27,6 @@ export const TranslationDisplayBlock: FC<{ wordIndex: number }> = ({
   wordIndex,
 }): ReactElement<Record<string, unknown>> => {
   const { state, dispatch } = useContext(BibleDataContext);
-  // const [ state, dispatch ] = useTracked();
   const { bibleObject, bibleInfo } = state;
   const { bibleBookName, bibleChapterIndex, bibleVerseIndex } = bibleInfo;
 

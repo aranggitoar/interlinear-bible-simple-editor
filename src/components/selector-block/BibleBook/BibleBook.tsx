@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { useContext, FC } from 'react';
 import { setBibleBookNameFromBibleInfo } from 'utils/bibleDataReducerHelperFunctions';
-import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { Select, Option } from '../styles';
 
 const defaultBibleBookSelectorText = 'Choose bible book';
@@ -40,7 +40,6 @@ function createBibleBookSelector(bibleBookNameList: Array<string>) {
 
 export const BibleBookSelectorBlock: FC = () => {
   const { state, dispatch } = useContext(BibleDataContext);
-  // const [state, dispatch] = useTracked();
 
   return (
     <Select

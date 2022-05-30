@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { FC, ReactElement, useContext } from 'react';
-import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { morphHBMorphologyParser } from 'utils/morphHBMorphologyParser';
 import { byzMTMorphologyParser } from 'utils/byzMTMorphologyParser';
 import { MorphologyContainer } from './styles';
@@ -87,7 +87,6 @@ export const MorphologyDisplayBlock: FC<{ wordIndex: number }> = ({
   wordIndex,
 }): ReactElement<Record<string, unknown>> => {
   const { state } = useContext(BibleDataContext);
-  // const state = useTracked();
   const { bibleObject, bibleInfo } = state;
   const { bibleBookName, bibleChapterIndex, bibleVerseIndex } = bibleInfo;
 

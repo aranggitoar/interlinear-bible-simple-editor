@@ -28,7 +28,7 @@ import {
   setBibleInfo,
 } from 'utils/bibleDataReducerHelperFunctions';
 import { BibleDataInfoType } from 'types/BibleData';
-import { BibleDataContext, useUpdate, useTrackedState } from 'contexts/BibleDataContext';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { FileHandlerButton, InvisibleInput, Container } from './style';
 
 const saveFileText = 'Save';
@@ -36,7 +36,6 @@ const loadFileText = 'Load';
 
 const uploadRequestHandler: FC = (): ReactElement => {
   const { dispatch } = useContext(BibleDataContext);
-  // const dispatch = useUpdate();
 
   const handleChange = (event: FormEvent<HTMLInputElement>): void => {
     event.preventDefault();
@@ -96,7 +95,6 @@ const uploadRequestHandler: FC = (): ReactElement => {
 
 const downloadRequestHandler: FC = (): ReactElement => {
   const { state } = useContext(BibleDataContext);
-  // const state = useTrackedState();
 
   const downloadBibleAsJSON: MouseEventHandler<HTMLLabelElement> = (): void => {
     const hiddenElement = document.createElement('a');

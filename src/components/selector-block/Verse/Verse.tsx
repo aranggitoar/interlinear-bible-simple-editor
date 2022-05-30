@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { useContext, FC } from 'react';
 import { setBibleVerseIndexFromBibleInfo } from 'utils/bibleDataReducerHelperFunctions';
-import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
+import { BibleDataContext } from 'contexts/BibleDataContext';
 import { Select, Option } from '../styles';
 
 const defaultBibleVerseSelectorText = 'Choose verse';
@@ -40,7 +40,6 @@ function createVerseSelector(amountOfVerses: number) {
 
 export const VerseSelectorBlock: FC = () => {
   const { state, dispatch } = useContext(BibleDataContext);
-  // const [state, dispatch] = useTracked();
 
   let amountOfVerses = 0 as number;
 
