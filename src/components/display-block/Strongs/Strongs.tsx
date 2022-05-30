@@ -19,20 +19,36 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { FC, ReactElement, useContext } from 'react';
-import { BibleDataContext, useTracked } from 'contexts/BibleDataContext';
+import { BibleDataContext } from 'contexts/BibleDataContext';
+import { StrongsEntryDialogContext } from 'contexts/StrongsEntryDialogContext';
+import { StrongsEntryDialogContextType } from 'types/StrongsEntryDialog';
 import { filterDisplayedStrongs } from 'utils/filterDisplayedStrongs';
+import { getStrongsEntry } from 'utils/getStrongsEntry';
 import { StrongsContainer } from './styles';
 
 export const StrongsDisplayBlock: FC<{ wordIndex: number }> = ({
   wordIndex,
 }): ReactElement<Record<string, unknown>> => {
   const { state } = useContext(BibleDataContext);
-  // const state = useTracked();
+  const { updateStrongsEntryDialog } = useContext(
+    StrongsEntryDialogContext
+  ) as StrongsEntryDialogContextType;
   const { bibleObject, bibleInfo } = state;
   const { bibleBookName, bibleChapterIndex, bibleVerseIndex } = bibleInfo;
 
   const strongs =
     bibleObject[bibleBookName][bibleChapterIndex][bibleVerseIndex][wordIndex][2];
 
-  return <StrongsContainer>{filterDisplayedStrongs(strongs)}</StrongsContainer>;
+  return (
+    <StrongsContainer
+      onClick={() => {
+        updateStrongsEntryDialog({
+          isOpen: true,
+          markup: getStrongsEntry(strongs)[0],
+        });
+      }}
+    >
+      {filterDisplayedStrongs(strongs)}
+    </StrongsContainer>
+  );
 };

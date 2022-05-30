@@ -18,43 +18,28 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import { createContext, Dispatch, useReducer, useMemo, FC, ReactNode } from 'react';
-import { BibleDataType } from 'types/BibleData';
-import { BibleDataActionsType } from 'types/BibleDataActions';
-import { BibleDataReducer } from './BibleDataReducer';
+import { createContext, useState, FC, ReactNode } from 'react';
+import { StrongsEntryDialogType, StrongsEntryDialogContextType } from 'types/StrongsEntryDialog';
 
-const initialBibleDataState = {
-  bibleObject: {},
-  bibleFileName: '',
-  bibleBookNames: [],
-  bibleInfo: {
-    bibleBookName: '',
-    bibleChapterIndex: 0,
-    bibleVerseIndex: 0,
-    bibleWordIndex: 0,
-  },
-} as BibleDataType;
+export const StrongsEntryDialogContext = createContext<StrongsEntryDialogContextType | null>(null);
 
-export const BibleDataContext = createContext<{
-  state: BibleDataType;
-  dispatch: Dispatch<BibleDataActionsType>;
-}>({ state: initialBibleDataState, dispatch: () => undefined });
+// @ts-ignore // for now
+export const StrongsEntryDialogProvider: FC<ReactNode> = ({ children, ...props }) => {
+  const [strongsEntryDialog, setStrongsEntryDialog] = useState<StrongsEntryDialogType>({
+    isOpen: false,
+    markup: '',
+  });
 
-export const { Provider, useTracked, useUpdate, useTrackedState } = createContainer(() =>
-  useReducer(BibleDataReducer, initialBibleDataState)
-);
+  const updateStrongsEntryDialog = (newStrongsEntryDialog: StrongsEntryDialogType) => {
+    setStrongsEntryDialog(newStrongsEntryDialog);
+  }
 
-export const BibleDataProviderTracked: FC<ReactNode> = ({ children }) => (
-  <Provider>{children}</Provider>
-);
-
-export const BibleDataProvider: FC<ReactNode> = ({ children }) => {
-  const [state, dispatch] = useReducer(BibleDataReducer, initialBibleDataState);
   return (
-    <BibleDataContext.Provider
-      value={useMemo(() => ({ state, dispatch }), [state, dispatch])}
+    <StrongsEntryDialogContext.Provider
+      value={{strongsEntryDialog, updateStrongsEntryDialog}}
+      {...props}
     >
       {children}
-    </BibleDataContext.Provider>
+    </StrongsEntryDialogContext.Provider>
   );
 };

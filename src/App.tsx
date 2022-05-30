@@ -22,16 +22,19 @@ import { ReactElement, StrictMode } from 'react';
 import { DisplayBlock } from 'components/display-block';
 import { MenuBlock } from 'components/menu-block';
 import { SelectorBlock } from 'components/selector-block';
-import { BibleDataProvider, BibleDataProviderTracked } from 'contexts/BibleDataContext';
+import { BibleDataProvider } from 'contexts/BibleDataContext';
+import { StrongsEntryDialogProvider } from 'contexts/StrongsEntryDialogContext';
 import GlobalStyle from 'styles/global';
 
-export const App = ():ReactElement<Record<string, unknown>> => (
+export const App = (): ReactElement<Record<string, unknown>> => (
   <StrictMode>
     <GlobalStyle />
     <BibleDataProvider>
-      <MenuBlock />
-      <SelectorBlock />
-      <DisplayBlock />
+      <StrongsEntryDialogProvider>
+        <MenuBlock />
+        <SelectorBlock />
+        <DisplayBlock />
+      </StrongsEntryDialogProvider>
     </BibleDataProvider>
   </StrictMode>
 );

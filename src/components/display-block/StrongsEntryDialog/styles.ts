@@ -18,47 +18,45 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import styled from "styled-components/macro";
+import styled from "styled-components";
 
-export const Container = styled.div`
-  background: #f7f9fa;
+export const StrongsEntryDialogContainer = styled.div`
+  background: #fff;
   border-radius: 10px;
   box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-  left: 50%;
-  max-width: 330px;
+  width: 60vw;
+  height: 60vh;
   padding: 1.25em 1.5em;
   position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
+  overflow-y: scroll;
+  z-index: 10;
 `;
 
 export const Box = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   & button:first-child {
     margin-right: 2em;
   }
 `;
 
-export const Text = styled.p`
+export const MarkupContainer = styled.div`
   color: black;
   font-size: 1.1rem;
-  margin-bottom: 1.5em;
-  text-align: center;
+  text-align: left;
 `;
 
-export const Button = styled.button`
-  background: "#f7f9fa";
-  border-radius: 20px;
-  box-shadow: 0 3px 6px rgba(241, 85, 76, 0.25);
-  color: "#d2342a";
+export const CloseButton = styled.button`
+  background: "#fff";
+  border: 1px solid #ccc;
+  box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+  color: "#222";
+  cursor: pointer;
   font-size: 1.2rem;
-  padding: 0.3em 0;
   text-align: center;
-  transition: background-color 100ms;
-  width: 100px;
+  transition: color 200ms;
 
   &:hover {
-    background: "#f1f1f1";
+    color: "#000";
   }
 `;

@@ -18,32 +18,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import styled from 'styled-components';
+export type StrongsEntryDialogType = {
+  isOpen: boolean;
+  markup: string;
+}
 
-export const ColumnContainer = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  height: 75%;
-  justify-content: center;
-  max-width: 75%;
-  padding: 1rem;
-
-  &.rtl {
-    direction: rtl !important;
-  }
-
-  &.ltr {
-    direction: ltr !important;
-  }
-`;
-
-export const RowContainer = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: .75rem 1.25rem;
-`
+export type StrongsEntryDialogContextType = {
+  strongsEntryDialog: StrongsEntryDialogType;
+  updateStrongsEntryDialog: (newStrongsEntryDialog: StrongsEntryDialogType) => void;
+}

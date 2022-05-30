@@ -23,9 +23,14 @@ import styled from 'styled-components';
 export const StrongsContainer = styled.div`
   align-items: center;
   color: #4444dd;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 0.15em 0;
   max-width: 135px;
+
+  &:hover {
+    color: #3333cc;
+  }
 `;
