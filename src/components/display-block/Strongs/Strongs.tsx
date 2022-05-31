@@ -45,6 +45,7 @@ export const StrongsDisplayBlock: FC<{ wordIndex: number }> = ({
         updateStrongsEntryDialog({
           isOpen: true,
           markup: getStrongsEntry(strongs)[0],
+          title: strongs,
         });
       }}
     >
