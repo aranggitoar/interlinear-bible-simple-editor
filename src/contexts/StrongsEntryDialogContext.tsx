@@ -18,10 +18,14 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import { createContext, useState, FC, ReactNode } from 'react';
-import { StrongsEntryDialogType, StrongsEntryDialogContextType } from 'types/StrongsEntryDialog';
+import { createContext, useMemo, useState, FC, ReactNode } from 'react';
+import {
+  StrongsEntryDialogType,
+  StrongsEntryDialogContextType,
+} from 'types/StrongsEntryDialog';
 
-export const StrongsEntryDialogContext = createContext<StrongsEntryDialogContextType | null>(null);
+export const StrongsEntryDialogContext =
+  createContext<StrongsEntryDialogContextType | null>(null);
 
 // @ts-ignore // for now
 export const StrongsEntryDialogProvider: FC<ReactNode> = ({ children, ...props }) => {
@@ -33,11 +37,14 @@ export const StrongsEntryDialogProvider: FC<ReactNode> = ({ children, ...props }
 
   const updateStrongsEntryDialog = (newStrongsEntryDialog: StrongsEntryDialogType) => {
     setStrongsEntryDialog(newStrongsEntryDialog);
-  }
+  };
 
   return (
     <StrongsEntryDialogContext.Provider
-      value={{strongsEntryDialog, updateStrongsEntryDialog}}
+      value={useMemo(
+        () => ({ strongsEntryDialog, updateStrongsEntryDialog }),
+        [strongsEntryDialog, updateStrongsEntryDialog]
+      )}
       {...props}
     >
       {children}

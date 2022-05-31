@@ -22,9 +22,9 @@ export type StrongsEntryDialogType = {
   isOpen: boolean;
   markup: string;
   title: string;
-}
+};
 
 export type StrongsEntryDialogContextType = {
   strongsEntryDialog: StrongsEntryDialogType;
   updateStrongsEntryDialog: (newStrongsEntryDialog: StrongsEntryDialogType) => void;
-}
+};
