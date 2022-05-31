@@ -195,6 +195,7 @@
     "@types/react-dom": "^17.0.11",
     "electron-squirrel-startup": "^1.0.0",
     "html-react-parser": "^1.4.13",
+    "re-resizable": "^6.9.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.5",
