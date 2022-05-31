@@ -23,40 +23,65 @@ import styled from "styled-components";
 export const StrongsEntryDialogContainer = styled.div`
   background: #fff;
   border-radius: 10px;
-  box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-  width: 60vw;
-  height: 60vh;
-  padding: 1.25em 1.5em;
+  box-shadow: rgb(100 100 111 / 20%) 0px 4px 30px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: fixed;
-  overflow-y: scroll;
   z-index: 10;
 `;
 
-export const Box = styled.div`
+export const StrongsEntryDialogResizableContainer = {
+  "align-items": "center",
+  display: "flex",
+  "flex-direction": "column",
+  padding: "0 1.25em",
+  "overflow-y": "scroll",
+  "overflow-x": "hidden"
+} as const;
+
+export const StrongsEntryDialogTitle = styled.div`
+  align-items: flex-start;
+  border-bottom: 1px solid #999;
+  background: #fff;
+  cursor: move;
   display: flex;
-  justify-content: flex-start;
-  & button:first-child {
-    margin-right: 2em;
-  }
+  padding: .75rem 0 .25rem;
+  position: fixed;
+  flex-direction: row;
+  font-size: 1.3rem;
+  font-weight: bold;
+  justify-content: space-between;
+  width: 90%;
 `;
 
-export const MarkupContainer = styled.div`
-  color: black;
-  font-size: 1.1rem;
-  text-align: left;
-`;
-
-export const CloseButton = styled.button`
-  background: "#fff";
-  border: 1px solid #ccc;
-  box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-  color: "#222";
+export const StrongsEntryDialogCloseButton = styled.button`
+  background: #fff;
+  border: 0;
+  color: #333;
   cursor: pointer;
   font-size: 1.2rem;
   text-align: center;
   transition: color 200ms;
 
   &:hover {
-    color: "#000";
+    color: #000;
   }
+`;
+
+export const StrongsEntryDialogMarkupContainer = styled.div`
+  color: black;
+  font-size: 1.1rem;
+  text-align: left;
+  padding: 3rem 0;
+  width: 90%;
+`;
+
+export const StrongsEntryDialogFooter = styled.div`
+  background: #fff;
+  bottom: 0;
+  border-top: 1px solid #999;
+  height: 5%;
+  position: fixed;
+  width: 90%;
 `;
