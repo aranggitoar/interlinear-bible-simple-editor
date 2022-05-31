@@ -82,7 +82,7 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "modulePaths": "['<rootDir>/src']"
+    "modulePaths": ["<rootDir>/src"]
   },
   "eslintConfig": {
     "env": {
