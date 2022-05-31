@@ -18,9 +18,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-import { simpleMorphHBMorphologicalDataReference, simpleByzMTMorphologicalDataReference} from 'utils/references/morphologicalCodesReferences';
+import { simpleMorphHBMorphologicalDataReference } from 'utils/references/morphologicalCodesReferences';
 import { morphHBMorphologyParser } from 'utils/morphHBMorphologyParser';
-import { byzMTMorphologyParser } from 'utils/byzMTMorphologyParser';
 
 // Function to turn each object key into a typed array member.
 function typedKeys<ValueType>(object: ValueType): (keyof ValueType)[] {
@@ -35,18 +34,6 @@ test('parse known MorphHB morphological code', () => {
   })
 });
 
-test ('parse unknown MorphHB morphological code', () => {
+test('parse unknown MorphHB morphological code', () => {
   expect(morphHBMorphologyParser("Z")).toBe("Unknown");
-});
-
-test('parse known ByzMT morphological code', () => {
-  const reference = simpleByzMTMorphologicalDataReference;
-
-  typedKeys(reference).forEach(code => {
-    expect(byzMTMorphologyParser(code)).toBe(reference[code]);
-  })
-});
-
-test ('parse unknown ByzMT morphological code', () => {
-  expect(byzMTMorphologyParser("J")).toBe("Unknown");
 });
