@@ -28,6 +28,7 @@ export const StrongsEntryDialogProvider: FC<ReactNode> = ({ children, ...props }
   const [strongsEntryDialog, setStrongsEntryDialog] = useState<StrongsEntryDialogType>({
     isOpen: false,
     markup: '',
+    title: '',
   });
 
   const updateStrongsEntryDialog = (newStrongsEntryDialog: StrongsEntryDialogType) => {
