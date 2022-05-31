@@ -23,25 +23,25 @@ import { createPortal } from 'react-dom';
 import Draggable from 'react-draggable';
 import { Resizable } from 're-resizable';
 import parse from 'html-react-parser';
-import { StrongsEntryDialogContext } from 'contexts/StrongsEntryDialogContext';
-import { StrongsEntryDialogContextType } from 'types/StrongsEntryDialog';
+import { LexiconEntryDialogContext } from 'contexts/LexiconEntryDialogContext';
+import { LexiconEntryDialogContextType } from 'types/LexiconEntryDialog';
 import {
-  StrongsEntryDialogContainer,
-  StrongsEntryDialogResizableContainer,
-  StrongsEntryDialogCloseButton,
-  StrongsEntryDialogTitle,
-  StrongsEntryDialogMarkupContainer,
-  StrongsEntryDialogFooter,
+  LexiconEntryDialogContainer,
+  LexiconEntryDialogResizableContainer,
+  LexiconEntryDialogCloseButton,
+  LexiconEntryDialogTitle,
+  LexiconEntryDialogMarkupContainer,
+  LexiconEntryDialogFooter,
 } from './styles';
 
-export const StrongsEntryDialogBox: FC = ({
+export const LexiconEntryDialogBox: FC = ({
   children,
   ...rest
 }): ReactElement<Record<string, unknown>> | null => {
-  const { strongsEntryDialog, updateStrongsEntryDialog } = useContext(
-    StrongsEntryDialogContext
-  ) as StrongsEntryDialogContextType;
-  const { isOpen, markup, title } = strongsEntryDialog;
+  const { lexiconEntryDialog, updateLexiconEntryDialog } = useContext(
+    LexiconEntryDialogContext
+  ) as LexiconEntryDialogContextType;
+  const { isOpen, lexiconIndex, lexiconEntry } = lexiconEntryDialog;
 
   // Initialize state for Draggable container placement.
   const [marginToCenter, setMarginToCenter] = useState({ left: 0, top: 0 });
@@ -53,16 +53,16 @@ export const StrongsEntryDialogBox: FC = ({
   // Get the portal container node.
   const portalContainer = document.getElementById('portal') as Element | DocumentFragment;
 
-  // Reset the strongsEntryDialog global state.
-  const closeStrongsEntryDialog = () => {
-    updateStrongsEntryDialog({ isOpen: false, markup: '', title: '' });
+  // Reset the lexiconEntryDialog global state.
+  const closeLexiconEntryDialog = () => {
+    updateLexiconEntryDialog({ isOpen: false, lexiconIndex: '',lexiconEntry: '' });
   };
 
   // Set up the dialog box location and event listeners once and clean it when
   // it is closed.
-  const strongsEntryDialogCloseButtonRef = useRef(null);
+  const lexiconEntryDialogCloseButtonRef = useRef(null);
   useEffect(() => {
-    const { current } = strongsEntryDialogCloseButtonRef;
+    const { current } = lexiconEntryDialogCloseButtonRef;
     // @ts-ignore // property 'focus' exists on object 'current'.
     if (current) current.focus();
 
@@ -91,14 +91,14 @@ export const StrongsEntryDialogBox: FC = ({
 
     // Setting the Draggable container's direct children in the middle of the
     // page, as it cannot be set by CSS.
-    if (document.querySelector('.strongsEntryDialogContainer') !== null) {
+    if (document.querySelector('.lexiconEntryDialogContainer') !== null) {
       const left =
         document.body.clientWidth / 2 -
         // @ts-ignore // the check was made
-        document.querySelector('.strongsEntryDialogContainer').clientWidth / 2;
+        document.querySelector('.lexiconEntryDialogContainer').clientWidth / 2;
       const top =
         // @ts-ignore // the check was made
-        document.querySelector('.strongsEntryDialogContainer').clientHeight / 2 -
+        document.querySelector('.lexiconEntryDialogContainer').clientHeight / 2 -
         document.body.clientHeight / 2;
       setMarginToCenter({
         left,
@@ -121,11 +121,11 @@ export const StrongsEntryDialogBox: FC = ({
   // is closed.
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') closeStrongsEntryDialog();
+      if (event.key === 'Escape') closeLexiconEntryDialog();
     };
     window.addEventListener('keydown', handleKeydown);
     return () => window.removeEventListener('keydown', handleKeydown);
-  }, [closeStrongsEntryDialog]);
+  }, [closeLexiconEntryDialog]);
 
   // A hack to avoid error because of an unsolved issue
   // https://github.com/react-grid-layout/react-draggable/issues/652.
@@ -140,8 +140,8 @@ export const StrongsEntryDialogBox: FC = ({
   if (!isOpen) return null;
 
   return createPortal(
-    <DraggableAny handle="#strongsEntryDialogTitle" avoidWarningRef={avoidWarningRef}>
-      <StrongsEntryDialogContainer
+    <DraggableAny handle="#lexiconEntryDialogTitle" avoidWarningRef={avoidWarningRef}>
+      <LexiconEntryDialogContainer
         ref={avoidWarningRef}
         role="dialog"
         aria-describedby="dialog-desc"
@@ -149,11 +149,11 @@ export const StrongsEntryDialogBox: FC = ({
           marginLeft: marginToCenter.left,
           marginTop: marginToCenter.top,
         }}
-        className="strongsEntryDialogContainer"
+        className="lexiconEntryDialogContainer"
         {...rest}
       >
         <Resizable
-          style={StrongsEntryDialogResizableContainer}
+          style={LexiconEntryDialogResizableContainer}
           size={{ width: resizableWidth, height: resizableHeight }}
           minWidth="35vw"
           minHeight="35vh"
@@ -164,21 +164,21 @@ export const StrongsEntryDialogBox: FC = ({
             setResizableHeight(resizableHeight + d.height);
           }}
         >
-          <StrongsEntryDialogTitle id="strongsEntryDialogTitle">
-            {title}
-            <StrongsEntryDialogCloseButton
-              ref={strongsEntryDialogCloseButtonRef}
-              onClick={closeStrongsEntryDialog}
+          <LexiconEntryDialogTitle id="lexiconEntryDialogTitle">
+            {lexiconIndex}
+            <LexiconEntryDialogCloseButton
+              ref={lexiconEntryDialogCloseButtonRef}
+              onClick={closeLexiconEntryDialog}
             >
               Close
-            </StrongsEntryDialogCloseButton>
-          </StrongsEntryDialogTitle>
-          <StrongsEntryDialogMarkupContainer>
-            {parse(markup)}
-          </StrongsEntryDialogMarkupContainer>
-          <StrongsEntryDialogFooter />
+            </LexiconEntryDialogCloseButton>
+          </LexiconEntryDialogTitle>
+          <LexiconEntryDialogMarkupContainer>
+            {parse(lexiconEntry)}
+          </LexiconEntryDialogMarkupContainer>
+          <LexiconEntryDialogFooter />
         </Resizable>
-      </StrongsEntryDialogContainer>
+      </LexiconEntryDialogContainer>
     </DraggableAny>,
     portalContainer
   );

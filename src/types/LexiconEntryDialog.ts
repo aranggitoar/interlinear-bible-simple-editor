@@ -18,6 +18,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-export type StrongsEntryType = {
-  [key: string]: string;
+export type LexiconEntryDialogType = {
+  isOpen: boolean;
+  lexiconIndex: string;
+  lexiconEntry: string;
+};
+
+export type LexiconEntryDialogContextType = {
+  lexiconEntryDialog: LexiconEntryDialogType;
+  updateLexiconEntryDialog: (newLexiconEntryDialog: LexiconEntryDialogType) => void;
 };

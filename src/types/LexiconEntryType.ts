@@ -18,13 +18,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 */
 
-export type StrongsEntryDialogType = {
-  isOpen: boolean;
-  markup: string;
-  title: string;
-};
-
-export type StrongsEntryDialogContextType = {
-  strongsEntryDialog: StrongsEntryDialogType;
-  updateStrongsEntryDialog: (newStrongsEntryDialog: StrongsEntryDialogType) => void;
+export type LexiconEntryType = {
+  [key: string]: string;
 };

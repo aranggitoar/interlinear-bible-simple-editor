@@ -20,36 +20,36 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { FC, ReactElement, useContext } from 'react';
 import { BibleDataContext } from 'contexts/BibleDataContext';
-import { StrongsEntryDialogContext } from 'contexts/StrongsEntryDialogContext';
-import { StrongsEntryDialogContextType } from 'types/StrongsEntryDialog';
-import { filterDisplayedStrongs } from 'utils/filterDisplayedStrongs';
-import { getStrongsEntry } from 'utils/getStrongsEntry';
-import { StrongsContainer } from './styles';
+import { LexiconEntryDialogContext } from 'contexts/LexiconEntryDialogContext';
+import { LexiconEntryDialogContextType } from 'types/LexiconEntryDialog';
+import { filterDisplayedLexiconIndex } from 'utils/filterDisplayedLexiconIndex';
+import { getLexiconEntry } from 'utils/getLexiconEntry';
+import { LexiconContainer } from './styles';
 
-export const StrongsDisplayBlock: FC<{ wordIndex: number }> = ({
+export const LexiconDisplayBlock: FC<{ wordIndex: number }> = ({
   wordIndex,
 }): ReactElement<Record<string, unknown>> => {
   const { state } = useContext(BibleDataContext);
-  const { updateStrongsEntryDialog } = useContext(
-    StrongsEntryDialogContext
-  ) as StrongsEntryDialogContextType;
+  const { updateLexiconEntryDialog } = useContext(
+    LexiconEntryDialogContext
+  ) as LexiconEntryDialogContextType;
   const { bibleObject, bibleInfo } = state;
   const { bibleBookName, bibleChapterIndex, bibleVerseIndex } = bibleInfo;
 
-  const strongs =
+  const lexicon =
     bibleObject[bibleBookName][bibleChapterIndex][bibleVerseIndex][wordIndex][2];
 
   return (
-    <StrongsContainer
+    <LexiconContainer
       onClick={() => {
-        updateStrongsEntryDialog({
+        updateLexiconEntryDialog({
           isOpen: true,
-          markup: getStrongsEntry(strongs)[0],
-          title: strongs,
+          lexiconIndex: lexicon,
+          lexiconEntry: getLexiconEntry(lexicon)[0],
         });
       }}
     >
-      {filterDisplayedStrongs(strongs)}
-    </StrongsContainer>
+      {filterDisplayedLexiconIndex(lexicon)}
+    </LexiconContainer>
   );
 };

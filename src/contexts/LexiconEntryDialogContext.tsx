@@ -20,34 +20,34 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import { createContext, useMemo, useState, FC, ReactNode } from 'react';
 import {
-  StrongsEntryDialogType,
-  StrongsEntryDialogContextType,
-} from 'types/StrongsEntryDialog';
+  LexiconEntryDialogType,
+  LexiconEntryDialogContextType,
+} from 'types/LexiconEntryDialog';
 
-export const StrongsEntryDialogContext =
-  createContext<StrongsEntryDialogContextType | null>(null);
+export const LexiconEntryDialogContext =
+  createContext<LexiconEntryDialogContextType | null>(null);
 
 // @ts-ignore // for now
-export const StrongsEntryDialogProvider: FC<ReactNode> = ({ children, ...props }) => {
-  const [strongsEntryDialog, setStrongsEntryDialog] = useState<StrongsEntryDialogType>({
+export const LexiconEntryDialogProvider: FC<ReactNode> = ({ children, ...props }) => {
+  const [lexiconEntryDialog, setLexiconEntryDialog] = useState<LexiconEntryDialogType>({
     isOpen: false,
-    markup: '',
-    title: '',
+    lexiconIndex: '',
+    lexiconEntry: '',
   });
 
-  const updateStrongsEntryDialog = (newStrongsEntryDialog: StrongsEntryDialogType) => {
-    setStrongsEntryDialog(newStrongsEntryDialog);
+  const updateLexiconEntryDialog = (newLexiconEntryDialog: LexiconEntryDialogType) => {
+    setLexiconEntryDialog(newLexiconEntryDialog);
   };
 
   return (
-    <StrongsEntryDialogContext.Provider
+    <LexiconEntryDialogContext.Provider
       value={useMemo(
-        () => ({ strongsEntryDialog, updateStrongsEntryDialog }),
-        [strongsEntryDialog, updateStrongsEntryDialog]
+        () => ({ lexiconEntryDialog, updateLexiconEntryDialog }),
+        [lexiconEntryDialog, updateLexiconEntryDialog]
       )}
       {...props}
     >
       {children}
-    </StrongsEntryDialogContext.Provider>
+    </LexiconEntryDialogContext.Provider>
   );
 };

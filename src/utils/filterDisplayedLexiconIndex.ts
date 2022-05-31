@@ -19,27 +19,27 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 // Filter the displayed strongs data.
-export const filterDisplayedStrongs = (data: string): string => {
-  let filteredStrongs = data as string;
+export const filterDisplayedLexiconIndex = (data: string): string => {
+  let filteredLexicon = data as string;
 
-  if (filteredStrongs[0] === 'G') {
-    if (filteredStrongs.indexOf('&') > -1) {
-      filteredStrongs = filteredStrongs.replace('&', ' & ');
+  if (filteredLexicon[0] === 'G') {
+    if (filteredLexicon.indexOf('&') > -1) {
+      filteredLexicon = filteredLexicon.replace('&', ' & ');
     }
-    filteredStrongs = filteredStrongs.replace(/[G]/g, '');
-  } else if (filteredStrongs[0] === 'H') {
-    // The Strongs number for OSHB is always with a forward slash, but the Strongs number is always last
+    filteredLexicon = filteredLexicon.replace(/[G]/g, '');
+  } else if (filteredLexicon[0] === 'H') {
+    // The Lexicon number for OSHB is always with a forward slash, but the Lexicon number is always last
     if (/\//.test(data)) {
       const temp = data.split('/');
       const [, posTwo, posThree] = temp;
       if (temp.length === 3) {
-        filteredStrongs = posThree;
+        filteredLexicon = posThree;
       } else {
-        filteredStrongs = posTwo;
+        filteredLexicon = posTwo;
       }
     }
-    filteredStrongs = filteredStrongs.replace('H', '');
+    filteredLexicon = filteredLexicon.replace('H', '');
   }
 
-  return filteredStrongs;
+  return filteredLexicon;
 };

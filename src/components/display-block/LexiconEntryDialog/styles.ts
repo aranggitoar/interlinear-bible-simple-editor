@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import styled from "styled-components";
 
-export const StrongsEntryDialogContainer = styled.div`
+export const LexiconEntryDialogContainer = styled.div`
   background: #fff;
   border-radius: 10px;
   box-shadow: rgb(100 100 111 / 20%) 0px 4px 30px 0px;
@@ -31,7 +31,7 @@ export const StrongsEntryDialogContainer = styled.div`
   z-index: 10;
 `;
 
-export const StrongsEntryDialogResizableContainer = {
+export const LexiconEntryDialogResizableContainer = {
   "align-items": "center",
   display: "flex",
   "flex-direction": "column",
@@ -40,7 +40,7 @@ export const StrongsEntryDialogResizableContainer = {
   "overflow-x": "hidden"
 } as const;
 
-export const StrongsEntryDialogTitle = styled.div`
+export const LexiconEntryDialogTitle = styled.div`
   align-items: flex-start;
   border-bottom: 1px solid #999;
   background: #fff;
@@ -55,7 +55,7 @@ export const StrongsEntryDialogTitle = styled.div`
   width: 90%;
 `;
 
-export const StrongsEntryDialogCloseButton = styled.button`
+export const LexiconEntryDialogCloseButton = styled.button`
   background: #fff;
   border: 0;
   color: #333;
@@ -69,7 +69,7 @@ export const StrongsEntryDialogCloseButton = styled.button`
   }
 `;
 
-export const StrongsEntryDialogMarkupContainer = styled.div`
+export const LexiconEntryDialogMarkupContainer = styled.div`
   color: black;
   font-size: 1.1rem;
   text-align: left;
@@ -77,7 +77,7 @@ export const StrongsEntryDialogMarkupContainer = styled.div`
   width: 90%;
 `;
 
-export const StrongsEntryDialogFooter = styled.div`
+export const LexiconEntryDialogFooter = styled.div`
   background: #fff;
   bottom: 0;
   border-top: 1px solid #999;

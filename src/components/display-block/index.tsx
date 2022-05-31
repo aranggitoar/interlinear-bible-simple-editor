@@ -19,11 +19,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 import { FC, ReactElement, useContext } from 'react';
-import { StrongsDisplayBlock } from 'components/display-block/Strongs/Strongs';
+import { LexiconDisplayBlock } from 'components/display-block/Lexicon/Lexicon';
 import { OriginalDisplayBlock } from 'components/display-block/Original/Original';
 import { TranslationDisplayBlock } from 'components/display-block/Translation/Translation';
 import { MorphologyDisplayBlock } from 'components/display-block/Morphology/Morphology';
-import { StrongsEntryDialogBox } from 'components/display-block/StrongsEntryDialog/StrongsEntryDialog';
+import { LexiconEntryDialogBox } from 'components/display-block/LexiconEntryDialog/LexiconEntryDialog';
 import {
   correctlyOrderedNTBibleBookNameReference,
   correctlyOrderedOTBibleBookNameReference,
@@ -61,7 +61,7 @@ export const DisplayBlock: FC = (): ReactElement<Record<string, unknown>> => {
     // https://reactjs.org/docs/reconciliation.html#recursing-on-children
     rowContainers.push(
       <RowContainer key={`${wordIndex}4`}>
-        <StrongsDisplayBlock key={`${wordIndex}0`} wordIndex={wordIndex} />
+        <LexiconDisplayBlock key={`${wordIndex}0`} wordIndex={wordIndex} />
         <OriginalDisplayBlock key={`${wordIndex}1`} wordIndex={wordIndex} />
         <TranslationDisplayBlock key={`${wordIndex}2`} wordIndex={wordIndex} />
         <MorphologyDisplayBlock key={`${wordIndex}3`} wordIndex={wordIndex} />
@@ -71,7 +71,7 @@ export const DisplayBlock: FC = (): ReactElement<Record<string, unknown>> => {
 
   return (
     <ColumnContainer id={direction}>
-      <StrongsEntryDialogBox />
+      <LexiconEntryDialogBox />
       {rowContainers}
     </ColumnContainer>
   );

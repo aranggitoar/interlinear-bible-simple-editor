@@ -23,18 +23,18 @@ import { DisplayBlock } from 'components/display-block';
 import { MenuBlock } from 'components/menu-block';
 import { SelectorBlock } from 'components/selector-block';
 import { BibleDataProvider } from 'contexts/BibleDataContext';
-import { StrongsEntryDialogProvider } from 'contexts/StrongsEntryDialogContext';
+import { LexiconEntryDialogProvider } from 'contexts/LexiconEntryDialogContext';
 import GlobalStyle from 'styles/global';
 
 export const App = (): ReactElement<Record<string, unknown>> => (
   <StrictMode>
     <GlobalStyle />
     <BibleDataProvider>
-      <StrongsEntryDialogProvider>
+      <LexiconEntryDialogProvider>
         <MenuBlock />
         <SelectorBlock />
         <DisplayBlock />
-      </StrongsEntryDialogProvider>
+      </LexiconEntryDialogProvider>
     </BibleDataProvider>
   </StrictMode>
 );
