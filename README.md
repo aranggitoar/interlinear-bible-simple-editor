@@ -1,3 +1,5 @@
+_This repo will be replaced soon._
+
 ## Bugs
 
 - Modals. (just use a library)
@@ -6,3 +8,6 @@
 ## Dev
 
 - Remember to unzip the data directory before development.
+
+## To Do
+- Improve the versioning in CHANGELOG.
