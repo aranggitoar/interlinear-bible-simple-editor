@@ -1,0 +1,21 @@
+import { defineConfig } from 'vite';
+import path from 'path';
+import solidPlugin from 'vite-plugin-solid';
+
+export default defineConfig({
+  plugins: [solidPlugin()],
+  build: {
+    target: 'esnext',
+    polyfillDynamicImport: false,
+  },
+  resolve: {
+    alias: {
+      assets: path.resolve(__dirname, './src/assets'),
+      components: path.resolve(__dirname, './src/components'),
+      stores: path.resolve(__dirname, './src/stores'),
+      styles: path.resolve(__dirname, './src/styles'),
+      types: path.resolve(__dirname, './src/types'),
+      utils: path.resolve(__dirname, './src/utils'),
+    },
+  },
+});
