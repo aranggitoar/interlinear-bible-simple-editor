@@ -1,11 +1,14 @@
 import { styled } from 'solid-styled-components';
 
-export const Container = styled.div`
+export const BlockContainer = styled.div`
   align-items: flex-start;
   display: flex;
   flex-direction: row;
+  grid-area: menu;
   justify-content: flex-start;
   padding: 0;
+  position: fixed;
+  top: 0;
   width: 100%;
 `;
 

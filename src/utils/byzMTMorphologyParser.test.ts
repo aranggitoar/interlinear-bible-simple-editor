@@ -1,48 +1,24 @@
-import { styled } from 'solid-styled-components';
+import { simpleByzMTMorphologicalDataReference } from 'utils/references/morphologicalCodesReferences';
+import { byzMTMorphologyParser } from 'utils/byzMTMorphologyParser';
 
-export const ButtonContainer = styled.div`
-  position: relative;
-`;
+// Function to turn each object key into a typed array member.
+function typedKeys<ValueType>(object: ValueType): (keyof ValueType)[] {
+  return Object.keys(object) as (keyof ValueType)[];
+}
 
-export const MoveByOneButton = styled.button`
-  background: none;
-  border: none;
-  color: #777;
-  cursor: pointer;
-  font-size: 50px;
-  transition: transform 500ms, color 150ms;
+describe('byzMTMorphologyParser', () => {
+  test('parse known ByzMT morphological code', () => {
+    const reference = simpleByzMTMorphologicalDataReference;
 
-  &:hover {
-    background: none;
-    color: #444;
-  }
+    typedKeys(reference).forEach((code) => {
+      expect(byzMTMorphologyParser(code)).toBe(reference[code]);
+    });
+  });
 
-  &:after {
-    background: none;
-    content: '';
-    height: 150%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 150%;
-  }
-
-  &#forward {
-    margin-left: 2em;
-  }
-
-  &#backward {
-    margin-right: 2em;
-  }
-
-  &#forward:hover {
-    transform: translateX(10px);
-  }
-
-  &#backward:hover {
-    transform: translateX(-10px);
-  }
-`;
+  test('parse unknown ByzMT morphological code', () => {
+    expect(byzMTMorphologyParser('J')).toBe('Unknown');
+  });
+});
 
 /*
 

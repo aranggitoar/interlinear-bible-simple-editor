@@ -1,3 +1,23 @@
+import { bibleData } from 'stores/bibleDataStore';
+import { setTranslatedWordFromBibleObject } from 'stores/bibleDataActions';
+import { TranslationField } from './styles';
+
+export default (props: Record<string, number>) => {
+  const translation =
+    bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][
+      bibleData.bibleInfo.bibleChapterIndex
+    ][bibleData.bibleInfo.bibleVerseIndex][props.wordIndex][0];
+
+  return (
+    <TranslationField
+      value={translation !== '' ? translation : ''}
+      onChange={(event) => {
+        setTranslatedWordFromBibleObject(props.wordIndex, event.currentTarget.value);
+      }}
+    />
+  );
+};
+
 /*
 
 Interlinear Bible Simple Editor is a multiplatform interlinear bible translation software.
@@ -17,23 +37,3 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
 
 */
-
-import { simpleByzMTMorphologicalDataReference} from 'utils/references/morphologicalCodesReferences';
-import { byzMTMorphologyParser } from 'utils/byzMTMorphologyParser';
-
-// Function to turn each object key into a typed array member.
-function typedKeys<ValueType>(object: ValueType): (keyof ValueType)[] {
-  return Object.keys(object) as (keyof ValueType)[];
-}
-
-test('parse known ByzMT morphological code', () => {
-  const reference = simpleByzMTMorphologicalDataReference;
-
-  typedKeys(reference).forEach(code => {
-    expect(byzMTMorphologyParser(code)).toBe(reference[code]);
-  })
-});
-
-test('parse unknown ByzMT morphological code', () => {
-  expect(byzMTMorphologyParser("J")).toBe("Unknown");
-});

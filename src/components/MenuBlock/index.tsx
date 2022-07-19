@@ -1,11 +1,11 @@
 import FileHandler from './FileHandler';
 // import { MenuBlockSettings } from './Settings/Settings';
-import { Container } from './styles';
+import { BlockContainer } from './styles';
 
 export default () => (
-  <Container>
+  <BlockContainer>
     <FileHandler />
-  </Container>
+  </BlockContainer>
 );
 
 /*

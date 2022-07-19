@@ -1,22 +1,23 @@
-import { BibleData } from 'stores/BibleDataStore';
-import { setTranslatedWordFromBibleObject } from 'stores/BibleDataActions';
-import { TranslationField } from './styles';
+import { getLexiconEntry } from 'utils/getLexiconEntry';
+import { greekLexiconDataMock, hebrewLexiconDataMock } from './lexicalDataMock';
 
-export default (props: Record<string, number>) => {
-  const translation =
-    BibleData.bibleObject[BibleData.bibleInfo.bibleBookName][
-      BibleData.bibleInfo.bibleChapterIndex
-    ][BibleData.bibleInfo.bibleVerseIndex][props.wordIndex][0];
+describe('getLexiconEntry', () => {
+  test('get some Greek lexical data', () => {
+    const { index, entry } = greekLexiconDataMock;
 
-  return (
-    <TranslationField
-      value={translation !== '' ? translation : ''}
-      onChange={(event) => {
-        setTranslatedWordFromBibleObject(props.wordIndex, event.currentTarget.value);
-      }}
-    />
-  );
-};
+    entry.forEach((markup, i) => {
+      expect(getLexiconEntry(index[i])[0]).toBe(markup);
+    });
+  });
+
+  test('get some Hebrew lexical data', () => {
+    const { index, entry } = hebrewLexiconDataMock;
+
+    entry.forEach((markup, i) => {
+      expect(getLexiconEntry(index[i])[0]).toBe(markup);
+    });
+  });
+});
 
 /*
 

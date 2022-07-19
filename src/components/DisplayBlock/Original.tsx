@@ -1,4 +1,4 @@
-import { BibleData } from 'stores/BibleDataStore';
+import { bibleData } from 'stores/bibleDataStore';
 import { OriginalContainer } from './styles';
 
 export default (props: Record<string, number>) => {
@@ -12,9 +12,9 @@ export default (props: Record<string, number>) => {
   };
 
   const original =
-    BibleData.bibleObject[BibleData.bibleInfo.bibleBookName][
-      BibleData.bibleInfo.bibleChapterIndex
-    ][BibleData.bibleInfo.bibleVerseIndex][props.wordIndex][1];
+    bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][
+      bibleData.bibleInfo.bibleChapterIndex
+    ][bibleData.bibleInfo.bibleVerseIndex][props.wordIndex][1];
 
   return <OriginalContainer>{filterDisplayedOriginal(original)}</OriginalContainer>;
 };

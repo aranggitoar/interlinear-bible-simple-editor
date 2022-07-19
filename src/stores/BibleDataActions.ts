@@ -1,9 +1,9 @@
 import { produce } from 'solid-js/store';
-import { BibleData, setBibleData } from './BibleDataStore';
+import { bibleData, setBibleData } from './bibleDataStore';
 import * as T from 'types/BibleData';
 
 export const setBibleObject = (newBibleObject: T.BibleDataObjectType) => {
-  setBibleData({ ...BibleData, bibleObject: newBibleObject });
+  setBibleData({ ...bibleData, bibleObject: newBibleObject });
 };
 
 export const setTranslatedWordFromBibleObject = (
@@ -19,66 +19,66 @@ export const setTranslatedWordFromBibleObject = (
   );
 
 export const setBibleFileName = (newBibleFileName: string) =>
-  setBibleData({ ...BibleData, bibleFileName: newBibleFileName });
+  setBibleData({ ...bibleData, bibleFileName: newBibleFileName });
 
 export const setBibleBookNames = (newBibleBookNames: Array<string>) =>
-  setBibleData({ ...BibleData, bibleBookNames: newBibleBookNames });
+  setBibleData({ ...bibleData, bibleBookNames: newBibleBookNames });
 
 export const setBibleInfo = (newBibleInfo: T.BibleDataInfoType) =>
-  setBibleData({ ...BibleData, bibleInfo: newBibleInfo });
+  setBibleData({ ...bibleData, bibleInfo: newBibleInfo });
 
 export const setBibleBookNameFromBibleInfo = (newBibleBookName: string) =>
   setBibleData({
-    ...BibleData,
+    ...bibleData,
     bibleInfo: {
-      ...BibleData.bibleInfo,
+      ...bibleData.bibleInfo,
       bibleBookName: newBibleBookName,
       bibleChapterIndex: 0,
-      bibleChapterCount: BibleData.bibleObject[newBibleBookName].length,
+      bibleChapterCount: bibleData.bibleObject[newBibleBookName].length,
       bibleVerseIndex: 0,
-      bibleVerseCount: BibleData.bibleObject[newBibleBookName][0].length,
-      bibleWordCount: BibleData.bibleObject[newBibleBookName][0][0].length,
+      bibleVerseCount: bibleData.bibleObject[newBibleBookName][0].length,
+      bibleWordCount: bibleData.bibleObject[newBibleBookName][0][0].length,
     },
   });
 
 export const setBibleChapterIndexFromBibleInfo = (newBibleChapterIndex: number) =>
   setBibleData({
-    ...BibleData,
+    ...bibleData,
     bibleInfo: {
-      ...BibleData.bibleInfo,
+      ...bibleData.bibleInfo,
       bibleChapterIndex: newBibleChapterIndex,
       bibleVerseIndex: 0,
       bibleVerseCount:
-        BibleData.bibleObject[BibleData.bibleInfo.bibleBookName][newBibleChapterIndex]
+        bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][newBibleChapterIndex]
           .length,
       bibleWordCount:
-        BibleData.bibleObject[BibleData.bibleInfo.bibleBookName][newBibleChapterIndex][0]
+        bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][newBibleChapterIndex][0]
           .length,
     },
   });
 
 export const setBibleVerseIndexFromBibleInfo = (newBibleVerseIndex: number) =>
   setBibleData({
-    ...BibleData,
+    ...bibleData,
     bibleInfo: {
-      ...BibleData.bibleInfo,
+      ...bibleData.bibleInfo,
       bibleVerseIndex: newBibleVerseIndex,
       bibleWordCount:
-        BibleData.bibleObject[BibleData.bibleInfo.bibleBookName][
-          BibleData.bibleInfo.bibleChapterIndex
+        bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][
+          bibleData.bibleInfo.bibleChapterIndex
         ][newBibleVerseIndex].length,
     },
   });
 
 export const moveOneVerseForward = () => {
-  let verseIndex = BibleData.bibleInfo.bibleVerseIndex;
-  let chapterIndex = BibleData.bibleInfo.bibleChapterIndex;
+  let verseIndex = bibleData.bibleInfo.bibleVerseIndex;
+  let chapterIndex = bibleData.bibleInfo.bibleChapterIndex;
 
   const maxVerseIndex =
-    BibleData.bibleObject[BibleData.bibleInfo.bibleBookName][chapterIndex].length - 1;
+    bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][chapterIndex].length - 1;
 
   const maxChapterIndex =
-    BibleData.bibleObject[BibleData.bibleInfo.bibleBookName].length - 1;
+    bibleData.bibleObject[bibleData.bibleInfo.bibleBookName].length - 1;
 
   if (chapterIndex <= maxChapterIndex && verseIndex <= maxVerseIndex) verseIndex += 1;
 
@@ -91,8 +91,8 @@ export const moveOneVerseForward = () => {
 };
 
 export const moveOneVerseBackward = () => {
-  let verseIndex = BibleData.bibleInfo.bibleVerseIndex;
-  let chapterIndex = BibleData.bibleInfo.bibleChapterIndex;
+  let verseIndex = bibleData.bibleInfo.bibleVerseIndex;
+  let chapterIndex = bibleData.bibleInfo.bibleChapterIndex;
 
   if (chapterIndex >= 0 && verseIndex >= 0) verseIndex -= 1;
 
@@ -100,7 +100,7 @@ export const moveOneVerseBackward = () => {
   // go back to the last chapter.
   if (verseIndex === -1 && chapterIndex > 0) {
     const verseCount =
-      BibleData.bibleObject[BibleData.bibleInfo.bibleBookName][chapterIndex].length + 1;
+      bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][chapterIndex].length + 1;
     verseIndex = verseCount;
     setBibleChapterIndexFromBibleInfo((chapterIndex -= 1));
   }
@@ -110,9 +110,9 @@ export const moveOneVerseBackward = () => {
 
 export const setBibleWordIndexFromBibleInfo = (newBibleWordIndex: number) =>
   setBibleData({
-    ...BibleData,
+    ...bibleData,
     bibleInfo: {
-      ...BibleData.bibleInfo,
+      ...bibleData.bibleInfo,
       bibleWordIndex: newBibleWordIndex,
     },
   });

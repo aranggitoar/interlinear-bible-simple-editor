@@ -7,7 +7,7 @@ import {
   setBibleBookNames,
   setBibleInfo,
 } from 'stores/BibleDataActions';
-import { BibleData } from 'stores/BibleDataStore';
+import { bibleData } from 'stores/bibleDataStore';
 import { BibleDataInfoType } from 'types/BibleData';
 import { FileHandlerButton, InvisibleInput, Container } from './style';
 
@@ -61,8 +61,6 @@ const uploadRequestHandler: Component = () => {
         bibleWordCount: updatedBibleObject[bibleBookName][0][0].length,
         bibleWordIndex: 0,
       } as BibleDataInfoType);
-
-      console.log(BibleData);
     };
   };
 
@@ -78,10 +76,10 @@ const downloadRequestHandler: Component = () => {
   const downloadBibleAsJSON = () => {
     const hiddenElement = document.createElement('a');
     hiddenElement.href = `data:attachment/text,${encodeURI(
-      JSON.stringify(BibleData.bibleObject)
+      JSON.stringify(bibleData.bibleObject)
     )}`;
     hiddenElement.target = '_blank';
-    hiddenElement.download = BibleData.bibleFileName as string;
+    hiddenElement.download = bibleData.bibleFileName as string;
     hiddenElement.click();
   };
 

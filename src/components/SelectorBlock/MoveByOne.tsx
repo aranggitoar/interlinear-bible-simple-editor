@@ -1,3 +1,23 @@
+import { JSX } from 'solid-js/jsx-runtime';
+import { moveOneVerseForward, moveOneVerseBackward } from 'stores/bibleDataActions';
+import * as S from './styles';
+
+export const MoveBackwardByOne = (): JSX.Element => (
+  <S.ButtonContainer>
+    <S.MoveByOneButton id="backward" onClick={() => moveOneVerseBackward()}>
+      &#8249;
+    </S.MoveByOneButton>
+  </S.ButtonContainer>
+);
+
+export const MoveForwardByOne = (): JSX.Element => (
+  <S.ButtonContainer>
+    <S.MoveByOneButton id="forward" onClick={() => moveOneVerseForward()}>
+      &#8250;
+    </S.MoveByOneButton>
+  </S.ButtonContainer>
+);
+
 /*
 
 Interlinear Bible Simple Editor is a multiplatform interlinear bible translation software.
@@ -17,23 +37,3 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
 
 */
-
-import { simpleMorphHBMorphologicalDataReference } from 'utils/references/morphologicalCodesReferences';
-import { morphHBMorphologyParser } from 'utils/morphHBMorphologyParser';
-
-// Function to turn each object key into a typed array member.
-function typedKeys<ValueType>(object: ValueType): (keyof ValueType)[] {
-  return Object.keys(object) as (keyof ValueType)[];
-}
-
-test('parse known MorphHB morphological code', () => {
-  const reference = simpleMorphHBMorphologicalDataReference;
-
-  typedKeys(reference).forEach(code => {
-    expect(morphHBMorphologyParser(code)).toBe(reference[code]);
-  })
-});
-
-test('parse unknown MorphHB morphological code', () => {
-  expect(morphHBMorphologyParser("Z")).toBe("Unknown");
-});

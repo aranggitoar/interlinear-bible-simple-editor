@@ -1,4 +1,4 @@
-import { BibleData } from 'stores/BibleDataStore';
+import { bibleData } from 'stores/bibleDataStore';
 import { morphHBMorphologyParser } from 'utils/morphHBMorphologyParser';
 import { byzMTMorphologyParser } from 'utils/byzMTMorphologyParser';
 import { MorphologyContainer } from './styles';
@@ -64,9 +64,9 @@ export const filterDisplayedMorphology = (data: string): string => {
 
 export default (props: Record<string, number>) => {
   const morphology =
-    BibleData.bibleObject[BibleData.bibleInfo.bibleBookName][
-      BibleData.bibleInfo.bibleChapterIndex
-    ][BibleData.bibleInfo.bibleVerseIndex][props.wordIndex][3];
+    bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][
+      bibleData.bibleInfo.bibleChapterIndex
+    ][bibleData.bibleInfo.bibleVerseIndex][props.wordIndex][3];
 
   return (
     <MorphologyContainer>{filterDisplayedMorphology(morphology)}</MorphologyContainer>

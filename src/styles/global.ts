@@ -19,15 +19,22 @@ export default createGlobalStyles`
 
   html, body, #root {
     height: 100%;
+    margin: 0;
   }
 
   #root {
     align-items: center;
     background-color: white;
     color: black;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+      "menu"
+      "selector"
+      "display";
+    grid-template-rows: 4vh 8vh auto;
+    justify-content: center;
     margin: auto;
+    overflow: hidden;
     width: 100%;
   }
 

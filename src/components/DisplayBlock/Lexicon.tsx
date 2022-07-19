@@ -1,4 +1,4 @@
-import { BibleData } from 'stores/BibleDataStore';
+import { bibleData } from 'stores/bibleDataStore';
 import { setLexiconEntryDialog } from 'stores/LexiconEntryDialogStore';
 import { filterDisplayedLexiconIndex } from 'utils/filterDisplayedLexiconIndex';
 import { getLexiconEntry } from 'utils/getLexiconEntry';
@@ -6,9 +6,9 @@ import { LexiconContainer } from './styles';
 
 export default (props: Record<string, number>) => {
   const lexicon =
-    BibleData.bibleObject[BibleData.bibleInfo.bibleBookName][
-      BibleData.bibleInfo.bibleChapterIndex
-    ][BibleData.bibleInfo.bibleVerseIndex][props.wordIndex][2];
+    bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][
+      bibleData.bibleInfo.bibleChapterIndex
+    ][bibleData.bibleInfo.bibleVerseIndex][props.wordIndex][2];
 
   return (
     <LexiconContainer

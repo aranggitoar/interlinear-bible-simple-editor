@@ -1,21 +1,24 @@
+import { Show } from 'solid-js';
+import { JSX } from 'solid-js/jsx-runtime';
 import BibleBook from './BibleBook';
 import Chapter from './Chapter';
 import Verse from './Verse';
 import { MoveBackwardByOne, MoveForwardByOne } from './MoveByOne';
+import { globalSettings } from 'stores/globalSettingsStore';
 import * as S from './styles';
 
-export default () => (
-  <>
-    <S.Container>
-      <S.Separator />
+export default (): JSX.Element => (
+  <S.BlockContainer>
+    <S.ItemsContainer>
       <MoveBackwardByOne />
       <BibleBook />
       <Chapter />
-      <Verse />
+      <Show when={globalSettings.viewBibleBy === 'verses'}>
+        <Verse />
+      </Show>
       <MoveForwardByOne />
-      <S.Separator />
-    </S.Container>
-  </>
+    </S.ItemsContainer>
+  </S.BlockContainer>
 );
 
 /*

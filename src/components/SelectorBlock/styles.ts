@@ -1,30 +1,82 @@
 import { styled } from 'solid-styled-components';
 
-export const Container = styled.div`
+export const BlockContainer = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
-  height: 75%;
+  grid-area: selector;
   justify-content: center;
-  padding: 0.75em 1em;
+  position: fixed;
+  top: 4vh;
+  width: 100%;
+  z-index: 2;
+`;
+
+export const ItemsContainer = styled.div`
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(2px);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const Select = styled.select`
+  border: 1px solid #aaa;
+  border-radius: 3px;
   cursor: pointer;
-  font-size: 16px;
-  margin: 0.5em 1.5em;
+  font-size: 1.2em;
+  margin: 0.5em;
+  min-width: 80px;
   padding: 0.15em 0.3em;
 `;
 
-export const Separator = styled.hr`
-  border: 0.75px solid #bbb;
-  box-shadow: 20px 20px 200px 3px;
-  margin: 1em 0;
-  width: 30%;
-  transition: all 400ms;
+export const Option = styled.option``;
+
+export const ButtonContainer = styled.div`
+  position: relative;
 `;
 
-export const Option = styled.option``;
+export const MoveByOneButton = styled.button`
+  background: none;
+  border: none;
+  color: #777;
+  cursor: pointer;
+  font-size: 40px;
+  transition: transform 500ms, color 150ms;
+
+  &:hover {
+    background: none;
+    color: #444;
+  }
+
+  &:after {
+    background: none;
+    content: '';
+    height: 150%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 150%;
+  }
+
+  &#forward {
+    margin-left: 5vw;
+  }
+
+  &#backward {
+    margin-right: 5vw;
+  }
+
+  &#forward:hover {
+    transform: translateX(10px);
+  }
+
+  &#backward:hover {
+    transform: translateX(-10px);
+  }
+`;
 
 /*
 

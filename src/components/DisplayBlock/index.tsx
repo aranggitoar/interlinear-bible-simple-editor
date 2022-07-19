@@ -1,3 +1,4 @@
+import { JSX } from 'solid-js/jsx-runtime';
 import Lexicon from './Lexicon';
 // import LexiconEntryDialog from './Lexicon/Dialog';
 import Original from './Original';
@@ -7,48 +8,50 @@ import {
   correctlyOrderedNTBibleBookNameReference,
   correctlyOrderedOTBibleBookNameReference,
 } from 'utils/references/correctlyOrderedBibleBookNameReferences';
-import { BibleData } from 'stores/BibleDataStore';
+import { bibleData } from 'stores/bibleDataStore';
 import * as S from './styles';
 
-function createContentRows(wordsInVerse: number) {
-  const jsxMarkup = [];
+const createContentRows = (wordsInVerse: number): JSX.Element => {
+  const jsxMarkup = [] as Array<JSX.Element>;
 
   // Generate as many containers as the word count of the current verse.
   for (let wordIndex = 0; wordIndex < wordsInVerse; wordIndex++) {
     jsxMarkup.push(
-      <S.RowContainer>
+      <S.WordContainer>
         <Lexicon wordIndex={wordIndex} />
         <Original wordIndex={wordIndex} />
         <Translation wordIndex={wordIndex} />
         <Morphology wordIndex={wordIndex} />
-      </S.RowContainer>
+      </S.WordContainer>
     );
   }
 
-  return jsxMarkup as Array<Element>;
-}
+  return jsxMarkup as JSX.Element;
+};
 
-export default () => {
+export default (): JSX.Element => {
   let direction = '';
 
   // Interpret the verse direction.
   // Return a string of the direction.
   if (
-    correctlyOrderedOTBibleBookNameReference.indexOf(BibleData.bibleInfo.bibleBookName) >
+    correctlyOrderedOTBibleBookNameReference.indexOf(bibleData.bibleInfo.bibleBookName) >
     -1
   )
     direction = 'rtl';
   if (
-    correctlyOrderedNTBibleBookNameReference.indexOf(BibleData.bibleInfo.bibleBookName) >
+    correctlyOrderedNTBibleBookNameReference.indexOf(bibleData.bibleInfo.bibleBookName) >
     -1
   )
     direction = 'ltr';
 
   return (
-    <S.ColumnContainer id={direction}>
-      {createContentRows(BibleData.bibleInfo.bibleWordCount)}
+    <S.BlockContainer>
+      <S.ContentContainer id={direction}>
+        {createContentRows(bibleData.bibleInfo.bibleWordCount)}
+      </S.ContentContainer>
       {/* <LexiconEntryDialog /> */}
-    </S.ColumnContainer>
+    </S.BlockContainer>
   );
 };
 

@@ -1,15 +1,20 @@
-import { styled } from 'solid-styled-components';
+import { createStore } from 'solid-js/store';
+import * as T from 'types/BibleData';
 
-export const MorphologyContainer = styled.div`
-  align-items: center;
-  color: #555555;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0.15em 0;
-  max-width: 135px;
-  text-align: center;
-`;
+export const [bibleData, setBibleData] = createStore({
+  bibleObject: {},
+  bibleFileName: '',
+  bibleBookNames: [],
+  bibleInfo: {
+    bibleBookName: '',
+    bibleChapterCount: 0,
+    bibleChapterIndex: 0,
+    bibleVerseCount: 0,
+    bibleVerseIndex: 0,
+    bibleWordCount: 0,
+    bibleWordIndex: 0,
+  },
+} as T.BibleDataType);
 
 /*
 

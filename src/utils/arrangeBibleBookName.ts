@@ -1,3 +1,22 @@
+import { correctlyOrderedBibleBookNameReference } from './references/correctlyOrderedBibleBookNameReferences';
+
+// Arrange the array of Bible book names.
+export function arrangeBibleBookName(bibleBookNames: Array<string>) {
+  const orderedBibleBookNames = [] as Array<string>;
+
+  for (let i = 0; correctlyOrderedBibleBookNameReference.length > i; i++) {
+    if (
+      bibleBookNames.find((name) =>
+        name.match(correctlyOrderedBibleBookNameReference[i])
+      ) !== undefined
+    ) {
+      orderedBibleBookNames.push(correctlyOrderedBibleBookNameReference[i]);
+    }
+  }
+
+  return orderedBibleBookNames;
+}
+
 /*
 
 Interlinear Bible Simple Editor is a multiplatform interlinear bible translation software.
@@ -17,22 +36,3 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
 
 */
-
-import { correctlyOrderedBibleBookNameReference } from './references/correctlyOrderedBibleBookNameReferences';
-
-// Arrange the array of Bible book names.
-export function arrangeBibleBookName(bibleBookNames: Array<string>) {
-  const orderedBibleBookNames = [] as Array<string>;
-
-  for (let i = 0; correctlyOrderedBibleBookNameReference.length > i; i++) {
-    if (
-      bibleBookNames.find((name) =>
-        name.match(correctlyOrderedBibleBookNameReference[i])
-      ) !== undefined
-    ) {
-      orderedBibleBookNames.push(correctlyOrderedBibleBookNameReference[i]);
-    }
-  }
-
-  return orderedBibleBookNames;
-}
