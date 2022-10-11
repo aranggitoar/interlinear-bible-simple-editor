@@ -1,0 +1,7 @@
+{
+  "presets": [
+    ["@babel/preset-env", { "modules": "auto" }],
+    "babel-preset-solid",
+    "@babel/preset-typescript"
+  ]
+}

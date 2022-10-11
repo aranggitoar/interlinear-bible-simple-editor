@@ -1,97 +1,156 @@
-/*
+// Copyright (C) 2022  Aranggi J. Toar <at@aranggitoar.com>
+// Full GPL-2.0 notice  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
-Interlinear Bible Simple Editor is a multiplatform interlinear bible translation software.
-Copyright (C) 2022  Aranggi J. Toar
+import * as r from 'utils/references/morphologicalCodesReferences';
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; only version 2 of the License.
+// Parse ByzMT verb morphological codes.
+const verbByzMTMorphParser = (morphData: Array<string>): Array<Array<string>> => {
+  let parsedMorphData = [[], []] as Array<Array<string>>;
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  // Parse the tense, voice and mood.
+  if (morphData.length >= 1) {
+    let tmp = morphData[0];
 
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
+    if (tmp.length === 4) {
+      parsedMorphData[0].push(r.verbTenseByzMTMorphRef[tmp[0] + tmp[1]]);
+      parsedMorphData[1].push('Aspek ' + tmp[0] + tmp[1]);
+      tmp = tmp.replace(tmp[0] + tmp[1], '');
+    }
 
-*/
+    if (tmp.length === 3) {
+      parsedMorphData[0].push(r.verbTenseByzMTMorphRef[tmp[0]]);
+      parsedMorphData[1].push('Aspek ' + tmp[0]);
+      tmp = tmp.replace(tmp[0], '');
+    }
 
-import { simpleByzMTMorphologicalDataReference } from 'utils/references/morphologicalCodesReferences';
+    parsedMorphData[0].push(r.verbVoiceByzMTMorphRef[tmp[0]]);
+    parsedMorphData[1].push('Diatesis ' + tmp[0]);
 
-export const byzMTMorphologyParser = (morphologicalData: string): string => {
-  let parsedMorphologicalData = morphologicalData;
-  switch (parsedMorphologicalData) {
-    case 'ADV':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.ADV;
-      break;
-    case 'ARAM':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.ARAM;
-      break;
-    case 'CONJ':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.CONJ;
-      break;
-    case 'COND':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.COND;
-      break;
-    case 'HEB':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.HEB;
-      break;
-    case 'INJ':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.INJ;
-      break;
-    case 'PREP':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.PREP;
-      break;
-    case 'PRT':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.PRT;
-      break;
-    case 'C': // Reciprocal pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
-      break;
-    case 'D': // Demonstrative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
-      break;
-    case 'F': // Reflexive pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
-      break;
-    case 'I': // Interrogative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
-      break;
-    case 'K': // Correlative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
-      break;
-    case 'N':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.N;
-      break;
-    case 'P':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
-      break;
-    case 'Q': // Correlative or interrogative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
-      break;
-    case 'R': // Relative pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
-      break;
-    case 'A':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.A;
-      break;
-    case 'S': // Possesive adjective
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.A;
-      break;
-    case 'T':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.T;
-      break;
-    case 'V':
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.V;
-      break;
-    case 'X': // Indefinite pronoun
-      parsedMorphologicalData = simpleByzMTMorphologicalDataReference.P;
-      break;
-    default:
-      parsedMorphologicalData = 'Unknown';
-      break;
+    parsedMorphData[0].push(r.verbMoodByzMTMorphRef[tmp[1]]);
+    parsedMorphData[1].push('Modus ' + tmp[1]);
   }
-  return parsedMorphologicalData;
+
+  // Parse the person and number or case, number and gender if there are 2 or
+  // more data points.
+  if (morphData.length >= 2) {
+    const tmp = morphData[1];
+
+    // If there are 3 characters, it must be case, number and gender.
+    if (tmp.length === 3) {
+      parsedMorphData[0].push(r.verbCaseByzMTMorphRef[tmp[0]]);
+      parsedMorphData[1].push('Kasus ' + tmp[0]);
+
+      parsedMorphData[0].push(r.verbNumberByzMTMorphRef[tmp[1]]);
+      parsedMorphData[1].push('Jumlah ' + tmp[1]);
+
+      parsedMorphData[0].push(r.verbGenderByzMTMorphRef[tmp[2]]);
+      parsedMorphData[1].push('Gender ' + tmp[2]);
+    }
+
+    // If there are 2 characters, it must be person and number.
+    if (tmp.length === 2) {
+      parsedMorphData[0].push(r.verbPersonByzMTMorphRef[tmp[0]]);
+      parsedMorphData[1].push('Persona ' + tmp[0]);
+
+      parsedMorphData[0].push(r.verbNumberByzMTMorphRef[tmp[1]]);
+      parsedMorphData[1].push('Jumlah' + tmp[1]);
+    }
+  }
+
+  // Parse the extra code.
+  if (morphData.length === 3) {
+    parsedMorphData[0].push(r.verbExtraByzMTMorphRef.morphData[2]);
+    parsedMorphData[1].push(morphData[2]);
+  }
+
+  return parsedMorphData;
+};
+
+// Parse ByzMT other than verb morphological codes.
+const nonVerbByzMTMorphParser = (morphData: Array<string>): Array<Array<string>> => {
+  let parsedMorphData = [[], []] as Array<Array<string>>;
+
+  // Parse the case, number and gender OR suffix for some adjectives, adverbs,
+  // particles and conjunctions.
+  if (morphData.length >= 1) {
+    let tmp = morphData[0];
+
+    if (tmp.length === 1) {
+      parsedMorphData[0].push(r.declinedSuffixByzMTMorphRef[tmp[0]]);
+      parsedMorphData[1].push('Fitur ' + tmp[0]);
+    }
+
+    // Some pronouns has person attached or in the place of gender.
+    if (tmp.length === 4 || /[0-9]/.test(tmp[0])) {
+      parsedMorphData[0].push(r.declinedPersonByzMTMorphRef[tmp[0]]);
+      parsedMorphData[1].push('Persona ' + tmp[0]);
+      tmp = tmp.replace(tmp[0], '');
+    }
+
+    // Some adjectives has another number attached.
+    if (tmp.length === 5) {
+      parsedMorphData[0].push(r.declinedNumberByzMTMorphRef[tmp[0]]);
+      parsedMorphData[1].push('Persona ' + tmp[0]);
+      tmp = tmp.replace(tmp[0], '');
+    }
+
+    if (tmp.length > 1) {
+      parsedMorphData[0].push(r.declinedCaseByzMTMorphRef[tmp[0]]);
+      parsedMorphData[1].push('Kasus ' + tmp[0]);
+
+      parsedMorphData[0].push(r.declinedNumberByzMTMorphRef[tmp[1]]);
+      parsedMorphData[1].push('Jumlah ' + tmp[1]);
+    }
+
+    // Some pronouns has person instead of gender, so this is separated with
+    // the above if block.
+    if (tmp.length > 2) {
+      parsedMorphData[0].push(r.declinedGenderByzMTMorphRef[tmp[2]]);
+      parsedMorphData[1].push('Gender ' + tmp[2]);
+    }
+  }
+
+  // Parse the suffix.
+  if (morphData.length === 2) {
+    const tmp = morphData[1];
+    parsedMorphData[0].push(r.declinedSuffixByzMTMorphRef[tmp[0]]);
+    parsedMorphData[1].push(tmp[0]);
+  }
+
+  return parsedMorphData;
+};
+
+// Parse any ByzMT morphological codes.
+export const byzMTMorphParser = (
+  morphData: string,
+  parsedMorph: Array<string | Array<string>>
+): Array<string | Array<string>> => {
+  if (/[-]/.test(morphData) === false) {
+    parsedMorph.push(r.undeclinedByzMTMorphRef[morphData]);
+    parsedMorph.push(morphData);
+  }
+
+  if (r.specialUndeclinedByzMTMorphRef[morphData] !== undefined) {
+    parsedMorph.push(r.specialUndeclinedByzMTMorphRef[morphData]);
+    parsedMorph.push(morphData);
+  }
+
+  const splitData = morphData.split('-');
+
+  if (splitData.length > 1) {
+    parsedMorph.push(r.declinedAndVerbPrefixByzMTMorphRef[splitData[0]]);
+    parsedMorph.push(splitData.shift() as string);
+
+    if (parsedMorph[1] === 'V') {
+      const tmp = verbByzMTMorphParser(splitData);
+      parsedMorph.push(tmp[0]);
+      parsedMorph.push(tmp[1]);
+    } else {
+      const tmp = nonVerbByzMTMorphParser(splitData);
+      parsedMorph.push(tmp[0]);
+      parsedMorph.push(tmp[1]);
+    }
+  }
+
+  return parsedMorph;
 };

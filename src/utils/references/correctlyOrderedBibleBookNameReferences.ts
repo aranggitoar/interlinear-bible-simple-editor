@@ -1,24 +1,8 @@
-/*
-
-Interlinear Bible Simple Editor is a multiplatform interlinear bible translation software.
-Copyright (C) 2022  Aranggi J. Toar
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; only version 2 of the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
-
-*/
+// Copyright (C) 2022  Aranggi J. Toar <at@aranggitoar.com>
+// Full GPL-2.0 notice  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
 // Array of correct Bible book name order.
+// The format of the names are taken from the sources.
 export const correctlyOrderedBibleBookNameReference = [
   'Genesis',
   'Exodus',
@@ -28,12 +12,12 @@ export const correctlyOrderedBibleBookNameReference = [
   'Joshua',
   'Judges',
   'Ruth',
-  '1 Samuel',
-  '2 Samuel',
-  '1 Kings',
-  '2 Kings',
-  '1 Chronicles',
-  '2 Chronicles',
+  'I Samuel',
+  'II Samuel',
+  'I Kings',
+  'II Kings',
+  'I Chronicles',
+  'II Chronicles',
   'Ezra',
   'Nehemiah',
   'Esther',
@@ -41,7 +25,7 @@ export const correctlyOrderedBibleBookNameReference = [
   'Psalms',
   'Proverbs',
   'Ecclesiastes',
-  'Song of Songs',
+  'Song of Solomon',
   'Isaiah',
   'Jeremiah',
   'Lamentations',
@@ -86,6 +70,75 @@ export const correctlyOrderedBibleBookNameReference = [
   '3 John',
   'Jude',
   'Revelation',
+];
+
+export const correctlyOrderedBibleBookNameReferenceID = [
+  'Kejadian',
+  'Keluaran',
+  'Imamat',
+  'Bilangan',
+  'Ulangan',
+  'Yosua',
+  'Hakim-hakim',
+  'Rut',
+  'I Samuel',
+  'II Samuel',
+  'I Raja-raja',
+  'II Raja-raja',
+  'I Tawarikh',
+  'II Tawarikh',
+  'Ezra',
+  'Nehemia',
+  'Ester',
+  'Ayub',
+  'Mazmur',
+  'Amsal',
+  'Pengkhotbah',
+  'Kidung Agung',
+  'Yesaya',
+  'Yeremia',
+  'Ratapan',
+  'Yehezkiel',
+  'Daniel',
+  'Hosea',
+  'Yoel',
+  'Amos',
+  'Obaja',
+  'Yunus',
+  'Mikha',
+  'Nahum',
+  'Habakuk',
+  'Zefanya',
+  'Hagai',
+  'Zakharia',
+  'Maleakhi',
+  'Matius',
+  'Markus',
+  'Lukas',
+  'Yohanes',
+  'Kisah Para Rasul',
+  'Roma',
+  '1 Korintus',
+  '2 Korintus',
+  'Galatia',
+  'Efesus',
+  'Filipi',
+  'Kolose',
+  '1 Tesalonika',
+  '2 Tesalonika',
+  '1 Timotius',
+  '2 Timotius',
+  'Titus',
+  'Filemon',
+  'Ibrani',
+  'Yakobus',
+  '1 Petrus',
+  '2 Petrus',
+  '1 Yohanes',
+  '2 Yohanes',
+  '3 Yohanes',
+  'Yudas',
+  'Wahyu',
 ];
 
 // Array of correct OT Bible book name order.
@@ -131,6 +184,48 @@ export const correctlyOrderedOTBibleBookNameReference = [
   'Malachi',
 ];
 
+export const correctlyOrderedOTBibleBookNameReferenceID = [
+  'Kejadian',
+  'Keluaran',
+  'Imamat',
+  'Bilangan',
+  'Ulangan',
+  'Yosua',
+  'Hakim-hakim',
+  'Rut',
+  'I Samuel',
+  'II Samuel',
+  'I Raja-raja',
+  'II Raja-raja',
+  'I Tawarikh',
+  'II Tawarikh',
+  'Ezra',
+  'Nehemia',
+  'Ester',
+  'Ayub',
+  'Mazmur',
+  'Amsal',
+  'Pengkhotbah',
+  'Kidung Agung',
+  'Yesaya',
+  'Yeremia',
+  'Ratapan',
+  'Yehezkiel',
+  'Daniel',
+  'Hosea',
+  'Yoel',
+  'Amos',
+  'Obaja',
+  'Yunus',
+  'Mikha',
+  'Nahum',
+  'Habakuk',
+  'Zefanya',
+  'Hagai',
+  'Zakharia',
+  'Maleakhi',
+];
+
 // Array of correct NT Bible book name order.
 export const correctlyOrderedNTBibleBookNameReference = [
   'Matthew',
@@ -160,4 +255,34 @@ export const correctlyOrderedNTBibleBookNameReference = [
   '3 John',
   'Jude',
   'Revelation',
+];
+
+export const correctlyOrderedNTBibleBookNameReferenceID = [
+  'Matius',
+  'Markus',
+  'Lukas',
+  'Yohanes',
+  'Kisah Para Rasul',
+  'Roma',
+  '1 Korintus',
+  '2 Korintus',
+  'Galatia',
+  'Efesus',
+  'Filipi',
+  'Kolose',
+  '1 Tesalonika',
+  '2 Tesalonika',
+  '1 Timotius',
+  '2 Timotius',
+  'Titus',
+  'Filemon',
+  'Ibrani',
+  'Yakobus',
+  '1 Petrus',
+  '2 Petrus',
+  '1 Yohanes',
+  '2 Yohanes',
+  '3 Yohanes',
+  'Yudas',
+  'Wahyu',
 ];

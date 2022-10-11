@@ -1,71 +1,73 @@
 # **Interlinear Bible Simple Editor**
-This is an *Interlinear Bible Simple Editor* (**IBSE**) that's created for easier
-translation of the Interlinear Bible format described
+
+This is an _Interlinear Bible Simple Editor_ (**IBSE**) that's created for
+easier translation of the Interlinear Bible format described
 [here](https://github.com/benihyangbaik/aist/blob/main/README.en.md#cheap-to-compute).
 
+## **Important Notices**
+
+_For now the whole UI is in Indonesian, we haven't thought of an easy way
+to have several language ready for the UI. Feel free to send suggestions
+to our email provided below or simply open an issue._
+
+_It is supposed to be a multiplatform and a web app, but because of the
+change of the multiplatform wrapper framework, it is not available as a
+web app for now._
+
 ## **Technology**
-Because of the urgent need of this application, it is made to be simple and
-portable. So the web technologies (React library for the functionality and
-interface and TypeScript for easier debugging), Electron as the wrapper for
-desktop use, and Webpack as the bundler for web use are utilized. The fonts
-used are [SBL
+
+Because of the urgent need of this application, it is made to be simple
+and portable. So the web technologies (SolidJS framework with Hope UI
+component library for the functionality and interface and TypeScript for
+easier debugging) and Tauri as the wrapper for desktop use is utilized.
+The fonts used are [SBL
 Biblit](https://www.sbl-site.org/educational/BiblicalFonts_SBLBibLit.aspx).
 
-
 ## **Functionality**
-Because of the urgent need of this application, so the functionality will be
-added gradually.
+
+Because of the urgent need of this application, so the functionality will
+be added gradually.
 
 _Phase I_ (**OK**)
+
 1. Input the equivalent of every word of the original language.
 2. Save and load the JSON file from certain directory.
-3. Automatically save ~~every verse, chapter, and Bible book move~~ on every change made.
+3. Automatically save on every change made.
 
-_Phase II_
-1. Display one chapter to translate.
-2. Change the font size.
-3. Detail for the root and family of a Strongs data.
+_Phase II_ (**OK**)
+
+1. Modal/dialog that shows the lexicon entry.
+2. Popup that shows the parsed morphological data.
+3. Upload (push) and download (pull) the JSON file from certain Git
+   repository.
 
 _Phase III_
-1. Verse references on the Strongs (dictionary) data.
-2. History of the traveled verses or chapters
-3. Mechanism to print the translated parts in a common digital book format such as PDF.
 
+1. Display one chapter to translate.
+2. Modifiable font size.
+3. Verse references on the Strongs (dictionary) data.
+4. History of the traveled verses or chapters
+5. Mechanism to print the translated parts in a common digital book format
+   such as PDF.
 
 ## **Usage**
-Simply go to [our site](https://ibse.benihyangbaik.com), load [Open Scripture's
-Hebrew
-Bible](https://github.com/benihyangbaik/interlinear-bible-simple-editor/blob/main/data/morphhb.json)
-or [the Byzantine Majority Text by
-Robinson-Pierpoint](https://github.com/benihyangbaik/interlinear-bible-simple-editor/blob/main/data/byzmt.json)
-and start editing! Every edit is saved on every change you make.
 
-You can also download the repo and run,
-```bash
-yarn install
-yarn start
-```
-OR
-```bash
-npm install
-npm start
-```
-to run it on your desktop temporarily.
-
-Also run `yarn make` or `npm make` to compile the installer and go to the
-`./out/make/{your-os}` directory and install using the provided installer
-there.
-
-We will release the installer in a couple of weeks, so desktop usage wouldn't
-need you to compile from source!
-
+We will release an installer for Windows and Linux in a couple of weeks!
+Until then, feel free to contact us by the email provided below if you
+require any assistance.
 
 ## **Development**
-Run the same commands as for running the application on your desktop
-temporarily. Start modifying the source, save them, and you'll see the
-application updated automatically.
 
+Run `pnpm tauri dev` after installing JavaScript and Rust dependencies,
+change `pnpm` with `yarn` or `npm` if you prefer. Start modifying the
+source, save them, and you'll see the application updated automatically.
 
 ## **Improvements**
+
 List of things to be improved.
+
 1. Add documentation as a comment for every function and components.
+
+## **Contact**
+
+Benih Yang Baik <[info@benihyangbaik.com](mailto:info@benihyangbaik.com)>

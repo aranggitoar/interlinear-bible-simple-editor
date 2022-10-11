@@ -1,31 +1,26 @@
 {
+  "types": ["jest", "@testing-library/jest-dom"],
   "compilerOptions": {
-    "target": "es5",
-    "allowJs": true,
-    "module": "commonjs",
-    "strict": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "removeComments": true,
-    "sourceMap": true,
-    "allowUnreachableCode": false,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src/",
-    "outDir": "dist",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "out",
-    "build",
-    ".webpack",
-    ".git",
-    "data"
-  ]
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "types": ["vite/client", "jest"],
+    "noEmit": true,
+    "isolatedModules": true,
+    "paths": {
+      "assets/*": ["./src/assets/*"],
+      "components/*": ["./src/components/*"],
+      "stores/*": ["./src/stores/*"],
+      "styles/*": ["./src/styles/*"],
+      "tests/*": ["./src/tests/*"],
+      "types/*": ["./src/types/*"],
+      "utils/*": ["./src/utils/*"]
+    }
+  }
 }
