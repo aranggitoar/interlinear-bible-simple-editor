@@ -1,12 +1,12 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 import solidPlugin from 'vite-plugin-solid';
+import suidPlugin from '@suid/vite-plugin';
 
 export default defineConfig({
-  plugins: [solidPlugin()],
+  plugins: [solidPlugin(), suidPlugin()],
   build: {
     target: 'esnext',
-    polyfillDynamicImport: false,
   },
   resolve: {
     alias: {
