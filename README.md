@@ -68,6 +68,4 @@ List of things to be improved.
 
 ## **Contact**
 
-Benih Yang Baik
-
-[info@benihyangbaik.com](mailto:info@benihyangbaik.com)
+Benih Yang Baik <[info@benihyangbaik.com](mailto:info@benihyangbaik.com)>
