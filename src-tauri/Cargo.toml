@@ -1,11 +1,11 @@
 [package]
-name = "ibse"
-version = "0.4.0"
+name = "IBSE"
+version = "0.6.0"
 description = "Easily translate an Interlinear Bible to your language!"
 authors = ["aranggitoar"]
 license = "GPL-2.0"
 repository = "https://git.sr.ht/~toar/ibse"
-default-run = "ibse"
+default-run = "IBSE"
 edition = "2021"
 rust-version = "1.57"
 

@@ -1,6 +1,6 @@
 {
   "name": "ibse",
-  "version": "0.4.0",
+  "version": "0.6.0",
   "description": "Editor for a modified format of Open Scripture's Hebrew Bible JSON version.",
   "scripts": {
     "dev": "vite",

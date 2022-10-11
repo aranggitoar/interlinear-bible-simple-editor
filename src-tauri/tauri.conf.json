@@ -7,8 +7,8 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "ibse",
-    "version": "0.4.0"
+    "productName": "IBSE",
+    "version": "0.6.0"
   },
   "tauri": {
     "allowlist": {
