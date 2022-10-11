@@ -1,3 +1,6 @@
+// Copyright (C) 2022  Aranggi J. Toar <at@aranggitoar.com>
+// Full GPL-2.0 notice  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
 #![cfg_attr(
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
