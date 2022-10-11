@@ -1,12 +1,7 @@
 # **Interlinear Bible Simple Editor**
 
-<<<<<<< HEAD
 _Interlinear Bible Simple Editor_ (**IBSE**) is created for easier
 translation of the Interlinear Bible format described
-=======
-This is an _Interlinear Bible Simple Editor_ (**IBSE**) that's created for
-easier translation of the Interlinear Bible format described
->>>>>>> 6e56b28b85320f7aacf21f787f0de24b5c19873b
 [here](https://github.com/benihyangbaik/aist/blob/main/README.en.md#cheap-to-compute).
 
 ## **Important Notices**
