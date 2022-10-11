@@ -32,8 +32,7 @@ _Phase I_ (**OK**)
 
 1. Input the equivalent of every word of the original language.
 2. Save and load the JSON file from certain directory.
-3. Automatically save ~~every verse, chapter, and Bible book move~~ on
-   every change made.
+3. Automatically save on every change made.
 
 _Phase II_ (**OK**)
 
