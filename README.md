@@ -19,8 +19,8 @@ web app for now._
 Because of the urgent need of this application, it is made to be simple
 and portable. So the web technologies (SolidJS framework with Hope UI
 component library for the functionality and interface and TypeScript for
-easier debugging), Tauri as the wrapper for desktop use. The fonts used
-are [SBL
+easier debugging) and Tauri as the wrapper for desktop use is utilized.
+The fonts used are [SBL
 Biblit](https://www.sbl-site.org/educational/BiblicalFonts_SBLBibLit.aspx).
 
 ## **Functionality**
