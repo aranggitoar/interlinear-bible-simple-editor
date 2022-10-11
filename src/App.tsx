@@ -1,36 +1,27 @@
+// Copyright (C) 2022  Aranggi J. Toar <at@aranggitoar.com>
+// Full GPL-2.0 notice  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
 import { Component } from 'solid-js';
+import { Toaster } from 'solid-toast';
+import { HopeProvider } from '@hope-ui/solid';
+import { config } from 'styles/theme';
+import { GlobalStyle } from 'styles/global';
 import DisplayBlock from 'components/DisplayBlock';
 import MenuBlock from 'components/MenuBlock';
 import SelectorBlock from 'components/SelectorBlock';
-import GlobalStyle from 'styles/global';
 
 const App: Component = () => (
-  <>
+  <HopeProvider config={config}>
     <GlobalStyle />
     <MenuBlock />
     <SelectorBlock />
     <DisplayBlock />
-  </>
+    <Toaster
+      containerStyle={{ 'font-family': 'sans-serif' }}
+      position="top-left"
+      gutter={16}
+    />
+  </HopeProvider>
 );
 
 export default App;
-
-/*
-
-Interlinear Bible Simple Editor is a multiplatform interlinear bible translation software.
-Copyright (C) 2022  Aranggi J. Toar
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; only version 2 of the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
-*/

@@ -1,7 +1,10 @@
+// Copyright (C) 2022  Aranggi J. Toar <at@aranggitoar.com>
+// Full GPL-2.0 notice  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
 import { fireEvent, render } from 'solid-testing-library';
 import { MoveForwardByOne, MoveBackwardByOne } from 'components/SelectorBlock/MoveByOne';
-import { bibleData } from 'stores/bibleDataStore';
-import { moveOneVerseForward } from 'stores/bibleDataActions';
+import { bibleData } from 'stores/BibleDataStore';
+import { moveOneVerseForward } from 'stores/BibleDataActions';
 import setupStore from 'tests/setup';
 
 describe('<MoveForwardByOne />', () => {

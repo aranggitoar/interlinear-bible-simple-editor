@@ -1,3 +1,6 @@
+// Copyright (C) 2022  Aranggi J. Toar <at@aranggitoar.com>
+// Full GPL-2.0 notice  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
 import { fireEvent, render } from 'solid-testing-library';
 import Chapter from 'components/SelectorBlock/Chapter';
 import setupStore from 'tests/setup';

@@ -1,29 +1,62 @@
-import FileHandler from './FileHandler';
-// import { MenuBlockSettings } from './Settings/Settings';
-import { BlockContainer } from './styles';
+// Copyright (C) 2022  Aranggi J. Toar <at@aranggitoar.com>
+// Full GPL-2.0 notice  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
-export default () => (
-  <BlockContainer>
-    <FileHandler />
-  </BlockContainer>
+import { JSX } from 'solid-js';
+import { Box, VStack } from '@hope-ui/solid';
+import { populateWithEmptyTargetLanguage } from 'utils/populateWithEmptyTargetLanguage';
+import { arrangeBibleBookName } from 'utils/arrangeBibleBookName';
+import {
+  setBibleFileName,
+  setBibleObject,
+  setBibleBookNames,
+  setBibleBookNameFromBibleInfo,
+  setBibleChapterIndexFromBibleInfo,
+} from 'stores/BibleDataActions';
+import { bibleData } from 'stores/BibleDataStore';
+import { BibleDataObjectType } from 'types/BibleData';
+import Sync from './Sync';
+import Save from './Save';
+import Load from './Load';
+
+const loadBibleFromParsedJSON = (bibleObject: BibleDataObjectType, fileName?: string) => {
+  let bibleBookNames = Object.keys(bibleObject);
+  let updatedBibleObject = bibleObject;
+  let bibleBookName = 'Genesis' as string;
+
+  // If the file is a default Open Scripture's Hebrew Bible format, add the
+  // container for target language.
+  if (bibleObject[bibleBookName][0][0][0].length === 3) {
+    updatedBibleObject = populateWithEmptyTargetLanguage(bibleObject);
+  }
+
+  // If there is more than one Bible book, arrange the order;
+  if (bibleBookNames.length > 1) {
+    bibleBookNames = arrangeBibleBookName(bibleBookNames);
+  }
+
+  console.log(bibleData.bibleInfo);
+  setBibleFileName(fileName ? '' : 'byzparsed-morphhb.json');
+  setBibleBookNames(bibleBookNames);
+  setBibleObject(updatedBibleObject);
+  setBibleBookNameFromBibleInfo(bibleBookName);
+  // Without this, the chapter list doesn't seem to be reloaded.
+  setBibleChapterIndexFromBibleInfo(0);
+  console.log(bibleData.bibleInfo);
+};
+
+export default (): JSX.Element => (
+  <Box
+    display="flex"
+    justifyContent="flex-start"
+    p="1rem"
+    position="fixed"
+    top="0"
+    zIndex="2"
+  >
+    <VStack spacing="1rem" alignItems="flex-start">
+      <Sync loadBibleFromParsedJSON={loadBibleFromParsedJSON} />
+      <Save />
+      <Load loadBibleFromParsedJSON={loadBibleFromParsedJSON} />
+    </VStack>
+  </Box>
 );
-
-/*
-
-Interlinear Bible Simple Editor is a multiplatform interlinear bible translation software.
-Copyright (C) 2022  Aranggi J. Toar
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; only version 2 of the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
-
-*/

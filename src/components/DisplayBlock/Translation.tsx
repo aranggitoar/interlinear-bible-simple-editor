@@ -1,6 +1,9 @@
-import { bibleData } from 'stores/bibleDataStore';
-import { setTranslatedWordFromBibleObject } from 'stores/bibleDataActions';
-import { TranslationField } from './styles';
+// Copyright (C) 2022  Aranggi J. Toar <at@aranggitoar.com>
+// Full GPL-2.0 notice  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
+import { Input } from '@hope-ui/solid';
+import { bibleData } from 'stores/BibleDataStore';
+import { setTranslatedWordFromBibleObject } from 'stores/BibleDataActions';
 
 export default (props: Record<string, number>) => {
   const translation =
@@ -9,31 +12,26 @@ export default (props: Record<string, number>) => {
     ][bibleData.bibleInfo.bibleVerseIndex][props.wordIndex][0];
 
   return (
-    <TranslationField
-      value={translation !== '' ? translation : ''}
-      onChange={(event) => {
-        setTranslatedWordFromBibleObject(props.wordIndex, event.currentTarget.value);
+    <Input
+      border="1px dashed rgb(188, 186, 184)"
+      borderRadius="5px"
+      color="$danger11"
+      css={{ direction: 'ltr' }}
+      fontSize="1.05rem"
+      _hover={{
+        border: '1px dashed #777',
       }}
+      _focus={{
+        border: '1px dashed #222',
+      }}
+      h="1em"
+      pr=".75rem"
+      pl=".75rem"
+      variant="unstyled"
+      value={translation !== '' ? translation : ''}
+      onChange={(event) =>
+        setTranslatedWordFromBibleObject(props.wordIndex, event.currentTarget.value)
+      }
     />
   );
 };
-
-/*
-
-Interlinear Bible Simple Editor is a multiplatform interlinear bible translation software.
-Copyright (C) 2022  Aranggi J. Toar
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; only version 2 of the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
-
-*/
