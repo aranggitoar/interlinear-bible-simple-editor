@@ -22,87 +22,84 @@ export default ({
   // 3a. If it is updated, load the file
   // 3b. If it is not updated, update the repo, then load the file
   const download = () => {
-    let exists = true;
     invoke('exists').then((res) => {
       // @ts-ignore
-      if (res.message) {
+      console.log(res.message);
+      // @ts-ignore
+      if (res.message === true) {
         toast.loading('Memeriksa apakah ada pembaruan ..', { id: 'update-sync' });
+        invoke('has_changes').then((res) => {
+          toast.remove('update-sync');
+          // @ts-ignore
+          if (res.message === true) {
+            toast.error(
+              'Ada pembaruan yang belum Anda unggah! Silahkan pilih "Unggah" terlebih dahulu.'
+            );
+          } else {
+            invoke('pull')
+              .then((res) => {
+                toast.remove('update-sync');
+                // @ts-ignore
+                if (res.message) {
+                  toast.success('Terjemahan sudah terbarui!');
+                  toast.loading('Memuat terjemahan ..', {
+                    id: 'load',
+                  });
+                  invoke('load')
+                    .then((res) => {
+                      // @ts-ignore // property "message" of "res" exists
+                      loadBibleFromParsedJSON(JSON.parse(res.message));
+                      toast.remove('load');
+                      toast.success('Terjemahan berhasil dimuat!');
+                    })
+                    .catch((err) => {
+                      toast.remove('load');
+                      toast.error('Terjadi sebuah kesalahan, error: ' + err.message);
+                    });
+                }
+              })
+              .catch((err) => {
+                toast.remove('update-sync');
+                toast.error('Terjadi sebuah kesalahan, error log: ' + err.message);
+              });
+          }
+        });
       } else {
         toast.loading('Mengunduh terjemahan sekarang ..', { id: 'clone-sync' });
-        exists = false;
+        invoke('clone')
+          .then(() => {
+            toast.remove('clone-sync');
+            toast.loading('Memuat terjemahan ..', {
+              id: 'load',
+            });
+            invoke('load')
+              .then((res) => {
+                // @ts-ignore // property "message" of "res" exists
+                loadBibleFromParsedJSON(JSON.parse(res.message));
+                toast.remove('load');
+                toast.success('Terjemahan berhasil dimuat!');
+              })
+              .catch((err) => {
+                toast.remove('load');
+                toast.error('Terjadi sebuah kesalahan, error: ' + err.message);
+              });
+          })
+          .catch((err) => {
+            toast.remove('clone-sync');
+            // @ts-ignore
+            toast.error('Terjadi sebuah kesalahan, error: ' + err.message);
+          });
       }
     });
-
-    if (exists) {
-      invoke('has_changes').then((res) => {
-        toast.remove('update-sync');
-        // @ts-ignore
-        if (res.message === true) {
-          toast.error(
-            'Ada pembaruan yang belum Anda unggah! Silahkan pilih "Unggah" terlebih dahulu.'
-          );
-        } else {
-          invoke('pull')
-            .then((res) => {
-              toast.remove('update-sync');
-              // @ts-ignore
-              if (res.message) {
-                toast.success('Terjemahan sudah terbarui!');
-                toast.loading('Memuat terjemahan ..', {
-                  id: 'load',
-                });
-                invoke('load')
-                  .then((res) => {
-                    // @ts-ignore // property "message" of "res" exists
-                    loadBibleFromParsedJSON(JSON.parse(res.message));
-                    toast.remove('load');
-                    toast.success('Terjemahan berhasil dimuat!');
-                  })
-                  .catch((err) => {
-                    toast.remove('load');
-                    toast.error('Terjadi sebuah kesalahan, error: ' + err.message);
-                  });
-              }
-            })
-            .catch((err) => {
-              toast.remove('update-sync');
-              toast.error('Terjadi sebuah kesalahan, error log: ' + err.message);
-            });
-        }
-      });
-    } else {
-      invoke('clone')
-        .then(() => {
-          toast.remove('clone-sync');
-          toast.loading('Memuat terjemahan ..', {
-            id: 'load',
-          });
-          invoke('load')
-            .then((res) => {
-              // @ts-ignore // property "message" of "res" exists
-              loadBibleFromParsedJSON(JSON.parse(res.message));
-              toast.remove('load');
-              toast.success('Terjemahan berhasil dimuat!');
-            })
-            .catch((err) => {
-              toast.remove('load');
-              toast.error('Terjadi sebuah kesalahan, error: ' + err.message);
-            });
-        })
-        .catch((err) => {
-          toast.remove('clone-sync');
-          // @ts-ignore
-          toast.error('Terjadi sebuah kesalahan, error: ' + err.message);
-        });
-    }
   };
 
   const upload = () => {
     toast.loading('Menyimpan pembaruan sebelum mengunggah ..', {
       id: 'save-sync',
     });
+    const bible = JSON.stringify(bibleData.bibleObject);
     invoke('save', {
-      bible: JSON.stringify(bibleData.bibleObject),
+      bible,
     })
       .then(() => {
         toast.remove('save-sync');

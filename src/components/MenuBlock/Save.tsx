@@ -13,8 +13,9 @@ export default (): JSX.Element => {
     toast.loading('Menyimpan terjemahan ..', {
       id: 'save',
     });
+    const bible = JSON.stringify(bibleData.bibleObject);
     invoke('save', {
-      bible: JSON.stringify(bibleData.bibleObject),
+      bible,
     })
       .then(() => {
         toast.remove('save');
