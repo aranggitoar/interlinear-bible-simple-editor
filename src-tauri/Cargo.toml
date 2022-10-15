@@ -1,6 +1,6 @@
 [package]
 name = "IBSE"
-version = "0.6.0"
+version = "0.6.1"
 description = "Easily translate an Interlinear Bible to your language!"
 authors = ["aranggitoar"]
 license = "GPL-2.0"

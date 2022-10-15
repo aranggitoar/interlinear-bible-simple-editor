@@ -7,7 +7,6 @@ specifiers:
   '@hope-ui/solid': ^0.6.7
   '@radix-ui/colors': ^0.1.8
   '@stitches/core': ^1.2.8
-  '@suid/vite-plugin': ^0.0.3
   '@tauri-apps/api': ^1.1.0
   '@tauri-apps/cli': ^1.1.1
   '@testing-library/dom': ^8.19.0
@@ -52,7 +51,6 @@ devDependencies:
   '@babel/core': 7.19.3
   '@babel/preset-env': 7.19.4_@babel+core@7.19.3
   '@babel/preset-typescript': 7.18.6_@babel+core@7.19.3
-  '@suid/vite-plugin': 0.0.3_vite@3.1.7
   '@tauri-apps/cli': 1.1.1
   '@testing-library/dom': 8.19.0
   '@testing-library/jest-dom': 5.16.5
@@ -1752,22 +1750,6 @@ packages:
   /@stitches/core/1.2.8:
     resolution: {integrity: sha512-Gfkvwk9o9kE9r9XNBmJRfV8zONvXThnm1tcuojL04Uy5uRyqg93DC83lDebl0rocZCfKSjUv+fWYtMQmEDJldg==}
     dev: false
-
-  /@suid/vite-plugin/0.0.3_vite@3.1.7:
-    resolution: {integrity: sha512-5bMrnB6vyBgIdFwvRPNcGhZh3XjpvH9jsPCz38Vi1bE1Ti2WLK7rvIguhCZs+2Z0v5LUpHkypWrl1+6MKCnTug==}
-    peerDependencies:
-      vite: ^3.0.0
-    dependencies:
-      '@babel/generator': 7.19.5
-      '@babel/parser': 7.19.4
-      '@babel/traverse': 7.19.4
-      '@babel/types': 7.19.4
-      '@types/babel__generator': 7.6.4
-      '@types/babel__traverse': 7.18.2
-      vite: 3.1.7
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
 
   /@tauri-apps/api/1.1.0:
     resolution: {integrity: sha512-n13pIqdPd3KtaMmmAcrU7BTfdMtIlGNnfZD0dNX8L4p8dgmuNyikm6JAA+yCpl9gqq6I8x5cV2Y0muqdgD0cWw==}

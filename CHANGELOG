@@ -12,3 +12,5 @@ data on verse change
 0.5.0 Added capability to upload and download to a Git repo
 
 0.6.0 Added capability to show lexicon entry and parsed morphological code
+
+0.6.1 Added capability to open verse references in a lexicon entry
