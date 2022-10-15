@@ -30,7 +30,10 @@ export default (props: Record<string, number | string>) => {
       variant="unstyled"
       value={translation !== '' ? translation : ''}
       onChange={(event) =>
-        setTranslatedWordFromBibleObject(props.wordIndex, event.currentTarget.value)
+        setTranslatedWordFromBibleObject(
+          props.wordIndex as number,
+          event.currentTarget.value
+        )
       }
     />
   );

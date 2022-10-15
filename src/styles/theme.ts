@@ -27,9 +27,6 @@ export const config: HopeThemeConfig = {
         trigger: {
           width: '150px',
         },
-        content: {
-          height: '40vh',
-        },
         listbox: {
           height: '100%',
           minHeight: '100%',
