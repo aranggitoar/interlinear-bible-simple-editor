@@ -5,18 +5,6 @@ interface IReference {
   [index: string]: string;
 }
 
-// Object of main morphological data code as keys and parsed as values.
-export const simpleMorphHBMorphRef = {
-  A: 'Adjektiva',
-  C: 'Konjungsi',
-  D: 'Adverbia',
-  N: 'Nomina',
-  P: 'Pronomina',
-  R: 'Preposisi',
-  T: 'Partikel',
-  V: 'Verba',
-} as IReference;
-
 // Morphological codes for Open Scripture's Hebrew Bible.
 // Reference:
 // https://hb.openscriptures.org/parsing/HebrewMorphologyCodes.html
@@ -32,6 +20,7 @@ export const regularPOSMorphHBMorphRef = {
   R: 'Preposisi',
   T: 'Partikel',
   V: 'Verba',
+  S: 'Pronomina',
 } as IReference;
 
 export const verbStemMorphHBMorphRef = {
@@ -227,10 +216,10 @@ export const undeclinedByzMTMorphRef = {
 } as IReference;
 
 export const specialUndeclinedByzMTMorphRef = {
-  'N-PRI': 'Nomina Nama Diri Tanpa Deklinasi',
-  'A-NUI': 'Numeralia Tanpa Deklinasi (Adjektiva)',
-  'N-LI': 'Huruf Tanpa Deklinasi (Nomina)',
-  'N-OI': 'Nomina atau Tipe Lain Tanpa Deklinasi',
+  PRI: 'Nama Diri Tanpa Deklinasi',
+  NUI: 'Numeralia Tanpa Deklinasi',
+  LI: 'Huruf Tanpa Deklinasi',
+  OI: 'Nomina atau Tipe Lain Tanpa Deklinasi',
 } as IReference;
 
 export const declinedAndVerbPrefixByzMTMorphRef = {

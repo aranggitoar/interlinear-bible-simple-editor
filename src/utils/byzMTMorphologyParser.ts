@@ -128,14 +128,18 @@ export const byzMTMorphParser = (
   if (/[-]/.test(morphData) === false) {
     parsedMorph.push(r.undeclinedByzMTMorphRef[morphData]);
     parsedMorph.push(morphData);
-  }
-
-  if (r.specialUndeclinedByzMTMorphRef[morphData] !== undefined) {
-    parsedMorph.push(r.specialUndeclinedByzMTMorphRef[morphData]);
-    parsedMorph.push(morphData);
+    return parsedMorph;
   }
 
   const splitData = morphData.split('-');
+
+  if (r.specialUndeclinedByzMTMorphRef[splitData[1]] !== undefined) {
+    parsedMorph.push(r.declinedAndVerbPrefixByzMTMorphRef[splitData[0]]);
+    parsedMorph.push(splitData[0]);
+    parsedMorph.push([r.specialUndeclinedByzMTMorphRef[splitData[1]]]);
+    parsedMorph.push(['Keterangan ' + splitData[1]]);
+    return parsedMorph;
+  }
 
   if (splitData.length > 1) {
     parsedMorph.push(r.declinedAndVerbPrefixByzMTMorphRef[splitData[0]]);
