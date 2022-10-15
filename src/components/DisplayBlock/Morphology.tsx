@@ -43,11 +43,11 @@ export const filterDisplayedMorphology = (
   return morphHBMorphParser(data, parsedOSHBMorph);
 };
 
-export default (props: Record<string, number>) => {
+export default (props: Record<string, number | string>) => {
   const morphology =
-    bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][
-      bibleData.bibleInfo.bibleChapterIndex
-    ][bibleData.bibleInfo.bibleVerseIndex][props.wordIndex][3];
+    bibleData.bibleObject[props.bibleBookName as string][
+      props.bibleChapterIndex as number
+    ][props.bibleVerseIndex as number][props.wordIndex as number][3];
 
   const filteredMorphology = filterDisplayedMorphology(morphology);
 
@@ -185,7 +185,7 @@ export default (props: Record<string, number>) => {
   };
 
   return (
-    <Popover>
+    <Popover trapFocus>
       <PopoverTrigger
         as={Text}
         cursor="pointer"

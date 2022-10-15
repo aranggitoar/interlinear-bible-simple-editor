@@ -11,7 +11,14 @@ import Morphology from './Morphology';
 import { correctlyOrderedOTBibleBookNameReference } from 'utils/references/correctlyOrderedBibleBookNameReferences';
 import { bibleData } from 'stores/BibleDataStore';
 
-const createContentRows = (wordsInVerse: number): JSX.Element => {
+// Create rows of lexicon entry, original word, translated word, and word morphology.
+export const createContentRows = (
+  wordsInVerse: number,
+  bibleBookName: string,
+  bibleChapterIndex: number,
+  bibleVerseIndex: number,
+  currentlyDisplayedLexiconEntry?: string
+): JSX.Element => {
   const jsxMarkup = [] as Array<JSX.Element>;
 
   // Generate as many containers as the word count of the current verse.
@@ -24,11 +31,59 @@ const createContentRows = (wordsInVerse: number): JSX.Element => {
         justifyContent="center"
         maxWidth="75%"
         p="0.75rem 1.25rem"
+        css={{
+          '*': {
+            color: (() => {
+              const lexiconRegExp = new RegExp(currentlyDisplayedLexiconEntry as string);
+
+              return lexiconRegExp.test(
+                bibleData.bibleObject[bibleBookName][bibleChapterIndex][bibleVerseIndex][
+                  wordIndex
+                ][2]
+              ) && currentlyDisplayedLexiconEntry !== undefined
+                ? '$danger11'
+                : '';
+            })(),
+          },
+          '*:hover': {
+            color: (() => {
+              const lexiconRegExp = new RegExp(currentlyDisplayedLexiconEntry as string);
+
+              return lexiconRegExp.test(
+                bibleData.bibleObject[bibleBookName][bibleChapterIndex][bibleVerseIndex][
+                  wordIndex
+                ][2]
+              ) && currentlyDisplayedLexiconEntry !== undefined
+                ? '$danger11'
+                : '';
+            })(),
+          },
+        }}
       >
-        <Lexicon wordIndex={wordIndex} />
-        <Original wordIndex={wordIndex} />
-        <Translation wordIndex={wordIndex} />
-        <Morphology wordIndex={wordIndex} />
+        <Lexicon
+          wordIndex={wordIndex}
+          bibleBookName={bibleBookName}
+          bibleChapterIndex={bibleChapterIndex}
+          bibleVerseIndex={bibleVerseIndex}
+        />
+        <Original
+          wordIndex={wordIndex}
+          bibleBookName={bibleBookName}
+          bibleChapterIndex={bibleChapterIndex}
+          bibleVerseIndex={bibleVerseIndex}
+        />
+        <Translation
+          wordIndex={wordIndex}
+          bibleBookName={bibleBookName}
+          bibleChapterIndex={bibleChapterIndex}
+          bibleVerseIndex={bibleVerseIndex}
+        />
+        <Morphology
+          wordIndex={wordIndex}
+          bibleBookName={bibleBookName}
+          bibleChapterIndex={bibleChapterIndex}
+          bibleVerseIndex={bibleVerseIndex}
+        />
       </Flex>
     );
   }
@@ -58,7 +113,12 @@ export default (): JSX.Element => (
           : css({ direction: 'ltr' })()
       }
     >
-      {createContentRows(bibleData.bibleInfo.bibleWordCount)}
+      {createContentRows(
+        bibleData.bibleInfo.bibleWordCount,
+        bibleData.bibleInfo.bibleBookName,
+        bibleData.bibleInfo.bibleChapterIndex,
+        bibleData.bibleInfo.bibleVerseIndex
+      )}
     </Flex>
   </Container>
 );

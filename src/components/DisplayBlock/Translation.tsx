@@ -5,11 +5,11 @@ import { Input } from '@hope-ui/solid';
 import { bibleData } from 'stores/BibleDataStore';
 import { setTranslatedWordFromBibleObject } from 'stores/BibleDataActions';
 
-export default (props: Record<string, number>) => {
+export default (props: Record<string, number | string>) => {
   const translation =
-    bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][
-      bibleData.bibleInfo.bibleChapterIndex
-    ][bibleData.bibleInfo.bibleVerseIndex][props.wordIndex][0];
+    bibleData.bibleObject[props.bibleBookName as string][
+      props.bibleChapterIndex as number
+    ][props.bibleVerseIndex as number][props.wordIndex as number][0];
 
   return (
     <Input

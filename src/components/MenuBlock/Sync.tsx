@@ -22,12 +22,10 @@ export default ({
   // 3a. If it is updated, load the file
   // 3b. If it is not updated, update the repo, then load the file
   const download = () => {
+    toast.loading('Memeriksa apakah ada pembaruan ..', { id: 'update-sync' });
     invoke('exists').then((res) => {
       // @ts-ignore
-      console.log(res.message);
-      // @ts-ignore
       if (res.message === true) {
-        toast.loading('Memeriksa apakah ada pembaruan ..', { id: 'update-sync' });
         invoke('has_changes').then((res) => {
           toast.remove('update-sync');
           // @ts-ignore

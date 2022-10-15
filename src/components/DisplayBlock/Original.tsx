@@ -4,7 +4,7 @@
 import { Text } from '@hope-ui/solid';
 import { bibleData } from 'stores/BibleDataStore';
 
-export default (props: Record<string, number>) => {
+export default (props: Record<string, number | string>) => {
   // Filter the displayed original language data.
   const filterDisplayedOriginal = (data: string): string => {
     let filteredOriginal = data;
@@ -15,9 +15,9 @@ export default (props: Record<string, number>) => {
   };
 
   const original =
-    bibleData.bibleObject[bibleData.bibleInfo.bibleBookName][
-      bibleData.bibleInfo.bibleChapterIndex
-    ][bibleData.bibleInfo.bibleVerseIndex][props.wordIndex][1];
+    bibleData.bibleObject[props.bibleBookName as string][
+      props.bibleChapterIndex as number
+    ][props.bibleVerseIndex as number][props.wordIndex as number][1];
 
   return (
     <Text fontSize="1.75rem" m="0.3rem 0">
