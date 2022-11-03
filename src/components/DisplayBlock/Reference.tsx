@@ -15,28 +15,29 @@ import {
   correctlyOrderedBibleBookNameReferenceID,
   correctlyOrderedOTBibleBookNameReference,
 } from 'utils/references/correctlyOrderedBibleBookNameReferences';
+import { getLexiconEntry } from 'utils/getLexiconEntry';
 import { createContentRows } from '.';
 import * as T from 'types/ReferenceData';
 
 export default () => {
   const addVerseReferenceTabs = (tabID: string) => {
     // Get the element nodes of the verse reference anchors.
-    const references = (document.getElementById(tabID) as Element).getElementsByClassName(
-      'bible'
-    );
+    const verseReferences = (
+      document.getElementById(tabID) as Element
+    ).getElementsByClassName('bible');
 
-    for (let i = 0; i < references.length; i++) {
+    for (let i = 0; i < verseReferences.length; i++) {
       // Check for certain CSS class to skip listened elements.
-      if (references[i].classList.contains('listened') === false) {
+      if (verseReferences[i].classList.contains('listened') === false) {
         // Add certain CSS class to mark element as listened.
-        references[i].classList.add('listened');
+        verseReferences[i].classList.add('listened');
 
         // Get the raw reference code.
-        let verseRef = (references[i] as HTMLAnchorElement).href;
+        let verseRef = (verseReferences[i] as HTMLAnchorElement).href;
 
         // Make it so everytime any reference is clicked a modal is
         // rendered based on the parsed reference code.
-        references[i].addEventListener('click', () => {
+        verseReferences[i].addEventListener('click', () => {
           console.log(verseRef);
           let splitVerseRef = verseRef
             .substring(verseRef.indexOf('#') + 2, 50)
@@ -65,14 +66,44 @@ export default () => {
           );
         });
       }
+
+      // Get the element nodes of the lexicon reference anchors.
+      const lexiconReferences = (
+        document.getElementById(tabID) as Element
+      ).getElementsByClassName('dict');
+
+      for (let i = 0; i < lexiconReferences.length; i++) {
+        if (lexiconReferences[i].classList.contains('listened') === false) {
+          lexiconReferences[i].classList.add('listened');
+
+          // Get the raw lexicon index.
+          let lexiconRef = (lexiconReferences[i] as HTMLAnchorElement).href;
+          lexiconReferences[i].addEventListener('click', () => {
+            console.log(lexiconRef);
+            lexiconRef = lexiconRef.substring(lexiconRef.indexOf('#') + 2, 50);
+            console.log(lexiconRef);
+            if (/&/.test(lexiconRef) === true) {
+              const splitLexiconId = lexiconRef.split('&');
+              for (let i = 0; i < splitLexiconId.length; i++) {
+                addReferenceDataItem(
+                  splitLexiconId[i],
+                  getLexiconEntry(splitLexiconId[i])[0]
+                );
+              }
+            } else {
+              addReferenceDataItem(lexiconRef, getLexiconEntry(lexiconRef)[0]);
+            }
+          });
+        }
+      }
     }
-    console.log(references);
+    console.log(verseReferences);
   };
 
   return (
     <Tabs
-      w={referenceData[0] === undefined ? 'initial' : '47.5vw'}
-      right="1rem"
+      w={referenceData[0] === undefined ? 'initial' : '35vw'}
+      right="3rem"
       height="70vh"
       position="fixed"
     >
@@ -86,6 +117,7 @@ export default () => {
             return (
               <>
                 <Tab
+                  position="relative"
                   onFocus={() =>
                     typeof reference.content === 'string'
                       ? addVerseReferenceTabs(reference.uuid)
@@ -93,13 +125,20 @@ export default () => {
                   }
                 >
                   {reference.title}
+                  <Text
+                    css={{
+                      cursor: 'pointer',
+                      zIndex: '3',
+                      position: 'absolute',
+                      top: '0',
+                      right: '0',
+                      fontSize: '0.8rem',
+                    }}
+                    onClick={() => deleteReferenceDataItem(reference.uuid)}
+                  >
+                    ✕
+                  </Text>
                 </Tab>
-                <Text
-                  css={{ margin: '0 0.25rem 0 0.15rem', cursor: 'pointer', zIndex: '3' }}
-                  onClick={() => deleteReferenceDataItem(reference.uuid)}
-                >
-                  ✕
-                </Text>
               </>
             );
           }}

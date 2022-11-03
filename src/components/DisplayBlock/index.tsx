@@ -111,7 +111,7 @@ export default (): JSX.Element => (
         flexDirection="row"
         flexWrap="wrap"
         justifyContent="center"
-        w="47.5vw"
+        w={referenceData[0] === undefined ? '75vw' : '60vw'}
         class={
           correctlyOrderedOTBibleBookNameReference.indexOf(
             bibleData.bibleInfo.bibleBookName
