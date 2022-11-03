@@ -14,7 +14,6 @@ const App: Component = () => (
   <HopeProvider config={config}>
     <GlobalStyle />
     <MenuBlock />
-    <SelectorBlock />
     <DisplayBlock />
     <Toaster
       containerStyle={{ 'font-family': 'sans-serif' }}

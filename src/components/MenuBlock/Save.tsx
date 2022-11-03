@@ -9,13 +9,20 @@ import { CaretDown, Cloud, DesktopTower, FloppyDisk } from 'phosphor-solid';
 import { bibleData } from 'stores/BibleDataStore';
 
 export default (): JSX.Element => {
+  // Implement verse change identification.
+  // const checkDiff = () => {
+  //   "dan berfirmanlah"
+  //   "ו/יאמר"
+  //   "Hc/H559"
+  //   "HC/Vqw3ms"
+  // }
   const saveToSyncronized = () => {
+    // console.log(JSON.stringify(bibleData.bibleObject, null, '  '));
     toast.loading('Menyimpan terjemahan ..', {
       id: 'save',
     });
-    const bible = JSON.stringify(bibleData.bibleObject);
     invoke('save', {
-      bible,
+      bible: JSON.stringify(bibleData.bibleObject, null, '  '),
     })
       .then(() => {
         toast.remove('save');

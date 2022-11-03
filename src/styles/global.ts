@@ -18,6 +18,11 @@ export const GlobalStyle = globalCss({
     fontSize: '16px',
   },
 
+  '#root': {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+
   // For notification library "Solid Toast"
   '.sldt-active *': {
     fontFamily: 'sans-serif !important',
