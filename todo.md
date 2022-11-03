@@ -22,3 +22,33 @@ Details about the log file:
   one on September of 2022.
 - The log index is necessary to order the logs, if not, month 11 and 12
   would be ordered right after month 1 and might be confusing.
+
+## Others
+
+- Change Toast to HopeUI's notification component.
+
+## Moving from Tauri to Wails
+
+This is necessary, as a couple of collaboration features requires it.
+
+Things to port:
+
+- File logic (check if exists, save from synchronized, load from synchronized)
+- Repo logic (clone, check for changes, commit, push, pull)
+
+New features:
+
+- Multi-user logic (server connection, different access levels)
+- Email notification?
+
+Halfway implemented:
+
+- Merge conflicts handling (what conflicts is there, when the last change is
+  made and who made the last change)
+
+Decisions to be made:
+
+- What access levels would there be?
+  - Owner, what authority would he have?
+  - Editor, three types of editor (Bible, lexicon and all)?
+  - Viewer, one type only?
