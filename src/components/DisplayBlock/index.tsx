@@ -2,14 +2,15 @@
 // Full GPL-2.0 notice  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
 import { JSX } from 'solid-js/jsx-runtime';
-import { css } from '@hope-ui/solid';
-import { Container, Flex } from '@hope-ui/solid';
+import { css, HStack, Box, Flex } from '@hope-ui/solid';
 import Lexicon from './Lexicon';
 import Original from './Original';
 import Translation from './Translation';
 import Morphology from './Morphology';
+import Reference from './Reference';
 import { correctlyOrderedOTBibleBookNameReference } from 'utils/references/correctlyOrderedBibleBookNameReferences';
 import { bibleData } from 'stores/BibleDataStore';
+import { referenceData } from 'stores/ReferenceDataStore';
 
 // Create rows of lexicon entry, original word, translated word, and word morphology.
 export const createContentRows = (
@@ -92,33 +93,41 @@ export const createContentRows = (
 };
 
 export default (): JSX.Element => (
-  <Container
+  <Box
     h="100%"
     display="flex"
     gridArea="display"
-    justifyContent="center"
+    justifyContent={referenceData[0] === undefined ? 'center' : 'flex-start'}
     alignItems="flex-start"
-    mt="2rem"
+    m="8rem 0 0 1rem"
+    w="100vw"
+    position="relative"
   >
-    <Flex
-      flexDirection="row"
-      flexWrap="wrap"
-      justifyContent="center"
-      maxWidth="75%"
-      class={
-        correctlyOrderedOTBibleBookNameReference.indexOf(
-          bibleData.bibleInfo.bibleBookName
-        ) > -1
-          ? css({ direction: 'rtl' })()
-          : css({ direction: 'ltr' })()
-      }
+    <HStack
+      spacing={referenceData[0] === undefined ? 'initial' : '1rem'}
+      alignItems="flex-start"
     >
-      {createContentRows(
-        bibleData.bibleInfo.bibleWordCount,
-        bibleData.bibleInfo.bibleBookName,
-        bibleData.bibleInfo.bibleChapterIndex,
-        bibleData.bibleInfo.bibleVerseIndex
-      )}
-    </Flex>
-  </Container>
+      <Flex
+        flexDirection="row"
+        flexWrap="wrap"
+        justifyContent="center"
+        w="47.5vw"
+        class={
+          correctlyOrderedOTBibleBookNameReference.indexOf(
+            bibleData.bibleInfo.bibleBookName
+          ) > -1
+            ? css({ direction: 'rtl' })()
+            : css({ direction: 'ltr' })()
+        }
+      >
+        {createContentRows(
+          bibleData.bibleInfo.bibleWordCount,
+          bibleData.bibleInfo.bibleBookName,
+          bibleData.bibleInfo.bibleChapterIndex,
+          bibleData.bibleInfo.bibleVerseIndex
+        )}
+      </Flex>
+      <Reference />
+    </HStack>
+  </Box>
 );
