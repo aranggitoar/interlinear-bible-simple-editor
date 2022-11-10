@@ -36,15 +36,21 @@ Things to port:
 - File logic (check if exists, save from synchronized, load from synchronized)
 - Repo logic (clone, check for changes, commit, push, pull)
 
+**1 WEEK**
+
 New features:
 
 - Multi-user logic (server connection, different access levels)
-- Email notification?
+- (Email notification?)
+
+**2 WEEK** without email notification feature
 
 Halfway implemented:
 
 - Merge conflicts handling (what conflicts is there, when the last change is
   made and who made the last change)
+
+**3 WEEKS**
 
 Decisions to be made:
 
