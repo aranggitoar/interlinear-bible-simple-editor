@@ -14,7 +14,7 @@ version](https://github.com/byztxt/byzantine-majority-text/tree/master/parsed)
 of the [Byzantine Majority Text by
 Robinson-Pierpoint](https://github.com/byztxt/byzantine-majority-text). The
 code used to modify it could be found
-[here](https://github.com/benihyangbaik/byztxt-parsed-to-morphhb), which is
+[here](https://github.com/aranggitoar/byztxt-parsed-to-morphhb), which is
 basically a trimmed and modified version of [librobinson by Dr. Ulrik
 Sandborg-Petersen](https://github.com/byztxt/librobinson).
 

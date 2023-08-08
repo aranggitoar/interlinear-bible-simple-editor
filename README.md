@@ -2,7 +2,7 @@
 
 _Interlinear Bible Simple Editor_ (**IBSE**) is created for easier
 translation of the Interlinear Bible format described
-[here](https://github.com/benihyangbaik/aist/blob/main/README.en.md#cheap-to-compute).
+[here](https://github.com/aranggitoar/aist/blob/main/README.en.md#cheap-to-compute).
 
 ## **Important Notices**
 
@@ -70,4 +70,4 @@ List of things to be improved.
 
 ## **Contact**
 
-Benih Yang Baik <[info@benihyangbaik.com](mailto:info@benihyangbaik.com)>
+Aranggi Toar <[at@aranggitoar.com](mailto:at@aranggitoar.com)>
